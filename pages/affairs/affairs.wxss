@@ -1,0 +1,8 @@
+/* pages/committee/committee.wxss */
+@import '../../style/weui.wxss';
+page,
+.page,
+.page__bd{
+    height: 100%;
+}
+

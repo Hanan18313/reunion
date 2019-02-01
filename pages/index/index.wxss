@@ -1,0 +1,13 @@
+/**index.wxss**/
+@import '../../style/weui.wxss';
+page,
+.page,
+.page__bd{
+    height: 100%;
+}
+.apply{
+  padding: 200rpx 0 0 0;
+}
+.btn{
+  padding: 300rpx 40rpx 0 40rpx;
+}

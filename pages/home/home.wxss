@@ -1,0 +1,44 @@
+/* pages/home/home.wxss */
+@import '../../style/weui.wxss';
+page,
+.page,
+.page__bd{
+    height: 100%;
+}
+.header{
+  height: 6%;
+  width: 100%
+}
+.userinfo{
+  height: 100%;
+}
+.map{
+  height: 30%;
+  width: 100%
+}
+/* .meeting_info{
+  padding: 10rpx 0 0 20rpx;
+} */
+.meeting_place,
+.meeting_time{
+  font-size: 30rpx;
+}
+.news{
+  height:40%;
+}
+.title{
+  padding: 0 60rpx 0 60rpx;
+}
+.more{
+  display: flex;
+  align-self: flex-end;
+}
+.body{
+  height: 83%;
+  border-bottom: #dddee1 solid 1px
+}
+.footer{
+  height: 10%;
+}
+
+

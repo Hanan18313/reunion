@@ -1,0 +1,20 @@
+<!--index.wxml-->
+<view>
+  <view class='apply' wx:if="{{show}}">
+    <view class="weui-cells weui-cells_after-title">    
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">姓名</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" bindinput='bindinput_name' placeholder="请输入姓名"/>
+          </view>
+        </view>
+      </view>
+      <!-- <view class="weui-cells__tips" style='color:#3f51b5;float:right' bindtap='complain'>验证有问题？点我进行申诉！</view> -->
+       <view class='btn'>
+    <!-- <text class="user-motto">{{motto}}</text> -->
+    <button type='primary' open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 验证信息 </button>
+  </view>
+  </view> 
+</view>

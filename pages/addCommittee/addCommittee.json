@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "添加组委会成员",
+  "onReachBottom": true,
+  "usingComponents": {
+    "i-checkbox-group": "../../style/dist/checkbox-group/index",
+    "i-checkbox": "../../style/dist/checkbox/index",
+    "i-load-more": "../../style/dist/load-more/index",
+    "i-index": "../../style/dist/index/index",
+    "i-index-item": "../../style/dist/index-item/index",
+    "i-tag": "../../style/dist/tag/index"
+  }
+}

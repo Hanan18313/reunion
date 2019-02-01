@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "组委会成员管理",
+  "usingComponents": {
+    "i-row":"../../style/dist/row/index",
+    "i-col":"../../style/dist/col/index",
+    "i-icon":"../../style/dist/icon/index",
+    "van-popup":"../../style/vant/popup/index",
+    "van-button":"../../style/vant/btn/index"
+  }
+}

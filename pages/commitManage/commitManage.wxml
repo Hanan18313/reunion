@@ -1,0 +1,18 @@
+<view class='page'>
+  <view class='page__bd'>
+    <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
+    <view style='display:flex;flex-wrap:wrap;flex-direction:row;background:#f8f8f9;padding:50rpx 0 0 0'>
+    <view   wx:for="{{OrganizerList}}" style='width:25%;height:200rpx'>
+      <view style='display:flex;justify-content:center'><image src='{{item.portrait}}' style='height:100rpx;width:100rpx;border-radius:20rpx'></image></view>
+      <view style='display:flex;justify-content:center'><text>{{item.userName}}</text></view>
+    </view>
+     <view  style='width:25%;height:200rpx'>
+      <view style='display:flex;justify-content:center;'><view><button style='height:100rpx;width:100rpx;border:#dddee1' bindtap='add'><i-icon style='position:absolute;top:0rpx;left:18rpx' type='add' size='32' color='#03a9f4'/></button>
+</view></view>
+      <view style='display:flex;justify-content:center'></view>
+    </view>
+    </view>
+    <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>
+  </view>
+</view>
+

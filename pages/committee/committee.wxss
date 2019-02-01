@@ -1,0 +1,29 @@
+/* pages/committee/committee.wxss */
+@import '../../style/weui.wxss';
+page,
+.page,
+.page__bd{
+    height: 100%;
+}
+.group_item{
+  height:280rpx;
+  width:100%;
+  background-color: #f5f5f5;
+}
+.group_header{
+  height:33%;
+  border-bottom: #424242 solid 1px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40rpx;
+}
+.group_body{
+  height:67%;
+  padding: 0 40rpx;
+  font-size: 32rpx;
+}
+.member{
+  display: flex;
+  justify-content: space-between
+}

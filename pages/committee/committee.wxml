@@ -1,0 +1,49 @@
+<!--pages/committee/committee.wxml-->
+<view class='page'>
+  <view class='page__bd'>
+    <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
+      <view>
+        <!-- <view class='add' style='height:100rpx;'><image class='add_img' src='../../images/add.png' style='height:50rpx; width:50rpx;float:right;padding:20rpx 40rpx 20rpx 40rpx' bindtap='add'></image></view> -->
+        <!-- <view class='add' style='height:100rpx;background-color: #f5f5f5;'><view style='float:right;padding:10rpx 30rpx 10rpx 30rpx' ><button style='height:80rpx;width:80rpx;' bindtap='add' wx:if="{{seek}}"><i-icon style='position:absolute;top:-8rpx;left:14rpx' type='editor' size='26' color='#03a9f4' /></button></view></view> -->
+        <view class="weui-cells weui-cells_after-title">
+            <navigator url="../commitManage/commitManage" class="weui-cell weui-cell_access" hover-class="weui-cell_active" >
+          <view class="weui-cell__hd"><image src="../../images/committe.png" style="width: 24px;height: 24px;margin:5px 5px 0 0" /></view>
+          <view class="weui-cell__bd weui-cell_primary">
+              <view class='meeting_time'>会务组成员管理</view>
+          </view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+          <navigator url="../locationManage/locationManage" class="weui-cell weui-cell_access" hover-class="weui-cell_active" >
+          <view class="weui-cell__hd"><image src="../../images/meeting.png" style="width: 24px;height: 24px;margin:5px 5px 0 0" /></view>
+          <view class="weui-cell__bd weui-cell_primary">
+              <view class='meeting_time'>会议地点管理</view>
+          </view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+         <navigator url="../scheduleManage/scheduleManage" class="weui-cell weui-cell_access" hover-class="weui-cell_active" >
+          <view class="weui-cell__hd"><image src="../../images/meeting.png" style="width: 24px;height: 24px;margin:5px 5px 0 0" /></view>
+          <view class="weui-cell__bd weui-cell_primary">
+              <view class='meeting_time'>日程管理</view>
+          </view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+         <navigator url="../newsManage/newsManage" class="weui-cell weui-cell_access" hover-class="weui-cell_active" >
+          <view class="weui-cell__hd"><image src="../../images/new.png" style="width: 24px;height: 24px;margin:5px 5px 0 0" /></view>
+          <view class="weui-cell__bd weui-cell_primary">
+              <view class='meeting_time'>新闻管理</view>
+          </view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+         <navigator url="../receiptManage/receiptManage" class="weui-cell weui-cell_access" hover-class="weui-cell_active" >
+          <view class="weui-cell__hd"><image src="../../images/advice.png" style="width: 24px;height: 24px;margin:5px 5px 0 0" /></view>
+          <view class="weui-cell__bd weui-cell_primary">
+              <view class='meeting_time'>报名回执管理</view>
+          </view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+        </view>
+      </view>
+    <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>
+  </view>
+</view>
+

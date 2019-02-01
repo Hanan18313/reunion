@@ -1,0 +1,23 @@
+/* pages/home/home.wxss */
+@import '../../style/weui.wxss';
+page,
+.page,
+.page__bd{
+    height: 100%;
+}
+.map{
+  height: 80%;
+  width: 100%
+}
+.body{
+  height: 50%;
+}
+.loc{
+  height: 50%;
+  width: 100%
+}
+.btn{
+  padding: 100rpx 40rpx 0 40rpx;
+}
+
+

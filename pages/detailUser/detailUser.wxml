@@ -1,0 +1,103 @@
+<!--pages/person/person.wxml-->
+<!--pages/home/home.wxml-->
+<view class='page'>
+  <view class='page__bd'>
+   <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
+   <view style='height:100%'>
+    <view class='add' style='height:100rpx;background-color: #f5f5f5;'><view style='float:right;padding:10rpx 30rpx 10rpx 30rpx' >
+   </view></view>
+    
+      <scroll-view scroll-y="true">
+       <form bindsubmit='bindsubmit'>
+         <view class="weui-cells weui-cells_after-title">    
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">姓名</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" disabled='true' value='{{userInfo.userName}}' placeholder="请输入姓名"/>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">学号</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" disabled='true' value='{{userInfo.sid}}' />
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">班级</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" disabled='true' value='{{userInfo.class}}' />
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">专业</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" disabled='true' bindinput='bindInput_pro' auto-focus='{{auto-focus}}' value='{{userInfo.pro}}' />
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">电话</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" disabled='true' bindinput='bindInput_phoneCn' value='{{userInfo.phoneCn}}'/>
+          </view>
+        </view>
+        <view class="weui-cell weui-cell_select">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                <view class="weui-label">常住地</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" disabled='true' value='{{userInfo.country}}' />
+            </view>
+            <!-- <view class="weui-cell__bd">
+                <picker bindchange="bindRegionChange" value="{{regionIndex}}" range="{{region}}" disabled='true'>
+                    <view class="weui-select weui-select_in-select-after">{{region[regionIndex]}}</view>
+                </picker>
+            </view> -->
+        </view>
+        <view class="weui-cell weui-cell_select">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                <view class="weui-label">社交媒体</view>
+            </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" disabled='true' value='{{userInfo.socialMedia}}' />
+            </view>
+            <!-- <view class="weui-cell__bd">
+                <picker bindchange="bindAcccountChange" value="{{accountIndex}}" range="{{account}}" disabled='true'>
+                    <view class="weui-select weui-select_in-select-after">{{account[accountIndex]}}</view>
+                </picker>
+            </view> -->
+        </view>
+         <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">常用社交账号</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" disabled='true' bindinput='bindInput_socialMediaAccount' value='{{userInfo.socialMediaAccount}}' />
+          </view>
+        </view>
+         <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">单位</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" disabled='true' value='{{userInfo.company}}' bindinput='bindInput_company'/>
+          </view>
+        </view>
+
+      </view>
+       </form>
+      </scroll-view>
+      <view class='btn_affairs' style='padding:200rpx 40rpx 0 40rpx'><button type='default' bindtap='myAffairs'>查看他的会务</button></view>
+   </view>
+   <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>
+  </view>
+</view>

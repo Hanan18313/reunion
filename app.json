@@ -1,0 +1,33 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/home/home",
+    "pages/complain/complain",
+    "pages/schedule/schedule",
+    "pages/moreNews/moreNews",
+    "pages/detailNews/detailNews",
+    "pages/person/person",
+    "pages/affairs/affairs",
+    "pages/reunion/reunion",
+    "pages/detailUser/detailUser",
+    "pages/committee/committee",
+    "pages/newsManage/newsManage",
+    "pages/locationManage/locationManage",
+    "pages/scheduleManage/scheduleManage",
+    "pages/commitManage/commitManage",
+    "pages/receiptManage/receiptManage",
+    "pages/addCommittee/addCommittee"
+  ],
+  "permission":{
+    "scope.userLocation":{
+      "desc":"您的位置将用于此小程序"
+    }
+  },
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"black"
+  }
+}

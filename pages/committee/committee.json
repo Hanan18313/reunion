@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "组委会",
+  "usingComponents": {
+    "i-card": "../../style/dist/card/index",
+    "i-icon": "../../style/dist/icon/index",
+    "i-cell-group": "../../style/dist/cell-group/index",
+    "i-cell": "../../style/dist/cell/index"
+  }
+}
