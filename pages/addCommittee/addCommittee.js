@@ -21,12 +21,20 @@ Page({
     user_name: [],
     loading: false,
     loading_done: false,
+    checked:false,
+    disabled:false,
     current:[],
+    currentId:[],
+    current_name:[],
+    data_arr:[]
   },
   lower: function (e) {
     var that = this
+    var dis = that.data.disabled
+    var chc = that.data.checked
+    var data_arr = that.data.data_arr
+    console.log(that.data.data_arr)
     that.data.page++
-    console.log(that.data.page)
     var params = {
       page: that.data.page,
       pageSize: that.data.pageSize
@@ -45,6 +53,15 @@ Page({
         dataArr.push(res.data)
         var res_arr = [].concat.apply([], dataArr)
         res_arr.forEach((item) => {
+          for (let i in data_arr) {
+            if (data_arr[i] == item.userId) {
+              dis = true;
+              chc = true
+            } else {
+              dis = false;
+              chc = false
+            }
+          }
           // console.log(item.userName)
           // console.log(py.chineseToPinYin(item.userName).charAt(0))
           //let firstName = item.userName.substring(0,1);
@@ -60,7 +77,9 @@ Page({
             userId: item.userId,
             phoneCn: item.phoneCn,
             isSign: item.isSign,
-            payState: item.payState
+            payState: item.payState,
+            dis: dis,
+            chc: chc
           })
         })
         that.data.user_name = storeName
@@ -77,22 +96,53 @@ Page({
       }
     })
   },
-  handleCommitteeChange({detail = {}}){
+  // handleCommitteeChange({detail = {}}){
+  //   console.log(detail)
+  //   var that = this
+  //   const index = this.data.current.indexOf(detail.value);
+  //   index === -1 ? this.data.current.push(detail.value) : this.data.current.splice(index, 1);
+  //   this.setData({
+  //     current: this.data.current
+  //   });
+  // },
+  handleCommitteeChange:function(e){
     var that = this
-    const index = this.data.current.indexOf(detail.value);
-    index === -1 ? this.data.current.push(detail.value) : this.data.current.splice(index, 1);
-    this.setData({
-      current: this.data.current
-    });
-    console.log(detail)
+    var index = that.data.current.indexOf(e.detail.value);
+    index === -1 ? that.data.current.push(e.detail.value) : that.data.current.splice(index, 1);
+    var stu_id = that.data.currentId.indexOf(e.target.dataset.id);
+    stu_id === -1 ? that.data.currentId.push(e.target.dataset.id) : that.data.currentId.splice(index ,1)
+    that.setData({
+      current:that.data.current
+    })
+    console.log(e)
   },
-
+  add:function(){
+    var that = this
+    var arr = []
+    var userId = that.data.currentId
+    for(let i in userId){
+      var obj = {}
+      obj.userId = userId[i]
+      arr.push(obj)
+    }
+    let params = {
+      organizerArr:arr
+    }
+    Req.postReq(urlList.addOrganizer,params,function(res){
+      console.log(res)
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options.data_arr)
     var that = this
+    var data_arr = that.data.data_arr
+    data_arr.push(options.data_arr)
     var arr = []
+    var dis = that.data.disabled
+    var chc = that.data.checked
     let params = {
       page: that.data.page,
       pageSize: that.data.pageSize
@@ -105,27 +155,42 @@ Page({
         list: []
       }
     })
+    wx.showLoading({
+      title: '加载中...',
+    })
     Req.getReq(urlList.getUserList, params, function (res) {
+      wx.hideLoading()
       if (res.code == 200) {
         var dataArr = that.data.dataArr
         dataArr.push(res.data)
         res.data.forEach((item) => {
-          console.log(item)
-          // console.log(item.userName)
-          // console.log(py.chineseToPinYin(item.userName).charAt(0))
-          //let firstName = item.userName.substring(0,1);
+          // console.log(item)
+          // for(let i = 0; i < that.data.currentId.length; i ++){
+          //   if(item.userId == that.data.currentId[i]){
+          //     dis = true
+          //   }else{
+          //     dis = false
+          //   }
+          // }
+          for(let i in data_arr){
+            if(data_arr[i] == item.userId){
+              dis = true;
+              chc = true
+            }else{
+              dis = false;
+              chc = false
+            }
+          }
           let firstName = py.chineseToPinYin(item.userName).charAt(0)
           let index = words.indexOf(firstName);
-          // console.log(firstName)
-          // console.log(storeName)
-          // console.log(item.userName)
-          // console.log(firstName)
           storeName[index].list.push({
             name: item.userName,
             key: firstName,
             userId: item.userId,
             phoneCn: item.phoneCn,
-            isSign: item.isSign
+            isSign: item.isSign,
+            dis:dis,
+            chc:chc
           })
         })
         that.data.user_name = storeName
@@ -141,7 +206,24 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    // var that = this
+    // var data = ''
+    // Req.getReq(urlList.getOrganizerList, data, function (res) {
+    //  // console.log(res.data)
+    //   var name_arr = []
+    //   var userId_arr = []
+    //   if (res.code == 200) {
+    //     for(let i = 0; i< res.data.length; i++){
+    //       name_arr.push(res.data[i].userName)
+    //       userId_arr.push(res.data[i].userId)
+    //     }
+    //     that.setData({
+    //       current:name_arr,
+    //       'currentId':userId_arr,
+    //       currentId:userId_arr
+    //     })
+    //   }
+    // })
   },
 
   /**

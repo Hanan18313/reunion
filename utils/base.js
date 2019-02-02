@@ -17,5 +17,6 @@ var urlList = {
   uploadImgForMeetingNews: baseUrl +'/uploadImgForMeetingNews',//上传图片
   signPersonNum: baseUrl +'/signPersonNum',//报名人数以及第几个报名
   updateMeetingInfo: baseUrl +'/updateMeetingInfo',//更新会议信息
+  addOrganizer: baseUrl +'/addOrganizer', //添加组委会成员
 }
 module.exports = urlList

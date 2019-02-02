@@ -60,7 +60,6 @@ Page({
   lower:function(e){
     var that = this
     that.data.page++
-    console.log(that.data.page)
     var params = {
       page:that.data.page,
       pageSize:that.data.pageSize
@@ -150,7 +149,6 @@ Page({
         var dataArr = that.data.dataArr
         dataArr.push(res.data)
         res.data.forEach((item) =>{
-          console.log(item)
           // console.log(item.userName)
           // console.log(py.chineseToPinYin(item.userName).charAt(0))
           //let firstName = item.userName.substring(0,1);
