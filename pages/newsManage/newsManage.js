@@ -13,46 +13,36 @@ Page({
     isIphoneX: app.globalData.model,
     openId:app.globalData.openId
   },
-  chooseImage:function(e){
-    var that = this
-    that.showActionSheet()
+  addNews:function(){
+    wx.navigateTo({
+      url: '../newsAdd/newsAdd',
+    })
   },
-  showActionSheet:function(e){
-    
-    wx.showActionSheet({
-      itemList: ['拍照','从手机选择'],
-      success:function(res){
-        if(res.tapIndex == 1){
-          wx.chooseImage({
-            count: 1,
-            sizeType: ['original', 'compressed'],
-            sourceType: ['album', 'camera'],
-            success: function (res) {
-              var that = this
-              var openId = app.globalData.openId
-              var tempFilePath = res.tempFilePaths
-              console.log(tempFilePath)
-              wx.uploadFile({
-                url: urlList.uploadImgForMeetingNews,
-                filePath: tempFilePath[0],
-                name: 'images',
-                header:{
-                  'Content-Type':'multipart/form-data',
-                  'openId':openId
-                },
-                success:function(res){
-                  console.log(res)
-                }
-              })
-            },
-          })
-        }else{
-  
-        }
-      },
-      fail:function(res){
-        console.log(222)
-        console.log(res)
+  editNews:function(e){
+    console.log(e)
+    wx.navigateTo({
+      url: '../newsEdit/newsEdit?newsId='+e.currentTarget.dataset.id,
+    })
+  },
+  deleteNews:function(e){
+    var that = this
+    var newsId = e.currentTarget.dataset.id
+    var params = {
+      id:newsId
+    }
+    Req.deleteReq(urlList.delMeetingNews,params,function(res){
+      if(res.code == 200){
+        wx.showToast({
+          title: '删除成功',
+          icon:'success',
+          duration:2000
+        })
+      }else{
+        wx.showToast({
+          title: '删除失败',
+          icon:'none',
+          duration:2000
+        })
       }
     })
   },
@@ -74,7 +64,24 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this
+    var params = ''
+    Req.getReq(urlList.meetingNewsList, params, function (res) {
+      if (res.data) {
+        for (let i = 0; i < res.data.length; i++) {
+          res.data[i].img = urlList.imgUrl + res.data[i].img
+          res.data[i].sendTime = util.formatTime(res.data[i].sendTime)
+          // if (res.data[i].isTop == 0) {
+          //   res.data[i].isTop = '未置顶'
+          // } else {
+          //   res.data[i].isTop = '已置顶'
+          // }
+        }
+        that.setData({
+          newsList: res.data
+        })
+      }
+    })
   },
 
   /**
@@ -109,6 +116,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '毕业30周年庆',
+      path: '/pages/index/index',
+      imageUrl: '../../images/tp.png'
+    }
   }
 })

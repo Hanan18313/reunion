@@ -4,6 +4,7 @@ var Req = require('../../utils/Req.js')
 var urlList = require('../../utils/base.js')
 var prom = require('../../utils/prom.js')
 var util = require('../../utils/util.js')
+var format = require('../../utils/formatDate.js')
 Page({
 
   /**
@@ -17,7 +18,26 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+   // console.log(options.newsId)
+    var that = this
+    var newsId = options.newsId
+    that.data.newsId = newsId
+   // console.log(newsId)
+    let params = ''
+    Req.getReq(urlList.meetingNewsList, params, function (res) {
+     // console.log(res)
+      if (res.data) {
+        for (let i = 0; i < res.data.length; i++) {
+          if (res.data[i].id == newsId) {
+            res.data[i].img = urlList.imgUrl + res.data[i].img
+            res.data[i].sendTime ='发布时间：'+ format.formatDate(res.data[i].sendTime)
+            that.setData({
+              newsInfo: res.data[i]
+            })
+          }
+        }
+      }
+    })
   },
 
   /**
@@ -66,6 +86,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '毕业30周年庆',
+      path: '/pages/index/index',
+      imageUrl: '../../images/tp.png'
+    }
   }
 })

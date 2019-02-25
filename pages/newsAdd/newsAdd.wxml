@@ -1,0 +1,51 @@
+<!--pages/newsAdd/newsAdd.wxml-->
+<view class='page'>
+  <view class='page__bd'>
+    <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
+    <view>
+      <view class='upload'>
+        <view class="weui-cell__bd">
+        <view class="weui-uploader">
+            <view class="weui-uploader__bd">
+                <view class="weui-uploader__files" id="uploaderFiles">
+                    <block wx:for="{{files}}" wx:key="*this">
+                        <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                            <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                        </view>
+                    </block>
+                </view>
+                <view class="weui-uploader__input-box">
+                    <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                </view>
+            </view>
+        </view>
+      </view>
+      </view>
+      <view class='content'>
+        <form bindsubmit='formSubmit'>
+          <view class="weui-cells weui-cells_after-title">    
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">标题</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" value='' name='title' bindinput='inputTitle' placeholder="请输入标题"/>
+              </view>
+            </view>
+          </view>
+          <view style='height:100rpx'></view>
+          <view class="weui-cells weui-cells_after-title"> 
+              <view class="weui-cell">
+                  <view class="weui-cell__bd">
+                      <textarea class="weui-textarea" name='content' placeholder="请输入内容" style="height: 7.3em" />
+                      <view class="weui-textarea-counter"></view>
+                  </view>
+              </view>
+          </view>
+          <view class='btn'><button type='primary' form-type='submit' disabled='{{disabled}}' loading='{{loading}}'>提交</button></view>
+        </form>
+      </view>
+    </view>
+    <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>
+  </view>
+</view>

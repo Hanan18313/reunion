@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "通知中心",
+  "usingComponents": {
+    "i-load-more": "../../style/dist/load-more/index"
+  }
+}

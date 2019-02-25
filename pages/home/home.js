@@ -27,9 +27,10 @@ Page({
       url: '../moreNews/moreNews',
     })
   },
-  detailNews:function(){
+  detailNews:function(e){
+    var newsId = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '../detailNews/detailNews',
+      url: '../detailNews/detailNews?newsId='+newsId,
     })
   },
   person:function(e){
@@ -45,6 +46,10 @@ Page({
       disabled:true
     })
     Req.postReq(urlList.meetingSignIn,data,function(res){
+      that.setData({
+        loading: false,
+        disabled: false
+      })
       if(res.code == 200){
         wx.showToast({
           title: '报名成功',
@@ -53,6 +58,15 @@ Page({
         })
         that.setData({
           show_btn:false
+        })
+        Req.getReq(urlList.signPersonNum, data, function (res) {
+          if (res.code == 200) {
+            that.setData({
+              total: res.data.count,
+              ranking: res.data.site
+            })
+          }
+          //   console.log(res)
         })
       }else{
         wx.showToast({
@@ -63,34 +77,49 @@ Page({
       }
     })
   },
+  notice:function(e){
+    var userId = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '../notice/notice?userId='+userId,
+    })
+  },
+  signList:function(){
+    wx.navigateTo({
+      url: '../signList/signList',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '加载中...',
+    })
     var that = this
-    var openid = app.globalData.openId
-    prom.wxPromisify(wx.request)({
-      url:urlList.getSignInfoByOpenId,
-      method:'GET',
-      header:{
-        'Content-Type':'application/json',
-        'openId':openid
-      },
-      complete:function(res){
-        // console.log(res)
-        if(res.data.data == null){
-          that.setData({
-            show_btn:true
-          })
-        }else{
-          that.setData({
-            show_btn:false
-          })
-        }
-      }
-    }).then(function(res){
+   // var openid = app.globalData.openId
+    // prom.wxPromisify(wx.request)({
+    //   url:urlList.getSignInfoByOpenId,
+    //   method:'GET',
+    //   header:{
+    //     'Content-Type':'application/json',
+    //     'openId':openid
+    //   },
+    //   complete:function(res){
+    //     // console.log(res)
+    //     if(res.data.data == null){
+    //       that.setData({
+    //         show_btn:true
+    //       })
+    //     }else{
+    //       that.setData({
+    //         show_btn:false
+    //       })
+    //     }
+    //   }
+  //  }).then(function(res){
       var data = ''
       Req.getReq(urlList.getUserInfoByOpenId, data, function (res) {
+        console.log(res)
         wx.showLoading({
           title: '加载中...',
         })
@@ -101,7 +130,7 @@ Page({
           })
         }
       })
-    })
+ //   })
   },
 
   /**
@@ -109,7 +138,7 @@ Page({
    */
   onReady: function () {
     var that = this
-    var data
+    var data = ''
     Req.getReq(urlList.signPersonNum,data,function(res){
       if(res.code == 200){
         that.setData({
@@ -117,7 +146,7 @@ Page({
           ranking:res.data.site
         })
       }
-      console.log(res)
+   //   console.log(res)
     })
   },
 
@@ -147,7 +176,7 @@ Page({
         }
       }
     }).then(function(res){
-      var data
+      var data =''
       Req.getReq(urlList.getMeetingInfo,data,function (res) {
         wx.showLoading({
           title: '加载中...',
@@ -165,8 +194,9 @@ Page({
         }
       })
     }).then(function(res){
-      var data
+      var data= ''
       Req.getReq(urlList.meetingNewsList,data,function(res){
+      //  console.log(res.data)
         wx.showLoading({
           title: '加载中...',
         })
@@ -174,11 +204,33 @@ Page({
           wx.hideLoading();
           for(let i in res.data){
             if(res.data[i].isTop == 1){
+              res.data[i].img = urlList.imgUrl+res.data[i].img
+             // console.log(res.data[i])
               that.setData({
                 news_info:res.data[i]
               })
             }
           }
+        }
+      })
+    }).then(function(res){
+      var params = ''
+      Req.getReq(urlList.getSignInfoByOpenId,params,function(res){
+       // console.log(res.data)
+        if(res.data != null){
+          if(res.data.isSign == 0){
+            that.setData({
+              show_btn: true
+            })
+          }else{
+            that.setData({
+              show_btn: false
+            })
+          }
+        }else{
+          that.setData({
+            show_btn:true
+          })
         }
       })
     })
@@ -216,6 +268,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '毕业30周年庆',
+      path: '/pages/index/index',
+      imageUrl: '../../images/tp.png'
+    }
   }
 })

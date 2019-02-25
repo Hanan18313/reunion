@@ -4,15 +4,16 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
-		"autoAudits": false
+		"autoAudits": false,
+		"uglifyFileName": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.5.1",
+	"libVersion": "2.4.0",
 	"appid": "wx1bff49ece2b88778",
 	"projectname": "reunion_pro",
 	"debugOptions": {
@@ -37,7 +38,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
@@ -48,7 +49,27 @@
 				{
 					"id": -1,
 					"name": "person",
-					"pathName": "pages/person/person"
+					"pathName": "pages/person/person",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "myaffairs",
+					"pathName": "pages/myAffairs/myAffairs",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "newsadd",
+					"pathName": "pages/newsManage/newsManage",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "schedule",
+					"pathName": "pages/scheduleManage/scheduleManage",
+					"scene": null
 				}
 			]
 		}

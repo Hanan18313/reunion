@@ -1,0 +1,229 @@
+<view class='page'>
+  <view class='page__bd'>
+    <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
+    <view style='height:100%'>
+      <view style='height:20%'>
+        <view>
+        <view wx:if="{{payMsgShow}}" style='display:flex;justify-content:center;padding:60rpx 0 0 0;color:#03a9f4;font-size:52rpx' ><text>{{payMsg}}</text></view>
+          <view wx:if="{{payBtn}}">
+            <view style="height:80rpx;display:flex;justify-content:center;align-items:center;color:#03a9f4"><text>如已缴费请提醒组委会验证</text></view>
+            <view class='btn'><button type='primary' bindtap='paySub' plain="true">我已缴费</button></view>
+          </view>
+        </view>
+      </view>
+    <view class='receipt'>
+      <form bindsubmit='formSubmit'>
+            <view class="weui-cells weui-cells_after-title">
+            <!-- <view class="weui-cell weui-cell_switch">
+                <view class="weui-cell__bd">是否到达</view>
+                <view class="weui-cell__ft">
+                    <switch checked />
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_switch">
+                <view class="weui-cell__bd">是否需要单间</view>
+                <view class="weui-cell__ft">
+                    <switch checked />
+                </view>
+            </view>
+            <view wx:if="{{needSingleRoom}}">
+
+            </view> -->
+            <view class="weui-cells weui-cells_after-title">
+            <!-- <view class="weui-cell weui-cell_switch">
+                <view class="weui-cell__bd">是否需要单间</view>
+                <view class="weui-cell__ft">
+                    <switch bindchange='needSingleRoom' checked="{{needSingleRoom}}"  disabled="true" />
+                </view>
+            </view> -->
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">需要单间</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" disabled='true' value='{{detailReceipt.needSingleRoom}}'/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">家属人数</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" disabled='true' value='{{family}}'/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">出行方式</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" disabled='true' value='{{detailReceipt.transportation}}'/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">航班/车次</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" disabled='true' value='{{detailReceipt.transportationNo}}'/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">到达时间</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" disabled='true' value='{{detailReceipt.expectedArrivalTime}}'/>
+                </view>
+            </view>
+            <!-- <view class="weui-cell weui-cell_switch">
+                <view class="weui-cell__bd">是否携带家属</view>
+                <view class="weui-cell__ft">
+                    <switch bindchange='family' checked="{{takeFamily}}" disabled="true"/>
+                </view>
+            </view>
+            <view wx:if="{{takeFamily}}">
+              <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label" style='font-size:30rpx;color:#495060'>家属人数</view>
+                </view>
+                <view class="weui-cell__bd">
+                  <picker value="{{adultNum}}" bindchange="bindAdultChange" value='{{adultIndex}}' range='{{adultArray}}' disabled='true'> 
+                        <view class="weui-input">{{adultArray[adultIndex]}}</view>
+                    </picker>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label" style='font-size:30rpx;color:#495060'>小孩儿人数</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker value="{{kidNum}}" bindchange="bindKidChange" value='{{kidIndex}}' range='{{kidArray}}'> 
+                        <view class="weui-input">{{kidArray[kidIndex]}}</view>
+                    </picker>
+                </view>
+            </view>
+            </view> -->
+            <!-- <i-panel title="选择出行方式">
+                  <view>
+                    <i-radio-group current="{{current}}" bindchange="handleFruitChange">
+                      <i-radio wx:for="{{fruit}}" position="{{position}}" wx:key="{{item.id}}" value="{{item.name}}">
+                      </i-radio>
+                  </i-radio-group>
+                  </view>
+              </i-panel> -->
+            </view>
+            <!-- <view class='transport_air' wx:if='{{transport == "飞机"}}'>
+            <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label" style='font-size:30rpx;color:#495060'>班次</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="air_no" value='{{air_no}}' auto-focus placeholder="请输入班次"/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label" style='font-size:30rpx;color:#495060'>达到机场</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="air_station" value='{{air_station}}' placeholder="请输入到达机场"/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label" style='font-size:30rpx;color:#495060'>达到时间</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="air_time" placeholder='请输入到达时间'/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_switch">
+                <view class="weui-cell__bd" style='font-size:30rpx;color:#495060'>是否需要接机</view>
+                <view class="weui-cell__ft">
+                    <switch bindchange='needPickUpAir' checked = "{{needPickUpAir}}"/>
+                </view>
+            </view>
+        </view>
+            </view>
+            <view class='transport_train' wx:if='{{transport == "火车"}}'>
+            <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label" style='font-size:30rpx;color:#495060'>车次</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="train_no" value='{{train_no}}' auto-focus placeholder="请输车次"/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label" style='font-size:30rpx;color:#495060'>到达车站</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="train_station" value='{{train_station}}' placeholder="请输入目的地"/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label" style='font-size:30rpx;color:#495060'>达到时间</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="train_time" placeholder='请输入到达时间'/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_switch">
+                <view class="weui-cell__bd" style='font-size:30rpx;color:#495060'>是否需要接站</view>
+                <view class="weui-cell__ft">
+                    <switch bindchange='needPickUpTrain' checked = "{{needPickUpTrain}}" />
+                </view>
+            </view>
+        </view>
+            </view>
+            <view class='transport_self' wx:if='{{transport == "自驾"}}'>
+            <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label" style='font-size:30rpx;color:#495060'>到达时间</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="self_time" auto-focus placeholder='请输入到达时间'/>
+                </view>
+            </view>
+        </view>
+            </view> -->
+
+
+        </view>
+        <!-- <view class="weui-cells__tips">接机/站联系电话：123456789</view> -->
+        <!-- <view class='btn'><button type='primary' form-type='submit'>提交</button></view> -->
+        <view class='btn'><button type='default' bindtap='myAffairsEdit' data-id=''>编辑我的会务</button></view>
+    </form>
+    </view>
+    <view style='border-top:#dddee1 solid 1px'></view>
+    <view>
+      <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input" wx:if="{{detailReceipt.hotelRoom}}">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">房间号</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" value='{{detailReceipt.hotelRoom}}' disabled='true'/>
+                </view>
+            </view>
+             <view class="weui-cell weui-cell_input" wx:if="{{detailReceipt.pickUpPhone}}">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">接车/机电话</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" value='{{detailReceipt.pickUpPhone}}' disabled='true'/>
+                </view>
+            </view>
+        </view>
+      <!-- <view class='btn'><button type='default' bindtap='appendText' data-id='{{detailReceipt.userId}}'>查看我的附加回执</button></view> -->
+    </view>
+    </view>
+    <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>
+  </view>
+</view>

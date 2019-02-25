@@ -1,7 +1,103 @@
+
 <view class='page'>
   <view class='page__bd'>
-    <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
-    <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>
+  <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
+  <view>
+    <view class='weui-cells weui-cells_after-title'>
+       
+    </view>
+  </view>
+  <view>
+  <view class='weui-cells weui-cells_after-title' style='background:#f8f8f9'>
+
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+          <view class="weui-label">需要单间</view>
+      </view>
+      <view class="weui-cell__bd">
+          <input class="weui-input" disabled='true' value='{{detailReceipt.needSingleRoom}}'/>
+      </view>
+  </view>
+  <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+          <view class="weui-label">家属人数</view>
+      </view>
+      <view class="weui-cell__bd">
+          <input class="weui-input" disabled='true' value='{{family}}'/>
+      </view>
+  </view>
+  <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+          <view class="weui-label">出行方式</view>
+      </view>
+      <view class="weui-cell__bd">
+          <input class="weui-input" disabled='true' value='{{detailReceipt.transportation}}'/>
+      </view>
+  </view>
+  <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+          <view class="weui-label">航班/车次</view>
+      </view>
+      <view class="weui-cell__bd">
+          <input class="weui-input" disabled='true' value='{{detailReceipt.transportationNo}}'/>
+      </view>
+  </view>
+  <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+          <view class="weui-label">目的地</view>
+      </view>
+      <view class="weui-cell__bd">
+          <input class="weui-input" disabled='true' value='{{detailReceipt.destination}}'/>
+      </view>
+  </view>
+  <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+          <view class="weui-label">到达时间</view>
+      </view>
+      <view class="weui-cell__bd">
+          <input class="weui-input" disabled='true' value='{{detailReceipt.expectedArrivalTime}}'/>
+      </view>
+  </view>
+  <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+          <view class="weui-label">是否接站</view>
+      </view>
+      <view class="weui-cell__bd">
+          <input class="weui-input" disabled='true' value='{{detailReceipt.needPickUp}}'/>
+      </view>
+  </view>
+  <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+          <view class="weui-label">缴费认证</view>
+      </view>
+      <view class="weui-cell__bd">
+       <input class="weui-input" disabled='true' value='{{detailReceipt.payState}}'/>
+      </view>
+  </view>
+  <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+          <view class="weui-label">缴费方式</view>
+      </view>
+      <view class="weui-cell__bd">
+          <input class="weui-input" disabled='true' value='{{detailReceipt.payRem}}'/>
+      </view>
+  </view>
+  <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">房间号</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" auto-focus placeholder='请输入房间号' disabled='true' value='{{detailReceipt.hotelRoom}}'/>
+                </view>
+            </view>
+ 
+  </view>
+  
+  </view>
+  <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>
   </view>
 </view>
+
+
+
 

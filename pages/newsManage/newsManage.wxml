@@ -2,22 +2,28 @@
 <view class='page'>
   <view class='page__bd'>
     <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
-    <view class="weui-cell__bd">
-      <view class="weui-uploader">
-          <view class="weui-uploader__bd">
-              <view class="weui-uploader__files" id="uploaderFiles">
-                  <block wx:for="{{files}}" wx:key="*this">
-                      <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
-                          <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
-                      </view>
-                  </block>
-              </view>
-              <view class="weui-uploader__input-box">
-                  <view class="weui-uploader__input" bindtap="chooseImage"></view>
-              </view>
-          </view>
-      </view>
+    <view>
+      <view class='add' style='height:100rpx;background-color: #f5f5f5;'><view style='float:right;padding:10rpx 30rpx 10rpx 30rpx' ><button style='height:80rpx;width:80rpx;' bindtap='addNews'><i-icon style='position:absolute;top:-8rpx;left:14rpx' type='add' size='26' color='#03a9f4'/></button></view></view>
     </view>
+    <!-- <view wx:for="{{newsList}}" style='padding:40rpx 0 0 0'>
+      <i-card title="{{item.title}}" extra="{{item.isTop}}" thumb="{{item.img}}" full bindtap="editNews" data-id='{{item.id}}'>
+        <view slot="content">{{item.content}}</view>
+        <view slot="footer">{{item.sendTime}}</view>
+    </i-card>
+    </view> -->
+    <view class="weui-panel" wx:for="{{newsList}}">
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__title weui-media-box__title_in-text" bindtap='editNews' data-id='{{item.id}}' style='color:#2e6e9e'>{{item.title}}</view>
+                    <view class="weui-media-box__desc"><text style='font-size:30rpx;padding-left:60rpx;color:#4f4f4f'>{{item.content}}</text></view>
+                    <view class="weui-media-box__info" style='color:#d99694'>
+                        <view class="weui-media-box__info__meta">{{item.senderName}}</view>
+                        <view class="weui-media-box__info__meta">{{item.sendTime}}</view>
+                        <view class="weui-media-box__info__meta " style='float:right;color:#288cf0;font-size:30rpx'><text bindtap='deleteNews' data-id='{{item.id}}'>删除</text></view>
+                    </view>
+                </view>
+            </view>
+        </view>
     <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>
   </view>
 </view>

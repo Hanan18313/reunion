@@ -6,46 +6,33 @@ const formatTime = date => {
   const hour = date.getHours()
   const minute = date.getMinutes()
   const second = date.getSeconds()
-  return [year, month, day].map(formatNumber).join('/')
+  return [year, month, day].map(formatNumber).join('-')
   // return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
-const formatDate = time => {
-  var date = new Date(time);
-  var year = date.getFullYear(),
-    month = date.getMonth() + 1,//月份是从0开始的
-    day = date.getDate(),
-    hour = date.getHours(),
-    min = date.getMinutes(),
-    sec = date.getSeconds();
-  if (hour < 10) {
-    hour = '0' + hour
-  }
-  if (min < 10) {
-    min = '0' + min
-  }
-  if (sec < 10) {
-    sec = '0' + sec
-  }
-  if (hour == 0 && min == 0 && sec == 0) {
-    var newDate = year + '-' +
-      month + '-' +
-      day;
-    return newDate;
-  } else {
-    var newTime = year + '-' +
-      month + '-' +
-      day + ' ' +
-      hour + ':' +
-      min + ':' +
-      sec;
-    return newTime;
-  }
+const formatTimeS = date => {
+  var date = new Date(date);
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hour = date.getHours()
+  const minute = date.getMinutes()
+  const second = date.getSeconds()
+  //return [year, month, day].map(formatNumber).join('/')
+   return [year, month, day].map(formatNumber).join('-')
 }
-
+const uniq = array => {
+  var temp = []
+  for (var i in array) {
+    if (temp.indexOf(array[i] == -1)) {
+      temp.push(array[i])
+    }
+  }
+  return temp
+}
 module.exports = {
-  formatDate:formatDate,
-  formatTime:formatTime
-
+  formatTimeS:formatTimeS,
+  formatTime:formatTime,
+  uniq:uniq
 }
 
 

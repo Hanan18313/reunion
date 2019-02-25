@@ -1,0 +1,48 @@
+<view class='page'>
+  <view class='page__bd'>
+    <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
+    <view>
+      <view style='padding:60rpx 0 0 0'></view>
+      <view >
+      <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">日程标题</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" bindinput='scheduleTitle' placeholder="日程标题"/>
+                </view>
+            </view>
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <textarea class="weui-textarea" bindinput='scheduleContent' placeholder="请输入日程内容" style="height: 11.3em" />
+                    <view class="weui-textarea-counter">{{scheduleContentLength}}/200</view>
+                </view>
+            </view>
+        </view>
+              <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">开始时间: </view>
+                    </view>
+                    <view class="weui-cell__bd">
+                      <input class="weui-input" data-name='startTime' value='{{startTime}}' bindtap='inputStartTime' placeholder="请选择时间"/>
+                    </view>
+                </view>
+                <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__hd">
+                        <view class="weui-label">结束时间: </view>
+                    </view>
+                    <view class="weui-cell__bd">
+                      <input class="weui-input" data-name='endTime' value='{{endTime}}' bindtap='inputEndTime' placeholder="请选择时间"/>
+                    </view>
+                </view>
+            </view>
+        <yycalendar show="{{show}}" beginTime="08:00" endTime="22:00" timeGap="60" themeColor="#2d8cf0" showOverdue="false" bind:yybindchange="_yybindchange"/>
+      </view>
+      <view class='btn'><button type='primary' disabled='{{disabled}}' loading='{{loading}}' bindtap='submit'>提交</button></view>
+    </view>
+    <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>
+  </view>
+</view>
+

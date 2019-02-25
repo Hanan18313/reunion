@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText": "日程管理",
+  "usingComponents": {
+    "i-icon": "../../style/dist/icon/index"
+  }
 }

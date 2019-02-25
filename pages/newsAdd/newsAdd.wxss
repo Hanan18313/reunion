@@ -1,0 +1,16 @@
+/* pages/newsAdd/newsAdd.wxss */
+@import '../../style/weui.wxss';
+page,
+.page,
+.page__bd{
+    height: 100%;
+}
+.upload{
+  padding: 20rpx 0 0 20rpx;
+}
+.content{
+  padding: 60rpx 0 0 0;
+}
+.btn{
+  padding: 100rpx 40rpx 0 40rpx;
+}

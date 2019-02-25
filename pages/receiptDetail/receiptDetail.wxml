@@ -1,0 +1,124 @@
+
+<view class='page'>
+  <view class='page__bd'>
+  <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
+  <view style='display:flex;justify-content:space-between'>
+    <view style='width:76%;font-size:34rpx'>
+       <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                  <view class="weui-label">缴费认证</view>
+              </view>
+              <view class="weui-cell__bd">
+                  <picker bindchange="bindPayChange" value="{{payIndex}}" range="{{payArray}}">
+                      <view class="weui-select">{{payArray[payIndex]}}</view>
+                  </picker>
+              </view>
+          </view>
+    </view>
+    <view style='width:24%;display:flex;justify-content:center;padding:12rpx 0 0 0'><view><button type='primary' size='mini' plain='true' bindtap='pay'>确认</button></view></view>
+  </view>
+  <view>
+  <view class='weui-cells weui-cells_after-title' style='background:#f8f8f9'>
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+          <view class="weui-label">需要单间</view>
+      </view>
+      <view class="weui-cell__bd">
+          <input class="weui-input" disabled='true' value='{{detailReceipt.needSingleRoom}}'/>
+      </view>
+  </view>
+  <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+          <view class="weui-label">家属人数</view>
+      </view>
+      <view class="weui-cell__bd">
+          <input class="weui-input" disabled='true' value='{{family}}'/>
+      </view>
+  </view>
+  <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+          <view class="weui-label">出行方式</view>
+      </view>
+      <view class="weui-cell__bd">
+          <input class="weui-input" disabled='true' value='{{detailReceipt.transportation}}'/>
+      </view>
+  </view>
+  <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+          <view class="weui-label">航班/车次</view>
+      </view>
+      <view class="weui-cell__bd">
+          <input class="weui-input" disabled='true' value='{{detailReceipt.transportationNo}}'/>
+      </view>
+  </view>
+  <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+          <view class="weui-label">目的地</view>
+      </view>
+      <view class="weui-cell__bd">
+          <input class="weui-input" disabled='true' value='{{detailReceipt.destination}}'/>
+      </view>
+  </view>
+  <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+          <view class="weui-label">到达时间</view>
+      </view>
+      <view class="weui-cell__bd">
+          <input class="weui-input" disabled='true' value='{{detailReceipt.expectedArrivalTime}}'/>
+      </view>
+  </view>
+  <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+          <view class="weui-label">是否接站</view>
+      </view>
+      <view class="weui-cell__bd">
+          <input class="weui-input" disabled='true' value='{{detailReceipt.needPickUp}}'/>
+      </view>
+  </view>
+  <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+          <view class="weui-label">缴费方式</view>
+      </view>
+      <view class="weui-cell__bd">
+          <input class="weui-input" disabled='true' value='{{detailReceipt.payRem}}'/>
+      </view>
+  </view>
+  </view>
+  <form bindsubmit='formSubmit'>
+    <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">房间号</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" auto-focus placeholder='请输入房间号' auto-focus name="hotelRoom" value='{{detailReceipt.hotelRoom}}'/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">接站电话</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder='请输入接站电话' name="pickUpPhone" value='{{detailReceipt.pickUpPhone}}'/>
+                </view>
+            </view>
+            <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <textarea class="weui-textarea" bindinput='appendText' name="appendText" placeholder="请输入附加回执" style="height: 3.3em" />
+                    <view class="weui-textarea-counter">{{appendTextLength}}/50</view>
+                </view>
+            </view>
+          </view>
+        </view>
+        <view class="weui-cells__tips">附加回执可选择填写</view>
+      <view class='btn'><button form-type='submit' type='primary'>提交</button></view>
+      </form>
+  </view>
+  <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>
+  </view>
+</view>
+
+
+
+

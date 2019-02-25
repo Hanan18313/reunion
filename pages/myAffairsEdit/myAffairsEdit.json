@@ -1,0 +1,14 @@
+{
+  "navigationBarTitleText": "编辑我的会务",
+  "usingComponents": {
+    "i-radio": "../../style/dist/radio/index",
+    "i-radio-group": "../../style/dist/radio-group/index",
+    "i-panel": "../../style/dist/panel/index",
+    "i-input": "../../style/dist/input/index",
+    "i-switch": "../../style/dist/switch/index",
+    "i-cell-group": "../../style/dist/cell-group/index",
+    "i-cell": "../../style/dist/cell/index",
+    "van-dialog": "../../style/vant/dialog/index",
+    "yycalendar": "plugin://myPlugin/yycalendar"
+  }
+}

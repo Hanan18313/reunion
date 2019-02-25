@@ -45,15 +45,45 @@ Page({
               'content-type': 'application/json'
             },
             complete: function (res) {
+            //  console.log(res)
               Req.header.openId = res.data.data
               //Req.header.openId = 123
+              
               app.globalData.openId = res.data.data
               if(res.data.data){
+                // wx.showLoading({
+                //   title: '加载中...',
+                // })
+                // wx.request({
+                //   url: urlList.getUserInfoByOpenId,
+                //   method:'GET',
+                //   header:{
+                //     'Content-Type':'application/json',
+                //     'openId':res.data.data
+                //   },
+                //   success:function(res){
+                //     wx.hideLoading()
+                //     if (res.code == 200) {
+                //       wx.hideLoading();
+                //       that.setData({
+                //         show: false
+                //       })
+                //       wx.redirectTo({
+                //         url: '../home/home',
+                //       })
+                //     } else {
+                //       wx.hideLoading();
+                //       that.setData({
+                //         show: true
+                //       })
+                //     }
+                //   }
+                // })
                 var data = ''
+                wx.showLoading({
+                  title: '加载中...',
+                })
                 Req.getReq(urlList.getUserInfoByOpenId,data,function(res){
-                  wx.showLoading({
-                    title: '加载中...',
-                  })
                   if(res.code == 200){
                     wx.hideLoading();
                     that.setData({
@@ -123,10 +153,13 @@ Page({
   },
   getUserInfo: function(e) {
     var that = this
+  //  console.log(that.data.userInfo)
+   // console.log(e)
     var url = urlList.checkUserByName
     var params = {
       "userName":that.data.bindinput_name,
-      "portrait":app.globalData.userInfo.avatarUrl
+      // "portrait":app.globalData.userInfo.avatarUrl
+      'portrait':e.detail.userInfo.avatarUrl
     }
     if(e.detail.userInfo){
       if(params.userName){
@@ -150,13 +183,16 @@ Page({
             })
           } else {
             wx.showModal({
-              title: '提示',
-              content: '信息冲突，是否跳转申诉界面？',
+              title: '信息验证失败',
+              content: '请联系金国峰电话：18621892125',
               success: function (res) {
                 if (res.confirm) {
-                  wx.navigateTo({
-                    url: '../complain/complain',
+                  wx.makePhoneCall({
+                    phoneNumber: '18621892125',
                   })
+                  // wx.navigateTo({
+                  //   url: '../complain/complain',
+                  // })
                 } else if (res.cancel) {
                   console.log('点击取消')
                 }

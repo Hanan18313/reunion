@@ -19,6 +19,7 @@ Page({
     dataArr:[],
     status:false,
     user_name:[],
+    committee:false,
     loading:false,
     loading_done:false,
     tags:[
@@ -64,6 +65,7 @@ Page({
       page:that.data.page,
       pageSize:that.data.pageSize
     }
+    var obj = ''
     let storeName = new Array(26);
     const words = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     words.forEach((item, index) => {
@@ -73,48 +75,61 @@ Page({
       }
     })
     Req.getReq(urlList.getUserList, params, function (res) {
-      if (res.data.length > 0) {
-        var dataArr = that.data.dataArr
-        dataArr.push(res.data)
-        var res_arr = [].concat.apply([], dataArr)
-        res_arr.forEach((item) => {
-          // console.log(item.userName)
-          // console.log(py.chineseToPinYin(item.userName).charAt(0))
-          //let firstName = item.userName.substring(0,1);
-          let firstName = py.chineseToPinYin(item.userName).charAt(0)
-          let index = words.indexOf(firstName);
-          // console.log(firstName)
-          // console.log(storeName)
-          // console.log(item.userName)
-          // console.log(firstName)
-          storeName[index].list.push({
-            name: item.userName,
-            key: firstName,
-            userId: item.userId,
-            phoneCn: item.phoneCn,
-            isSign:item.isSign,
-            payState:item.payState
+      Req.getReq(urlList.getOrganizerList,obj,function(val){
+        if (res.data.length > 0) {
+          var dataArr = that.data.dataArr
+          dataArr.push(res.data)
+          var res_arr = [].concat.apply([], dataArr)
+          res_arr.forEach((item) => {
+            // console.log(item.userName)
+            // console.log(py.chineseToPinYin(item.userName).charAt(0))
+            //let firstName = item.userName.substring(0,1);
+            let firstName = py.chineseToPinYin(item.userName).charAt(0)
+            let index = words.indexOf(firstName);
+            // console.log(firstName)
+            // console.log(storeName)
+            // console.log(item.userName)
+            // console.log(firstName)
+            for (let i = 0; i < val.data.length; i++) {
+              if (val.data[i].userId == item.userId) {
+                that.data.committee = true;
+                break;
+              } else {
+                that.data.committee = false
+              }
+            }
+            storeName[index].list.push({
+              name: item.userName,
+              key: firstName,
+              userId: item.userId,
+              phoneCn: item.phoneCn,
+              isSign: item.isSign,
+              payState: item.payState,
+              committee: that.data.committee
+            })
           })
-        })
-        that.data.user_name = storeName
-        that.setData({
-          userList: that.data.user_name,
-          loading:true,
-          loading_done:false
-        })
-      }else{
-        that.setData({
-          loading_done:true,
-          loading:false
-        })
-      }
+          that.data.user_name = storeName
+          that.setData({
+            userList: that.data.user_name,
+            loading: true,
+            loading_done: false
+          })
+        } else {
+          that.setData({
+            loading_done: true,
+            loading: false
+          })
+        }
+      })
     })
   },
   onChange(e){
     console.log(e)
+    var that = this
+    console.log(e)
   },
   detail(e){
-    console.log(e)
+   // console.log(e)
     var userId = e.currentTarget.dataset.id
     wx.navigateTo({
       url: '../detailUser/detailUser?userId='+userId,
@@ -136,6 +151,7 @@ Page({
       page:that.data.page,
       pageSize:that.data.pageSize
     }
+    var obj = ''
     let storeName = new Array(26);
     const words = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     words.forEach((item,index) =>{
@@ -145,33 +161,45 @@ Page({
       }
     })
     Req.getReq(urlList.getUserList,params,function(res){
-      if(res.code == 200){
-        var dataArr = that.data.dataArr
-        dataArr.push(res.data)
-        res.data.forEach((item) =>{
-          // console.log(item.userName)
-          // console.log(py.chineseToPinYin(item.userName).charAt(0))
-          //let firstName = item.userName.substring(0,1);
-          let firstName = py.chineseToPinYin(item.userName).charAt(0)
-          let index = words.indexOf(firstName);
-          // console.log(firstName)
-          // console.log(storeName)
-          // console.log(item.userName)
-          // console.log(firstName)
-          storeName[index].list.push({
-            name:item.userName,
-            key:firstName,
-            userId:item.userId,
-            phoneCn:item.phoneCn,
-            isSign: item.isSign
+      Req.getReq(urlList.getOrganizerList,obj,function(val){
+        if (res.code == 200) {
+          var dataArr = that.data.dataArr
+          dataArr.push(res.data)
+          res.data.forEach((item) => {
+            // console.log(item.userName)
+            // console.log(py.chineseToPinYin(item.userName).charAt(0))
+            //let firstName = item.userName.substring(0,1);
+            let firstName = py.chineseToPinYin(item.userName).charAt(0)
+            let index = words.indexOf(firstName);
+            // console.log(firstName)
+            // console.log(storeName)
+            // console.log(item.userName)
+            // console.log(firstName)
+            for(let i = 0 ; i < val.data.length; i++){
+              if(val.data[i].userId == item.userId){
+                that.data.committee = true;
+                break;
+              }else{
+                that.data.committee = false
+              }
+            }
+            storeName[index].list.push({
+              name: item.userName,
+              key: firstName,
+              userId: item.userId,
+              phoneCn: item.phoneCn,
+              isSign: item.isSign,
+              payState: item.payState,
+              committee:that.data.committee
+            })
           })
-        })
-        that.data.user_name = storeName
-        that.setData({
-          userList: that.data.user_name,
-          loading: true,
-        })
-      }
+          that.data.user_name = storeName
+          that.setData({
+            userList: that.data.user_name,
+            loading: true,
+          })
+        }
+      })
     })
   },
 
@@ -240,6 +268,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '毕业30周年庆',
+      path: '/pages/index/index',
+      imageUrl: '../../images/tp.png'
+    }
   }
 })

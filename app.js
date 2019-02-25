@@ -4,6 +4,9 @@ var req = require('./utils/Req.js')
 
 App({
   onLaunch: function () {
+    wx.showLoading({
+      title: '加载中...',
+    })
     // 展示本地存储能力
     var that = this
     var logs = wx.getStorageSync('logs') || []

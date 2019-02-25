@@ -1,0 +1,160 @@
+<view class='page'>
+  <view class='page__bd'>
+    <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
+    <view style='height:100%'>
+      <!-- <view style='height:30%'>
+        <view>
+        <view wx:if="{{payBtn}}" style="height:160rpx;display:flex;justify-content:center;align-items:center;color:#03a9f4"><text>{{payMsg}}</text></view>
+          <view class='btn' wx:if="{{pay}}"><button type='primary' bindtap='paySub' plain="true">确定</button></view>
+        </view>
+      </view> -->
+    <view class='receipt'>
+      <form bindsubmit='formSubmit'>
+            <view class="weui-cells weui-cells_after-title">
+            <!-- <view class="weui-cell weui-cell_switch">
+                <view class="weui-cell__bd">是否到达</view>
+                <view class="weui-cell__ft">
+                    <switch checked />
+                </view>
+            </view> -->
+            <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_switch">
+                <view class="weui-cell__bd">是否需要单间</view>
+                <view class="weui-cell__ft">
+                    <switch bindchange='needSingleRoom' checked="{{needSingleRoom}}" />
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_switch">
+                <view class="weui-cell__bd">是否携带家属</view>
+                <view class="weui-cell__ft">
+                    <switch bindchange='family' checked="{{takeFamily}}" />
+                </view>
+            </view>
+            <view wx:if="{{takeFamily}}">
+              <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label" style='font-size:30rpx;color:#495060'>家属人数</view>
+                </view>
+                <view class="weui-cell__bd">
+                  <picker value="{{adultNum}}" bindchange="bindAdultChange" value='{{adultIndex}}' range='{{adultArray}}'> 
+                        <view class="weui-input">{{adultArray[adultIndex]}}人</view>
+                    </picker>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label" style='font-size:30rpx;color:#495060'>小孩儿人数</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker value="{{kidNum}}" bindchange="bindKidChange" value='{{kidIndex}}' range='{{kidArray}}'> 
+                        <view class="weui-input">{{kidArray[kidIndex]}}人</view>
+                    </picker>
+                </view>
+            </view>
+            </view>
+            <i-panel title="选择出行方式">
+                  <view>
+                    <i-radio-group current="{{current}}" bindchange="handleFruitChange">
+                      <i-radio wx:for="{{fruit}}" position="{{position}}" wx:key="{{item.id}}" value="{{item.name}}">
+                      </i-radio>
+                  </i-radio-group>
+                  </view>
+              </i-panel>
+            </view>
+            <view class='transport_air' wx:if='{{transport == "飞机"}}'>
+            <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label" style='font-size:30rpx;color:#495060'>班次</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="air_no" value='{{air_no}}' auto-focus adjust-position='true' placeholder="请输入班次"/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label" style='font-size:30rpx;color:#495060'>达到机场</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="air_station" value='{{air_station}}' adjust-position='true' placeholder="请输入到达机场"/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label" style='font-size:30rpx;color:#495060'>达到时间</view>
+                </view>
+                <view class="weui-cell__bd">
+                <!-- <picker bindchange='inputTime' data-name='airTime' name='air_time' value='{{expectedArrivalAirTime}}'>
+                  <view class='weui-select'></view>
+                </picker> -->
+                    <input class="weui-input" data-name='airTime' name='air_time' value='{{expectedArrivalAirTime}}' bindtap='inputTime' adjust-position='true' placeholder="请选择时间"/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_switch">
+                <view class="weui-cell__bd" style='font-size:30rpx;color:#495060'>是否需要接机</view>
+                <view class="weui-cell__ft">
+                    <switch bindchange='needPickUpAir' checked = "{{needPickUpAir}}"/>
+                </view>
+            </view>
+        </view>
+            </view>
+            <view class='transport_train' wx:if='{{transport == "火车"}}'>
+            <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label" style='font-size:30rpx;color:#495060'>车次</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="train_no" value='{{train_no}}' auto-focus placeholder="请输车次"/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label" style='font-size:30rpx;color:#495060'>到达车站</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="train_station" value='{{train_station}}' placeholder="请输入目的地"/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label" style='font-size:30rpx;color:#495060'>达到时间</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" data-name='trainTime' name='train_time' value='{{expectedArrivalTrainTime}}' bindtap='inputTime' placeholder="请选择时间"/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_switch">
+                <view class="weui-cell__bd" style='font-size:30rpx;color:#495060'>是否需要接站</view>
+                <view class="weui-cell__ft">
+                    <switch bindchange='needPickUpTrain' checked = "{{needPickUpTrain}}" />
+                </view>
+            </view>
+        </view>
+            </view>
+            <view class='transport_self' wx:if='{{transport == "自驾"}}'>
+            <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label" style='font-size:30rpx;color:#495060'>到达时间</view>
+                </view>
+                <view class="weui-cell__bd">
+                     <input class="weui-input" data-name='selfTime' name='self_time' value='{{expectedArrivalSelfTime}}' bindtap='inputTime' placeholder="请选择时间"/>
+                </view>
+            </view>
+        </view>
+            </view>
+
+
+        </view>
+        <!-- <view class="weui-cells__tips">接机/站联系电话：123456789</view> -->
+        <!-- <view class='btn'><button type='primary' form-type='submit'>提交</button></view> -->
+        <view class='btn'><button type='primary' form-type='submit'>提交</button></view>
+    </form>
+    <yycalendar show="{{show}}" beginTime="06:00" endTime="23:00" timeGap="60" themeColor="#2d8cf0" showOverdue="false" bind:yybindchange="_yybindchange"/>
+    </view>
+    <view style='border-top:#dddee1 solid 1px'></view>
+    </view>
+    <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>
+  </view>
+</view>

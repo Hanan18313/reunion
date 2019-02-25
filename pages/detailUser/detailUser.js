@@ -71,99 +71,102 @@ Page({
       }
     ],
     accountIndex: 0,
-    userInfo: []
+    userInfo: [],
+    userId:'',
+    affairs:false
   },
-  edit: function () {
-    var that = this
-    that.setData({
-      input_disabled: false,
-      oper_show: false,
-      auto_focus: true
-    })
-  },
-  right: function (e) {
-    var that = this
-    // console.log(that.data.userInfo)
-    var params = {
-      pro: that.data.userInfo.pro,
-      phoneCn: that.data.userInfo.phoneCn,
-      country: that.data.userInfo.country,
-      socialMediaAccount: that.data.userInfo.socialMediaAccount,
-      socialMedia: that.data.userInfo.socialMedia,
-      company: that.data.userInfo.company
-    }
-    Req.putReq(urlList.updateUserInfoByOpenId, params, function (res) {
-      if (res.code == 200) {
-        wx.showToast({
-          title: '提交成功',
-          icon: 'success',
-          duration: 2000
-        })
-        setTimeout(() => {
-          wx.navigateBack({
-            delta: 1,
-          })
-        }, 2000)
-        that.setData({
-          oper_show: true,
-          input_disabled: true
-        })
-      } else {
-        wx.showToast({
-          title: '提交失败',
-          icon: 'none',
-          duration: 2000
-        })
-        that.setData({
-          oper_show: true,
-          input_disabled: true
-        })
-      }
-      console.log(res)
-    })
-  },
-  bindAcccountChange: function (e) {
-    var that = this
-    that.setData({
-      accountIndex: e.detail.value,
-      "userInfo.socialMedia": (that.data.accountArray[e.detail.value]).name
-    })
-  },
-  bindRegionChange: function (e) {
-    console.log(e)
-    var that = this
-    that.setData({
-      regionIndex: e.detail.value,
-      "userInfo.country": (that.data.regionArray[e.detail.value]).name
-    })
-  },
-  bindInput_pro: function (e) {
-    var that = this
-    that.setData({
-      "userInfo.pro": e.detail.value,
-    })
-  },
-  bindInput_phoneCn: function (e) {
-    var that = this
-    that.setData({
-      "userInfo.phoneCn": e.detail.value
-    })
-  },
-  bindInput_socialMediaAccount: function (e) {
-    var that = this
-    that.setData({
-      "userInfo.socialMediaAccount": e.detail.value
-    })
-  },
-  bindInput_company: function (e) {
-    var that = this
-    that.setData({
-      "userInfo.company": e.detail.value
-    })
-  },
-  myAffairs: function (e) {
+  // edit: function () {
+  //   var that = this
+  //   that.setData({
+  //     input_disabled: false,
+  //     oper_show: false,
+  //     auto_focus: true
+  //   })
+  // },
+  // right: function (e) {
+  //   var that = this
+  //   // console.log(that.data.userInfo)
+  //   var params = {
+  //     pro: that.data.userInfo.pro,
+  //     phoneCn: that.data.userInfo.phoneCn,
+  //     country: that.data.userInfo.country,
+  //     socialMediaAccount: that.data.userInfo.socialMediaAccount,
+  //     socialMedia: that.data.userInfo.socialMedia,
+  //     company: that.data.userInfo.company
+  //   }
+  //   Req.putReq(urlList.updateUserInfoByOpenId, params, function (res) {
+  //     if (res.code == 200) {
+  //       wx.showToast({
+  //         title: '提交成功',
+  //         icon: 'success',
+  //         duration: 2000
+  //       })
+  //       setTimeout(() => {
+  //         wx.navigateBack({
+  //           delta: 1,
+  //         })
+  //       }, 2000)
+  //       that.setData({
+  //         oper_show: true,
+  //         input_disabled: true
+  //       })
+  //     } else {
+  //       wx.showToast({
+  //         title: '提交失败',
+  //         icon: 'none',
+  //         duration: 2000
+  //       })
+  //       that.setData({
+  //         oper_show: true,
+  //         input_disabled: true
+  //       })
+  //     }
+  //     console.log(res)
+  //   })
+  // },
+  // bindAcccountChange: function (e) {
+  //   var that = this
+  //   that.setData({
+  //     accountIndex: e.detail.value,
+  //     "userInfo.socialMedia": (that.data.accountArray[e.detail.value]).name
+  //   })
+  // },
+  // bindRegionChange: function (e) {
+  //   console.log(e)
+  //   var that = this
+  //   that.setData({
+  //     regionIndex: e.detail.value,
+  //     "userInfo.country": (that.data.regionArray[e.detail.value]).name
+  //   })
+  // },
+  // bindInput_pro: function (e) {
+  //   var that = this
+  //   that.setData({
+  //     "userInfo.pro": e.detail.value,
+  //   })
+  // },
+  // bindInput_phoneCn: function (e) {
+  //   var that = this
+  //   that.setData({
+  //     "userInfo.phoneCn": e.detail.value
+  //   })
+  // },
+  // bindInput_socialMediaAccount: function (e) {
+  //   var that = this
+  //   that.setData({
+  //     "userInfo.socialMediaAccount": e.detail.value
+  //   })
+  // },
+  // bindInput_company: function (e) {
+  //   var that = this
+  //   that.setData({
+  //     "userInfo.company": e.detail.value
+  //   })
+  // },
+  affairs: function (e) {
+    var userId = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '../affairs/affairs',
+      url: '../affairs/affairs?userId='+userId,
     })
   },
   /**
@@ -172,11 +175,12 @@ Page({
   onLoad: function (options) {
     var that = this
     var userId = options.userId
+    that.data.userId = userId
     var data = {
       userId:userId
     }
     Req.getReq(urlList.getUserInfoByUserId, data, function (res) {
-      console.log(res)
+    //  console.log(res)
       if (res.code == 200) {
         that.setData({
           userInfo: res.data,
@@ -199,7 +203,23 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this
+  //  console.log(that.data.userId)
+    var params = {
+      userId:that.data.userId
+    }
+    Req.getReq(urlList.getSignInfoByUserId,params,function(res){
+    //  console.log(res)
+      if(res.data == null){
+        that.setData({
+          affairs:false
+        })
+      }else{
+        that.setData({
+          affairs:true
+        })
+      }
+    })
   },
 
   /**
@@ -234,6 +254,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '毕业30周年庆',
+      path: '/pages/index/index',
+      imageUrl: '../../images/tp.png'
+    }
   }
 })

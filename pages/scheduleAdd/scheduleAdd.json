@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "添加会议日程",
+  "usingComponents": {
+    "yycalendar": "plugin://myPlugin/yycalendar"
+  }
+}

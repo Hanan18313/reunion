@@ -17,11 +17,39 @@
     "pages/scheduleManage/scheduleManage",
     "pages/commitManage/commitManage",
     "pages/receiptManage/receiptManage",
-    "pages/addCommittee/addCommittee"
+    "pages/receiptDetail/receiptDetail",
+    "pages/addCommittee/addCommittee",
+    "pages/jobCommittee/jobCommittee",
+    "pages/myAffairs/myAffairs",
+    "pages/newsAdd/newsAdd",
+    "pages/newsEdit/newsEdit",
+    "pages/receiptList/receiptList",
+    "pages/scheduleAdd/scheduleAdd",
+    "pages/scheduleEdit/scheduleEdit",
+    "pages/myAffairsEdit/myAffairsEdit",
+    "pages/appendText/appendText",
+    "pages/notice/notice",
+    "pages/signList/signList",
+    "pages/mapRouter/mapRouter",
+    "pages/receiptNotice/receiptNotice"
   ],
   "permission":{
     "scope.userLocation":{
       "desc":"您的位置将用于此小程序"
+    }
+  },
+  "plugins": {
+    "myPlugin": {
+      "version": "2.0.0",
+      "provider": "wx6b6cb15df2836ebe"
+    },
+    "mapRoute":{
+      "version": "1.0.6",
+      "provider": "wx5bc2ac602a747594"
+    },
+    "calendar":{
+      "version":"1.1.0",
+      "provider": "wx92c68dae5a8bb046"
     }
   },
   "window":{

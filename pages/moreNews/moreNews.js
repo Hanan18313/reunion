@@ -12,12 +12,34 @@ Page({
   data: {
     isIphoneX: app.globalData.model,
   },
-
+  lookNews:function(e){
+    var newsId = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '../detailNews/detailNews?newsId='+newsId,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this
+    var params = ''
+    Req.getReq(urlList.meetingNewsList, params, function (res) {
+      if (res.data) {
+        for (let i = 0; i < res.data.length; i++) {
+          res.data[i].img = urlList.imgUrl + res.data[i].img
+          res.data[i].sendTime = util.formatTime(res.data[i].sendTime)
+          if (res.data[i].isTop == 0) {
+            res.data[i].isTop = '未置顶'
+          } else {
+            res.data[i].isTop = '已置顶'
+          }
+        }
+        that.setData({
+          newsList: res.data
+        })
+      }
+    })
   },
 
   /**
@@ -66,6 +88,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '毕业30周年庆',
+      path: '/pages/index/index',
+      imageUrl: '../../images/tp.png'
+    }
   }
 })

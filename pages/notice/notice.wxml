@@ -1,0 +1,29 @@
+<!--pages/newsAdd/newsAdd.wxml-->
+<view class='page'>
+  <view class='page__bd'>
+    <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
+    <view>
+      <scroll-view scroll-y='true' style='height:95vh' scroll-top='{{scrollTop}}' bindscrolltoupper="upper">
+        <view>
+          <i-load-more tip="加载中..." loading="{{ loading }}" wx:if="{{loading}}"/>
+          <i-load-more tip="已全部加载" wx:if="{{loading_done}}" loading="{{false}}" />
+        </view>
+        <view>
+          <view class="weui-panel">
+            <view class="weui-panel__bd" wx:for="{{notice}}">
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__title weui-media-box__title_in-text" wx:if="{{item.sender == 'system'}}">发布人：系统通知</view><view class="weui-media-box__title weui-media-box__title_in-text" wx:elif="{{item.sender != 'system'}}">发布人：{{item.sender}}</view>
+                    <view class="weui-media-box__desc"><text style='padding-left:56rpx;font-size:32rpx'>{{item.content}}</text></view>
+                    <view class="weui-media-box__info" style='color:#d99694'>
+                        <!-- <view class="weui-media-box__info__meta" wx:if="{{item.title}}">{{item.title}}</view> -->
+                        <view class="weui-media-box__info__meta">{{item.sendTime}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        </view>
+      </scroll-view>
+    </view>
+    <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>
+  </view>
+</view>

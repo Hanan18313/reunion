@@ -1,0 +1,45 @@
+<!--pages/newsAdd/newsAdd.wxml-->
+<view class='page'>
+  <view class='page__bd'>
+    <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
+    <view>
+      <view class='upload'>
+        <view style='height:200rpx;width:100%'><image src='{{newsInfo.img}}' style='width:240rpx;height:180rpx'></image></view>
+      </view>
+      <view class='content'>
+        <form bindsubmit='formSubmit'>
+          <view class="weui-cells weui-cells_after-title">    
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">标题</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" value='{{newsInfo.title}}' name='title' />
+              </view>
+            </view>
+          </view>
+          <view style='height:100rpx'></view>
+          <view class="weui-cells weui-cells_after-title"> 
+              <view class="weui-cell">
+                  <view class="weui-cell__bd">
+                      <textarea class="weui-textarea" name='content' value='{{newsInfo.content}}' style="height: 7.3em" />
+                      <view class="weui-textarea-counter"></view>
+                  </view>
+              </view>
+          </view>
+          <view style='height:100rpx'></view>
+          <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_switch">
+                <view class="weui-cell__bd">是否置顶</view>
+                <view class="weui-cell__ft">
+                    <switch bindchange='bindTopChange' checked = '{{newsInfo.isTop}}' />
+                </view>
+            </view>
+        </view>
+          <view class='btn'><button type='primary' form-type='submit' data-id='{{newsInfo.id}}' disabled='{{disabled}}' loading='{{loading}}'>提交</button></view>
+        </form>
+      </view>
+    </view>
+    <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>
+  </view>
+</view>

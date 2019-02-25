@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "位置导航",
+  "usingComponents": {
+    "map-route": "plugin://mapRoute/mapRoute"
+  }
+}

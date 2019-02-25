@@ -34,7 +34,7 @@
           </view>
           <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </navigator>
-         <navigator url="../receiptManage/receiptManage" class="weui-cell weui-cell_access" hover-class="weui-cell_active" >
+         <navigator url="../receiptNotice/receiptNotice?userId={{userInfo.userId}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active" >
           <view class="weui-cell__hd"><image src="../../images/advice.png" style="width: 24px;height: 24px;margin:5px 5px 0 0" /></view>
           <view class="weui-cell__bd weui-cell_primary">
               <view class='meeting_time'>报名回执管理</view>

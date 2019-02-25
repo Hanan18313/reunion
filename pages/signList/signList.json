@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "报名名单",
+  "usingComponents": {
+    "i-load-more": "../../style/dist/load-more/index",
+    "i-index": "../../style/dist/index/index",
+    "i-index-item": "../../style/dist/index-item/index",
+    "i-tag": "../../style/dist/tag/index"
+  }
+}

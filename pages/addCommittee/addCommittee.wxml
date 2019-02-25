@@ -2,7 +2,7 @@
   <view class='page__bd'>
   <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
    <view style='height:100rpx;width:100%;background:#f8f8f9'>
-      <view style='float:right;padding:20rpx 40rpx 0 0'><button  type='primary' size='mini' bindtap='add'>完成</button></view></view>
+      <view style='float:right;padding:20rpx 40rpx 0 0'><button  type='primary' size='mini' bindtap='add' disabled='{{submit_dis}}'>完成</button></view></view>
   <view>
     <scroll-view scroll-y="true" style='height:90vh' bindscrolltolower='lower'>
       <view class="i-index-demo">

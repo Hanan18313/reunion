@@ -4,3 +4,13 @@ page,
 .page__bd{
     height: 100%;
 }
+.meetingTime{
+  height: 28%;
+}
+.schedule{
+  border-top: #dddee1 solid 1px;
+  height: 65%;
+}
+.btn{
+  padding: 40rpx 100rpx 20rpx 100rpx;
+}

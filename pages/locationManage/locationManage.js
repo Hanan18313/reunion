@@ -27,14 +27,15 @@ Page({
     var that = this
     wx.chooseLocation({
       success: function(res) {
+       // console.log(res)
         that.setData({
-          'location':res.address,
+          'location':res.name,
           'markers[0].latitude':res.latitude,
           'markers[0].longitude':res.longitude,
           longitude:res.longitude,
           latitude:res.latitude
         })
-        console.log(res)
+       // console.log(res)
       },
     })
   },
@@ -49,12 +50,12 @@ Page({
     wx.showLoading({
       title: '加载中...',
     })
-    console.log(that.data)
-    console.log(params)
+  //  console.log(that.data)
+   // console.log(params)
     if(that.data.latitude){
       Req.putReq(urlList.updateMeetingInfo, params, function (res) {
         wx.hideLoading()
-        console.log(res)
+    //    console.log(res)
         if (res.code == 200) {
           wx.showToast({
             title: '提交成功',
@@ -96,7 +97,7 @@ Page({
           location:res.data.location
         })
       }
-      console.log(res)
+   //   console.log(res)
     })
   },
 
@@ -146,6 +147,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '毕业30周年庆',
+      path: '/pages/index/index',
+      imageUrl: '../../images/tp.png'
+    }
   }
 })

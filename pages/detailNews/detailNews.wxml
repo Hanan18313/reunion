@@ -1,6 +1,56 @@
 <view class='page'>
   <view class='page__bd'>
     <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
+    <!-- <view>
+      <view class='upload'>
+        <view style='height:400rpx;width:100%'><image src='{{newsInfo.img}}' style='width:100%;height:400rpx'></image></view>
+      </view>
+      <view class='content'>
+        <form bindsubmit='formSubmit'>
+          <view class="weui-cells weui-cells_after-title">    
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label">标题</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" value='{{newsInfo.title}}' disabled='{{true}}' name='title' />
+              </view>
+            </view>
+          </view>
+          <view style='height:100rpx'></view>
+          <view class="weui-cells weui-cells_after-title"> 
+              <view class="weui-cell">
+                  <view class="weui-cell__bd">
+                      <textarea class="weui-textarea" name='content' disabled='{{true}}' value='{{newsInfo.content}}' style="height: 10.3em" />
+                      <view class="weui-textarea-counter"></view>
+                  </view>
+              </view>
+          </view>
+        </form>
+      </view>
+    </view> -->
+    <view>
+      <view class="weui-article">
+            <view class="weui-article__h1" style='color:#2e6e9e;font-size:18px'>{{newsInfo.title}}</view>
+            <view class="weui-article__section">
+                <!-- <view class="weui-article__title">章标题</view> -->
+                <view class="weui-article__section">
+                    <view class="weui-article__p">
+                        <image class="weui-article__img" src='{{newsInfo.img}}' mode="aspectFit" style="height: 180px" />
+                    </view>
+                </view>
+                <view class="weui-article__section">
+                    <!-- <view class="weui-article__h3">1.2 节标题</view> -->
+                    <view class="weui-article__p">
+                        <text style='font-size:30rpx;color:#4f4f4f'>{{newsInfo.content}}</text>
+                    </view>
+                    <view class="weui-article__p" style='float:right'>
+                        <text style='font-size:26rpx;color:#d99694'>{{newsInfo.sendTime}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
     <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>
   </view>
 </view>

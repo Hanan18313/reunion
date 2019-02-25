@@ -17,16 +17,17 @@
                 wx:for-index="in" 
                 wx:key="{{in}}" 
                 wx:for-item="it"
-                style='height:80rpx;display:flex;align-items:center;padding:0 0 0 40rpx;border-bottom:#dddee1 solid 1px'>
+                style='height:80rpx;display:flex;align-items:center;padding:0 0 0 40rpx;border-bottom:#dddee1 solid 1px'  data-name='{{it.name}}' bindtap='onChange'>
                 <view style='display:flex;justify-content:space-between;width:50%'>
-                  <text >{{it.name}}</text>
-                  <text wx:if="{{it.phoneCn}}" bindtap='call'>{{it.phoneCn}}</text>
+                 <view style='width:50%'> <text bindtap='detail' data-id='{{it.userId}}'>{{it.name}}</text></view>
+                  <view style='width:50%'><text wx:if="{{it.phoneCn}}" bindtap='call'>{{it.phoneCn}}</text></view>
                 </view>
-                <view bindtap='detail' data-id='{{it.userId}}' style='display:flex;justify-content:flex-end;width:40%'>
+                <view style='display:flex;justify-content:flex-end;width:40%'>
                 <i-tag wx:if="{{it.isSign == 1}}" color="green">已报名</i-tag>
-                <view style='width:100rpx'><i-tag wx:if="{{it.isSign == 1 && it.payState == '已缴费'}}" color="blue" style="padding-left:8rpx">已缴费</i-tag></view>
-                <!-- <i-tag wx:for="{{tags}}" wx:key="{{index}}" color="{{item.color}}" name="{{index}}">{{item.name}}</i-tag> -->
-                <text></text></view>
+                <view style='width:100rpx'><i-tag wx:if="{{it.isSign == 1 && it.payState == '确认缴费'}}" color="blue" style="padding-left:8rpx">已缴费</i-tag></view>
+                <i-tag wx:if="{{it.committee}}" color='yellow'>组委会</i-tag>
+                </view>
+                
             </view>
         </i-index-item>
     </i-index>

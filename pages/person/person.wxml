@@ -90,7 +90,8 @@
       </view>
        </form>
       </scroll-view>
-      <view class='btn_affairs' style='padding:150rpx 40rpx 0 40rpx' wx:if="{{showAffairs_btn}}"><button type='default' bindtap='myAffairs'>查看我的会务</button></view>
+      <view class='btn_affairs' style='padding:60rpx 40rpx 0 40rpx' wx:if="{{showAffairs_btn}}"><button type='default' bindtap='myAffairs'>查看我的会务</button></view>
+      <view class='btn_affairs' style='padding:50rpx 40rpx 0 40rpx' wx:if="{{showAffairs_btn}}"><button class="weui-btn" type="primary" plain="true" bindtap='signOut'>取消报名</button></view>
    </view>
    <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>
   </view>

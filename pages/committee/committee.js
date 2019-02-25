@@ -17,7 +17,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this
+    var params = ''
+    Req.getReq(urlList.getUserInfoByOpenId,params,function(res){
+      if(res.code == 200){
+        that.setData({
+          userInfo:res.data
+        })
+      }
+    })
   },
 
   /**
@@ -66,6 +74,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '毕业30周年庆',
+      path: '/pages/index/index',
+      imageUrl: '../../images/tp.png'
+    }
   }
 })

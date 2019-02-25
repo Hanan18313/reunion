@@ -119,7 +119,7 @@ Page({
           input_disabled: true
         })
       }
-      console.log(res)
+    //  console.log(res)
     })
   },
   bindAcccountChange:function(e){
@@ -130,7 +130,7 @@ Page({
     })
   },
   bindRegionChange:function(e){
-    console.log(e)
+  //  console.log(e)
     var that = this
     that.setData({
       regionIndex: e.detail.value,
@@ -163,7 +163,31 @@ Page({
   },
   myAffairs:function(e){
     wx.navigateTo({
-      url: '../affairs/affairs',
+      url: '../myAffairs/myAffairs',
+    })
+  },
+  signOut:function(){
+    var that = this
+    var params = ''
+    Req.putReq(urlList.meetingSignOut,params,function(res){
+      if(res.code == 200){
+        wx.showToast({
+          title: '取消报名成功',
+          icon:'success',
+          duration:2000
+        })
+        setTimeout(() =>{
+          wx.navigateBack({
+            detal:1
+          })
+        },2000)
+      }else{
+        wx.showToast({
+          title: '操作失败',
+          icon:'none',
+          duration:2000
+        })
+      }
     })
   },
   /**
@@ -173,11 +197,13 @@ Page({
     var that = this
     var data
     Req.getReq(urlList.getUserInfoByOpenId,data,function(res){
+   //   console.log(res)
       if(res.code == 200){
         that.setData({
           userInfo:res.data,
           "userInfo":res.data,
           regionIndex: that.data.region.indexOf(res.data.country),
+          accountIndex:that.data.account.indexOf(res.data.socialMedia)
         })
       }
     })
@@ -190,13 +216,20 @@ Page({
     var that = this
     var data
     Req.getReq(urlList.getSignInfoByOpenId,data,function(res){
-      if(res.data == null){
-        that.setData({
-          showAffairs_btn:false
-        })
+    //  console.log(res)
+      if(res.data != null){
+        if(res.data.isSign == 0){
+          that.setData({
+            showAffairs_btn: false
+          })
+        }else{
+          that.setData({
+            showAffairs_btn: true
+          })
+        }
       }else{
         that.setData({
-          showAffairs_btn:true
+          showAffairs_btn: false
         })
       }
     })
@@ -241,6 +274,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '毕业30周年庆',
+      path: '/pages/index/index',
+      imageUrl: '../../images/tp.png'
+    }
   }
 })

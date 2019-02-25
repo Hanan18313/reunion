@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "首页",
+  "navigationBarTitleText": "毕业30年庆",
   "usingComponents": {
     "i-drawer": "../../style/dist/drawer/index",
     "i-tab-bar": "../../style/dist/tab-bar/index",
