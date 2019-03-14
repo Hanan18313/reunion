@@ -5,7 +5,6 @@ var urlList = require('../../utils/base.js')
 var prom = require('../../utils/prom.js')
 var util = require('../../utils/util.js')
 var format = require('../../utils/formatDate.js')
-import Dialog from '../../style/vant/dialog/dialog'
 // var Dialog  = require('../../style/vant/dialog/dialog.js')
 Page({
 
@@ -41,7 +40,8 @@ Page({
     needPickUpTrain:false,
     payMsgShow:false,
     payBtn:false,
-    payMsg:'如已缴费请进行验证'
+    payMsg:'如已缴费请进行验证',
+    showAffairs_btn:false
   },
   myAffairsEdit:function(){
     wx.navigateTo({
@@ -189,11 +189,54 @@ Page({
       url: '../appendText/appendText?userId'+userId,
     })
   },
+  signOut: function () {
+    var that = this
+    var params = ''
+    Req.putReq(urlList.meetingSignOut, params, function (res) {
+      if (res.code == 200) {
+        wx.showToast({
+          title: '取消报名成功',
+          icon: 'success',
+          duration: 2000
+        })
+        setTimeout(() => {
+          wx.navigateBack({
+            detal: 1
+          })
+        }, 2000)
+      } else {
+        wx.showToast({
+          title: '操作失败',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this
+    var data
+    Req.getReq(urlList.getSignInfoByOpenId, data, function (res) {
+      //  console.log(res)
+      if (res.data != null) {
+        if (res.data.isSign == 0) {
+          that.setData({
+            showAffairs_btn: false
+          })
+        } else {
+          that.setData({
+            showAffairs_btn: true
+          })
+        }
+      } else {
+        that.setData({
+          showAffairs_btn: false
+        })
+      }
+    })
   },
 
   /**
@@ -271,7 +314,7 @@ Page({
         }
         that.setData({
           detailReceipt: res.data,
-          family: '家属' + res.data.adultNum + '人,' + '小孩儿' + res.data.kidsNum + '人'
+          family: '成人' + res.data.adultNum + '人,' + '儿童' + res.data.kidsNum + '人'
         })
       }
     })

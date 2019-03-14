@@ -31,32 +31,95 @@ Page({
         name:'已缴费',
         color:'blue'
       }
-    ]
+    ],
+    current:0
   },
-  showInput: function () {
+  handleChange:function(e){
+    console.log(e)
     var that = this
     that.setData({
-      inputShowed: true
+      current:e.detail.key
     })
-  },
-  //取消
-  hideInput: function () {
-    var that = this
-    that.setData({
-      inputVal: "",
-      inputShowed: false,
-    })
-  },
-  //清空搜索框
-  clearInput: function () {
-    var that = this
-    that.setData({
-      inputVal: ""
-    })
-  },
-  inputTyping: function (e) {
-    var that = this
-
+    if(e.detail.key == 0){
+      var arr = []
+      let params = {
+        page: that.data.page,
+        pageSize: that.data.pageSize,
+        filter: {
+          classroom: 0
+        }
+      }
+      var obj = ''
+      let storeName = new Array(26);
+      const words = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+      words.forEach((item, index) => {
+        storeName[index] = {
+          key: item,
+          list: []
+        }
+      })
+      Req.getReq(urlList.getUserList, params, function (res) {
+        console.log(res.data)
+        Req.getReq(urlList.getOrganizerList, obj, function (val) {
+          if (res.code == 200) {
+            var dataArr = that.data.dataArr
+            dataArr.push(res.data)
+            res.data.forEach((item) => {
+              // console.log(item.userName)
+              // console.log(py.chineseToPinYin(item.userName).charAt(0))
+              //let firstName = item.userName.substring(0,1);
+              let firstName = py.chineseToPinYin(item.userName).charAt(0)
+              let index = words.indexOf(firstName);
+              // console.log(firstName)
+              // console.log(storeName)
+              // console.log(item.userName)
+              // console.log(firstName)
+              for (let i = 0; i < val.data.length; i++) {
+                if (val.data[i].userId == item.userId) {
+                  that.data.committee = true;
+                  break;
+                } else {
+                  that.data.committee = false
+                }
+              }
+              storeName[index].list.push({
+                name: item.userName,
+                key: firstName,
+                userId: item.userId,
+                phoneCn: item.phoneCn,
+                isSign: item.isSign,
+                payState: item.payState,
+                committee: that.data.committee
+              })
+            })
+            that.data.user_name = storeName
+            that.setData({
+              userList: that.data.user_name,
+              loading: true,
+            })
+          }
+        })
+      })
+    }else{
+      let params = {
+        filter: {
+          classroom: e.detail.key
+        },
+        page: that.data.page,
+        pageSize: 100
+      }
+      wx.showLoading({
+        title: '加载中...',
+      })
+      Req.getReq(urlList.getUserList, params, function (res) {
+        wx.hideLoading()
+        if(res.code == 200){
+          that.setData({
+            userlist:res.data
+          })
+        }
+      })
+    }
   },
   lower:function(e){
     var that = this
@@ -149,7 +212,10 @@ Page({
     var arr = []
     let params = {
       page:that.data.page,
-      pageSize:that.data.pageSize
+      pageSize:that.data.pageSize,
+      filter:{
+        classroom:0
+      }
     }
     var obj = ''
     let storeName = new Array(26);
@@ -160,8 +226,13 @@ Page({
         list:[]
       }
     })
+    wx.showLoading({
+      title: '加载中...',
+    })
     Req.getReq(urlList.getUserList,params,function(res){
+      console.log(res.data)
       Req.getReq(urlList.getOrganizerList,obj,function(val){
+        wx.hideLoading()
         if (res.code == 200) {
           var dataArr = that.data.dataArr
           dataArr.push(res.data)

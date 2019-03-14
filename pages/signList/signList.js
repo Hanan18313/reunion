@@ -14,7 +14,10 @@ Page({
     isIphoneX: app.globalData.model,
     page:1,
     pageSize:200,
-    dataArr:[]
+    dataArr:[],
+    roomTotal:0,
+    familyTotal:0,
+    pickTotal:0
   },
   onChange:function(e){
     console.log(e)
@@ -29,21 +32,35 @@ Page({
       page: that.data.page,
       pageSize: that.data.pageSize
     }
-    Req.getReq(urlList.getUserList, params, function (res) {
+    Req.getReq(urlList.getSignInfoList, params, function (res) {
+      //console.log(res)
       if (res.code == 200) {
-        console.log(res)
-        if(res.data.length > 0){
-          for(let i = 0; i < res.data.length; i++){
-            if(res.data[i].isSign == 1){
-              arr.push(res.data[i])
-            }
+        for(let i = 0; i < res.data.length; i++){
+          Object.defineProperty(res.data[i],'familyNum',{
+            enumerable: true,
+            writable:true,
+            value:0
+          })
+          if(res.data[i].needPickUp == 1){
+            that.data.pickTotal++
           }
+          if(res.data[i].needSingleRoom == 1){
+            that.data.roomTotal++
+          }
+          // if(res.data[i].adultNum != 0 || res.data[i].kidsNum != 0){
+          //   res.data[i].adultNum = Number(res.data[i].adultNum) + Number(res.data[i].kidsNum)
+          // }
+         // res.data[i].familyNum = Number(res.data[i].adultNum) + Number(res.data[i].kidsNum)
+          that.data.familyTotal += Number(res.data[i].adultNum)+Number(res.data[i].kidsNum)
         }
+        console.log(res.data)
+        that.setData({
+          signList:res.data,
+          roomTotal:that.data.roomTotal,
+          pickTotal:that.data.pickTotal,
+          familyTotal:that.data.familyTotal
+        })
       }
-      console.log(arr)
-      that.setData({
-        signList:arr
-      })
     })
   },
 

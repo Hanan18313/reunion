@@ -38,6 +38,7 @@ var urlList = {
   payEffective: baseUrl +'/payEffective',//汇款已提交 -> 确认收费
   payInvalid: baseUrl +'/payInvalid',//会狂已提交 -> 未收费
   getAtSelfMessage: baseUrl +'/getAtSelfMessage',//查看@我的消息
-  addMsg: baseUrl +'/addMsg',//发布消息
+  addMsg: baseUrl +'/addMsg',//发布消息,
+  getSignInfoList: baseUrl +'/getSignInfoList',//获取所有签到信息
 }
 module.exports = urlList

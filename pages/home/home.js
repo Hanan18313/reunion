@@ -21,6 +21,10 @@ Page({
       width: 50,
       height: 50,
     }],
+    autoPlay: true,
+    interval: 3000,
+    duration: 1000,
+    circular:true
   },
   moreNews:function(){
     wx.navigateTo({
@@ -195,8 +199,8 @@ Page({
       })
     }).then(function(res){
       var data= ''
+      var imgArr = []
       Req.getReq(urlList.meetingNewsList,data,function(res){
-      //  console.log(res.data)
         wx.showLoading({
           title: '加载中...',
         })
@@ -204,10 +208,16 @@ Page({
           wx.hideLoading();
           for(let i in res.data){
             if(res.data[i].isTop == 1){
-              res.data[i].img = urlList.imgUrl+res.data[i].img
-             // console.log(res.data[i])
+              if(res.data[i].img.split(',').length > 1){
+                for(let j = 0; j < res.data[i].img.split(',').length; j++){
+                  imgArr.push(urlList.imgUrl + res.data[i].img.split(',')[j])
+                }
+              }else{
+                res.data[i].img = urlList.imgUrl + res.data[i].img
+              }
               that.setData({
-                news_info:res.data[i]
+                news_info:res.data[i],
+                imgArr:imgArr
               })
             }
           }

@@ -115,6 +115,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    var imgArr = []
     var newsId = options.newsId
     that.data.newsId = newsId
    // console.log(newsId)
@@ -124,9 +125,17 @@ Page({
       if(res.data){
         for (let i = 0; i < res.data.length; i++) { 
           if(res.data[i].id == newsId){
-            res.data[i].img = urlList.imgUrl+res.data[i].img
+            if (res.data[i].img.split(',').length > 1) {
+              for (let j = 0; j < res.data[i].img.split(',').length; j++) {
+                imgArr.push(urlList.imgUrl + res.data[i].img.split(',')[j])
+              }
+            } else {
+              res.data[i].img = urlList.imgUrl + res.data[i].img
+            }
+          //  res.data[i].img = urlList.imgUrl+res.data[i].img
             that.setData({
-              newsInfo:res.data[i]
+              newsInfo:res.data[i],
+              imgArr:imgArr
             })
           }
         }

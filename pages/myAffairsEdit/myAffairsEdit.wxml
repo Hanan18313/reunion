@@ -33,26 +33,27 @@
             <view wx:if="{{takeFamily}}">
               <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__hd">
-                    <view class="weui-label" style='font-size:30rpx;color:#495060'>家属人数</view>
+                    <view class="weui-label" style='font-size:30rpx;color:#495060'>成人人数</view>
                 </view>
                 <view class="weui-cell__bd">
                   <picker value="{{adultNum}}" bindchange="bindAdultChange" value='{{adultIndex}}' range='{{adultArray}}'> 
-                        <view class="weui-input">{{adultArray[adultIndex]}}人</view>
+                        <view class="weui-input">{{adultArray[adultIndex]}}</view>
                     </picker>
                 </view>
             </view>
             <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__hd">
-                    <view class="weui-label" style='font-size:30rpx;color:#495060'>小孩儿人数</view>
+                    <view class="weui-label" style='font-size:30rpx;color:#495060'>儿童人数</view>
                 </view>
                 <view class="weui-cell__bd">
                     <picker value="{{kidNum}}" bindchange="bindKidChange" value='{{kidIndex}}' range='{{kidArray}}'> 
-                        <view class="weui-input">{{kidArray[kidIndex]}}人</view>
+                        <view class="weui-input">{{kidArray[kidIndex]}}</view>
                     </picker>
                 </view>
             </view>
             </view>
-            <i-panel title="选择出行方式">
+            <view style='font-size:32rpx;border-top:#dddee1 solid 1px;padding:10rpx 0 10rpx 30rpx '>选择出行方式</view>
+            <i-panel>
                   <view>
                     <i-radio-group current="{{current}}" bindchange="handleFruitChange">
                       <i-radio wx:for="{{fruit}}" position="{{position}}" wx:key="{{item.id}}" value="{{item.name}}">
@@ -73,7 +74,7 @@
             </view>
             <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__hd">
-                    <view class="weui-label" style='font-size:30rpx;color:#495060'>达到机场</view>
+                    <view class="weui-label" style='font-size:30rpx;color:#495060'>到达机场</view>
                 </view>
                 <view class="weui-cell__bd">
                     <input class="weui-input" name="air_station" value='{{air_station}}' adjust-position='true' placeholder="请输入到达机场"/>
@@ -81,13 +82,14 @@
             </view>
             <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__hd">
-                    <view class="weui-label" style='font-size:30rpx;color:#495060'>达到时间</view>
+                    <view class="weui-label" style='font-size:30rpx;color:#495060'>到达时间</view>
                 </view>
-                <view class="weui-cell__bd">
+                <view class="weui-cell__bd" style='height:88rpx'>
                 <!-- <picker bindchange='inputTime' data-name='airTime' name='air_time' value='{{expectedArrivalAirTime}}'>
                   <view class='weui-select'></view>
                 </picker> -->
-                    <input class="weui-input" data-name='airTime' name='air_time' value='{{expectedArrivalAirTime}}' bindtap='inputTime' adjust-position='true' placeholder="请选择时间"/>
+                    <!-- <input class="weui-input" data-name='airTime' name='air_time' value='{{expectedArrivalAirTime}}' bindtap='inputTime' adjust-position='true' placeholder="请选择时间"/> -->
+                    <button  class="weui-button"  data-name='airTime' style='background:#ffffff;font-size:32rpx;color:#616161;height:88rpx;border-top:#dddee1 solid 1px;border-radius:0rpx' bindtap='inputTime'>{{expectedArrivalAirTime}}</button>
                 </view>
             </view>
             <view class="weui-cell weui-cell_switch">
@@ -118,10 +120,11 @@
             </view>
             <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__hd">
-                    <view class="weui-label" style='font-size:30rpx;color:#495060'>达到时间</view>
+                    <view class="weui-label" style='font-size:30rpx;color:#495060'>到达时间</view>
                 </view>
-                <view class="weui-cell__bd">
-                    <input class="weui-input" data-name='trainTime' name='train_time' value='{{expectedArrivalTrainTime}}' bindtap='inputTime' placeholder="请选择时间"/>
+                <view class="weui-cell__bd" style='height:88rpx'>
+                    <!-- <input class="weui-input" data-name='trainTime' name='train_time' value='{{expectedArrivalTrainTime}}' bindtap='inputTime' placeholder="请选择时间"/> -->
+                    <button  class="weui-button"  data-name='trainTime' style='background:#ffffff;font-size:32rpx;color:#616161;height:88rpx;border-top:#dddee1 solid 1px;border-radius:0rpx' bindtap='inputTime'>{{expectedArrivalTrainTime}}</button>
                 </view>
             </view>
             <view class="weui-cell weui-cell_switch">
@@ -138,8 +141,9 @@
                 <view class="weui-cell__hd">
                     <view class="weui-label" style='font-size:30rpx;color:#495060'>到达时间</view>
                 </view>
-                <view class="weui-cell__bd">
-                     <input class="weui-input" data-name='selfTime' name='self_time' value='{{expectedArrivalSelfTime}}' bindtap='inputTime' placeholder="请选择时间"/>
+                <view class="weui-cell__bd" style='height:88rpx'>
+                  <button  class="weui-button" data-name='selfTime' style='background:#ffffff;font-size:32rpx;color:#616161;height:88rpx;border-top:#dddee1 solid 1px;border-radius:0rpx' bindtap='inputTime'>{{expectedArrivalSelfTime}}</button>
+                     <!-- <input class="weui-input" data-name='selfTime' name='self_time' value='{{expectedArrivalSelfTime}}' bindtap='inputTime' placeholder="请选择时间"/> -->
                 </view>
             </view>
         </view>
@@ -151,7 +155,7 @@
         <!-- <view class='btn'><button type='primary' form-type='submit'>提交</button></view> -->
         <view class='btn'><button type='primary' form-type='submit'>提交</button></view>
     </form>
-    <yycalendar show="{{show}}" beginTime="06:00" endTime="23:00" timeGap="60" themeColor="#2d8cf0" showOverdue="false" bind:yybindchange="_yybindchange"/>
+    <yycalendar show="{{show}}" beginTime="06:00" endTime="23:00" timeGap="30" themeColor="#2d8cf0" showOverdue="false" bind:yybindchange="_yybindchange"/>
     </view>
     <view style='border-top:#dddee1 solid 1px'></view>
     </view>

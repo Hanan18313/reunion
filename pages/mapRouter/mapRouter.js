@@ -12,7 +12,7 @@ Page({
    */
   data: {
     isIphoneX: app.globalData.model,
-    routeInfo:{}
+   // routeInfo:{}
   },
 
   /**
@@ -26,7 +26,7 @@ Page({
       if(res.code == 200){
         wx.getLocation({
           success: function(_res) {
-        //    console.log(_res)
+          //  console.log(_res)
             var routeInfo = {
               startLat: _res.latitude,    //起点纬度 选填
               startLng: _res.longitude,    //起点经度 选填

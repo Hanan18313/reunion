@@ -147,21 +147,21 @@ Page({
     var that = this
  //   console.log(that.data.userId)
     var openid = app.globalData.openId
-   prom.wxPromisify(wx.request)({
-      url:urlList.addMsg,
-      method:'POST',
-      data:{
-        content:e.detail.value.appendText,
-        receiverStr:that.data.userId
-      },
-      header:{
-        'Content-Type':'application/json',
-        'openId':openid
-      },
-      success:function(res){
-        console.log(res)
-      }
-   }).then(function(res){
+ //  prom.wxPromisify(wx.request)({
+      // url:urlList.addMsg,
+      // method:'POST',
+      // data:{
+      //   content:e.detail.value.appendText,
+      //   receiverStr:that.data.userId
+      // },
+      // header:{
+      //   'Content-Type':'application/json',
+      //   'openId':openid
+      // },
+      // success:function(res){
+      //   console.log(res)
+      // }
+ //  }).then(function(res){
       var params = {
         userId: that.data.userId,
         hotelRoom: e.detail.value.hotelRoom,
@@ -196,7 +196,7 @@ Page({
           duration: 2000
         })
       }
-    })
+    //})
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -26,22 +26,24 @@
                     <view class="weui-cell__hd">
                         <view class="weui-label">开始时间: </view>
                     </view>
-                    <view class="weui-cell__bd">
-                      <input class="weui-input" data-name='startTime' name='startTime' value='{{startTime}}' bindtap='inputStartTime' placeholder="请选择时间"/>
+                    <view class="weui-cell__bd" style='height:88rpx'>
+                      <!-- <input class="weui-input" data-name='startTime' name='startTime' value='{{startTime}}' bindtap='inputStartTime' placeholder="请选择时间"/> -->
+                      <button  class="weui-button" data-name='startTime' style='background:#ffffff' bindtap='inputStartTime'>{{startTime}}</button>
                     </view>
                 </view>
                 <view class="weui-cell weui-cell_input">
                     <view class="weui-cell__hd">
                         <view class="weui-label">结束时间: </view>
                     </view>
-                    <view class="weui-cell__bd">
-                      <input class="weui-input" data-name='endTime' name="endTime" value='{{endTime}}' bindtap='inputEndTime' placeholder="请选择时间"/>
+                    <view class="weui-cell__bd" style='height:88rpx'>
+                      <!-- <input class="weui-input" data-name='endTime' name="endTime" value='{{endTime}}' bindtap='inputEndTime' placeholder="请选择时间"/> -->
+                      <button  class="weui-button" data-name='endTime' style='background:#ffffff;border-top:#dddee1 solid 1px' bindtap='inputEndTime'>{{endTime}}</button>
                     </view>
                 </view>
             </view>
             <view class='btn'><button type='primary' disabled='{{disabled}}' loading='{{loading}}' form-type='submit'>提交</button></view>
       </form>
-        <yycalendar show="{{show}}" beginTime="08:00" endTime="22:00" timeGap="60" themeColor="#2d8cf0" showOverdue="false" bind:yybindchange="_yybindchange"/>
+        <yycalendar show="{{show}}" beginTime="06:00" endTime="22:00" timeGap="30" themeColor="#2d8cf0" showOverdue="false" bind:yybindchange="_yybindchange"/>
       </view>
     </view>
     <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>

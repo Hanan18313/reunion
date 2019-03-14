@@ -2,14 +2,25 @@
 <view class='page'>
   <view class='page__bd'>
   <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
+    <view style='display:flex;flex-direction:row;justify-content:space-between;padding:20rpx 60rpx;font-size:32rpx'>
+      <view >单间：{{roomTotal}}间</view>
+      <view >家属：{{familyTotal}}人</view>
+      <view >接站：{{pickTotal}}人</view>
+    </view>
   <view>
     <scroll-view scroll-y="true" style='height:90vh' bindscrolltolower='lower'>
      <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell" wx:for="{{signList}}">
                 <view class="weui-cell__hd">
-                    <image src="{{item.portrait}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                    <image wx:if="{{!item.Users[0].portrait}}" src="../../images/td.png" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                    <image wx:elif="{{item.Users[0].portrait}}" src="{{item.Users[0].portrait}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
                 </view>
-                <view class="weui-cell__bd">{{item.userName}}</view>
+                <view class="weui-cell__bd" style='width:100rpx'>{{item.userName}}</view>
+                <view style='width:100rpx'><i-tag wx:if="{{item.needSingleRoom == 1}}" color="blue" ><view style='width:70rpx;text-align:center'>单间</view></i-tag></view>
+                <!-- <view style='width:100rpx'><i-tag wx:if="{{item.adultNum}}">家属+{{item.adultNum}}</i-tag></view> -->
+                <view style='width:100rpx'><i-tag wx:if="{{hotelRoom}}"><view>{{item.hotelRoom}}</view></i-tag><i-tag wx:elif="{{!hotelRoom && item.payState == '确认缴费'}}" color='green'><view>已缴费</view></i-tag></view>
+                
+                <view style='width:100rpx'><i-tag wx:if="{{item.needPickUp == 1}}"><view style='width:70rpx;text-align:center'>接站</view></i-tag></view>
             </view>
            
         </view>

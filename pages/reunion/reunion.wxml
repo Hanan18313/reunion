@@ -3,7 +3,26 @@
   <view class='page__bd'>
   <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
   <view>
-    <scroll-view scroll-y="true" style='height:90vh' bindscrolltolower='lower'>
+     <i-tabs current="{{ current }}" bindchange="handleChange">
+    <i-tab key="0" title="全体"></i-tab>
+    <i-tab key="1" title="一班"></i-tab>
+    <i-tab key="2" title="二班"></i-tab>
+    <i-tab key="3" title="三班"></i-tab>
+    <i-tab key="4" title="其他"></i-tab>
+</i-tabs>
+  </view>
+  <view>
+  <scroll-view scroll-y="true" style='height:88vh' wx:if="{{current != 0}}">
+    <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell" wx:for="{{userlist}}">
+                <view class="weui-cell__bd" style='height:40rpx;width:100rpx;font-size:28rpx'>{{item.userName}}</view>
+                <view class="weui-cell__bd" style='height:40rpx;width:100rpx;font-size:28rpx' ><text wx:if="{{item.phoneCn}}">{{item.phoneCn}}</text></view>
+                <view class="weui-cell__bd" style='height:40rpx;width:80rpx;font-size:28rpx'><i-tag  wx:if="{{item.isSign == 1}}" color='green'>已报名</i-tag></view>
+                <view style='width:80rpx;height:40rpx;display:flex;justify-content:center;align-items:center' bindtap='detail' data-id='{{item.userId}}'><i-icon type="enter" color='blue'/></view>
+            </view>
+        </view>
+    </scroll-view>
+    <scroll-view scroll-y="true" style='height:88vh' bindscrolltolower='lower' wx:if="{{current == 0}}">
       <view class="i-index-demo">
     <i-index height="100%" bind:change="onChange" item-height="26">
         <i-index-item 
@@ -18,16 +37,16 @@
                 wx:key="{{in}}" 
                 wx:for-item="it"
                 style='height:80rpx;display:flex;align-items:center;padding:0 0 0 40rpx;border-bottom:#dddee1 solid 1px'  data-name='{{it.name}}' bindtap='onChange'>
-                <view style='display:flex;justify-content:space-between;width:50%'>
-                 <view style='width:50%'> <text bindtap='detail' data-id='{{it.userId}}'>{{it.name}}</text></view>
-                  <view style='width:50%'><text wx:if="{{it.phoneCn}}" bindtap='call'>{{it.phoneCn}}</text></view>
+                <view style='display:flex;justify-content:space-between;width:45%'>
+                 <view style='width:40%'> <text>{{it.name}}</text></view>
+                  <view style='width:60%'><text wx:if="{{it.phoneCn}}" bindtap='call'>{{it.phoneCn}}</text></view>
                 </view>
                 <view style='display:flex;justify-content:flex-end;width:40%'>
-                <i-tag wx:if="{{it.isSign == 1}}" color="green">已报名</i-tag>
-                <view style='width:100rpx'><i-tag wx:if="{{it.isSign == 1 && it.payState == '确认缴费'}}" color="blue" style="padding-left:8rpx">已缴费</i-tag></view>
-                <i-tag wx:if="{{it.committee}}" color='yellow'>组委会</i-tag>
+                <view style='width:100rpx'><i-tag wx:if="{{it.isSign == 1}}" color="green">已报名</i-tag></view>
+                <view style='width:100rpx'></view>
+                <view style='width:100rpx'><i-tag wx:if="{{it.committee}}" color='yellow'>组委会</i-tag></view>
                 </view>
-                
+                <view style='width:60rpx;height:60rpx;display:flex;justify-content:center;align-items:center' bindtap='detail' data-id='{{it.userId}}'><i-icon type="enter" color='blue'/></view>
             </view>
         </i-index-item>
     </i-index>

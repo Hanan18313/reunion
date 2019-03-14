@@ -102,16 +102,16 @@
                     <input class="weui-input" placeholder='请输入接站电话' name="pickUpPhone" value='{{detailReceipt.pickUpPhone}}'/>
                 </view>
             </view>
-            <view class="weui-cells weui-cells_after-title">
+            <!-- <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell">
                 <view class="weui-cell__bd">
                     <textarea class="weui-textarea" bindinput='appendText' name="appendText" placeholder="请输入附加回执" style="height: 3.3em" />
                     <view class="weui-textarea-counter">{{appendTextLength}}/50</view>
                 </view>
             </view>
-          </view>
+          </view> -->
         </view>
-        <view class="weui-cells__tips">附加回执可选择填写</view>
+        <!-- <view class="weui-cells__tips">附加回执可选择填写</view> -->
       <view class='btn'><button form-type='submit' type='primary'>提交</button></view>
       </form>
   </view>

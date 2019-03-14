@@ -20,19 +20,28 @@ Page({
   onLoad: function (options) {
    // console.log(options.newsId)
     var that = this
+    var imgArr = []
     var newsId = options.newsId
     that.data.newsId = newsId
    // console.log(newsId)
     let params = ''
     Req.getReq(urlList.meetingNewsList, params, function (res) {
-     // console.log(res)
+      console.log(res)
       if (res.data) {
         for (let i = 0; i < res.data.length; i++) {
           if (res.data[i].id == newsId) {
-            res.data[i].img = urlList.imgUrl + res.data[i].img
+            if (res.data[i].img.split(',').length > 1) {
+              for (let j = 0; j < res.data[i].img.split(',').length; j++) {
+                imgArr.push(urlList.imgUrl + res.data[i].img.split(',')[j])
+              }
+            } else {
+              res.data[i].img = urlList.imgUrl + res.data[i].img
+            }
             res.data[i].sendTime ='发布时间：'+ format.formatDate(res.data[i].sendTime)
+            console.log(imgArr)
             that.setData({
-              newsInfo: res.data[i]
+              newsInfo: res.data[i],
+              imgArr:imgArr
             })
           }
         }

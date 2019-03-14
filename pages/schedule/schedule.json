@@ -1,7 +1,6 @@
 {
   "navigationBarTitleText": "日程安排",
   "usingComponents": {
-    "i-icon": "../../style/dist/icon/index",
-    "calendar": "plugin://calendar/calendar"
+    "i-icon": "../../style/dist/icon/index"
   }
 }

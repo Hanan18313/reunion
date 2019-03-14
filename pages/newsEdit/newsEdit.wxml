@@ -4,7 +4,8 @@
     <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
     <view>
       <view class='upload'>
-        <view style='height:200rpx;width:100%'><image src='{{newsInfo.img}}' style='width:240rpx;height:180rpx'></image></view>
+        <view wx:if="{{imgArr.length == 0}}" style='height:200rpx;width:100%'><image src='{{newsInfo.img}}' style='width:240rpx;height:180rpx'></image></view>
+        <view wx:elif="{{imgArr.length != 0}}" style='height:200rpx;width:30%;display:flex;flex-direction:row'><view wx:for="{{imgArr}}" style='margin:6rpx'><image src='{{item}}' style='width:240rpx;height:180rpx'></image></view></view>
       </view>
       <view class='content'>
         <form bindsubmit='formSubmit'>

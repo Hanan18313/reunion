@@ -2,6 +2,9 @@
   "navigationBarTitleText": "会务回执通知",
   "usingComponents": {
     "i-load-more": "../../style/dist/load-more/index",
-    "i-icon": "../../style/dist/icon/index"
+    "i-icon": "../../style/dist/icon/index",
+    "i-tabs":"../../style/dist/tabs/index",
+    "i-tab":"../../style/dist/tab/index",
+    "i-modal":"../../style/dist/modal/index"
   }
 }

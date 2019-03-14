@@ -9,7 +9,6 @@
     
       <scroll-view scroll-y="true">
        <form bindsubmit='bindsubmit'>
-       <view class="weui-cells__title">学籍信息</view>
          <view class="weui-cells weui-cells_after-title">    
         <view class="weui-cell weui-cell_input" style='background:#f8f8f9'>
           <view class="weui-cell__hd">
@@ -35,18 +34,14 @@
             <input class="weui-input" disabled='true' value='{{userInfo.class}}' />
           </view>
         </view>
-        </view>
-        <view style='display:flex;flex-direction:row;height:100rpx'>
-          <view class="weui-cells__title" style='padding-top:20rpx'>联系信息</view>
-          <view style='position:absolute;left:480rpx;top:360rpx'><button type='primary' plain='true' size='mini' bindtap='edit'>编辑联系信息</button></view>
-        </view>
-        <view class="weui-cells weui-cells_after-title">
+        <!-- </view>
+        <view class="weui-cells weui-cells_after-title"> -->
           <view class="weui-cell weui-cell_input">
           <view class="weui-cell__hd">
             <view class="weui-label">专业</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" disabled='true' bindinput='bindInput_pro' value='{{userInfo.pro}}' />
+            <input class="weui-input" bindinput='bindInput_pro' auto-focus='{{auto-focus}}' value='{{userInfo.pro}}' />
           </view>
         </view>
         <view class="weui-cell weui-cell_input">
@@ -54,7 +49,7 @@
             <view class="weui-label">电话</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" disabled='true' bindinput='bindInput_phoneCn' value='{{userInfo.phoneCn}}' />
+            <input class="weui-input" bindinput='bindInput_phoneCn' value='{{userInfo.phoneCn}}' placeholder="请输入电话"/>
           </view>
         </view>
         <view class="weui-cell weui-cell_select">
@@ -62,10 +57,9 @@
                 <view class="weui-label">常住地</view>
             </view>
             <view class="weui-cell__bd">
-                <!-- <picker bindchange="bindRegionChange" value="{{regionIndex}}" range="{{region}}" disabled='{{input_disabled}}'>
+                <picker bindchange="bindRegionChange" value="{{regionIndex}}" range="{{region}}">
                     <view class="weui-select weui-select_in-select-after">{{region[regionIndex]}}</view>
-                </picker> -->
-                <input class="weui-input" disabled='true' bindinput='bindInput_phoneCn' value='{{userInfo.country}}' />
+                </picker>
             </view>
         </view>
         <view class="weui-cell weui-cell_select">
@@ -73,10 +67,9 @@
                 <view class="weui-label">社交媒体</view>
             </view>
             <view class="weui-cell__bd">
-                <!-- <picker bindchange="bindAcccountChange" value="{{accountIndex}}" range="{{account}}" disabled='{{input_disabled}}'>
+                <picker bindchange="bindAcccountChange" value="{{accountIndex}}" range="{{account}}">
                     <view class="weui-select weui-select_in-select-after">{{account[accountIndex]}}</view>
-                </picker> -->
-                <input class="weui-input" disabled='true' bindinput='bindInput_phoneCn' value='{{userInfo.socialMedia}}' />
+                </picker>
             </view>
         </view>
          <view class="weui-cell weui-cell_input">
@@ -84,7 +77,7 @@
             <view class="weui-label">常用社交账号</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" disabled='true' bindinput='bindInput_socialMediaAccount' value='{{userInfo.socialMediaAccount}}' />
+            <input class="weui-input" bindinput='bindInput_socialMediaAccount' value='{{userInfo.socialMediaAccount}}' placeholder="请输入常用社交账号"/>
           </view>
         </view>
          <view class="weui-cell weui-cell_input">
@@ -92,14 +85,14 @@
             <view class="weui-label">单位</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" disabled='{{true}}' value='{{userInfo.company}}' bindinput='bindInput_company'/>
+            <input class="weui-input" value='{{userInfo.company}}' bindinput='bindInput_company' placeholder="请输入单位"/>
           </view>
         </view>
-
         </view>
+        <view style='padding:100rpx 40rpx 0 40rpx'><button type='primary' bindtap='right'>提交</button></view>
        </form>
       </scroll-view>
-      <view class='btn_affairs' style='padding:60rpx 40rpx 0 40rpx' wx:if="{{showAffairs_btn}}"><button type='default' bindtap='myAffairs'>查看我的会务</button></view>
+      <!-- <view class='btn_affairs' style='padding:60rpx 40rpx 0 40rpx' wx:if="{{showAffairs_btn}}"><button type='default' bindtap='myAffairs'>查看我的会务</button></view> -->
       <!-- <view class='btn_affairs' style='padding:50rpx 40rpx 0 40rpx' wx:if="{{showAffairs_btn}}"><button class="weui-btn" type="primary" plain="true" bindtap='signOut'>取消报名</button></view> -->
    </view>
    <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>

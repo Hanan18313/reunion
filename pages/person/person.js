@@ -75,53 +75,16 @@ Page({
   },
   edit:function(){
     var that = this
-    that.setData({
-      input_disabled:false,
-      oper_show:false,
-      auto_focus:true
+    // that.setData({
+    //   input_disabled:false,
+    //   oper_show:false,
+    //   auto_focus:true
+    // })
+    wx.navigateTo({
+      url: '../personEdit/personEdit',
     })
   },
-  right:function(e){
-    var that = this
-    // console.log(that.data.userInfo)
-    var params = {
-      pro:that.data.userInfo.pro,
-      phoneCn:that.data.userInfo.phoneCn,
-      country:that.data.userInfo.country,
-      socialMediaAccount:that.data.userInfo.socialMediaAccount,
-      socialMedia:that.data.userInfo.socialMedia,
-      company:that.data.userInfo.company
-    }
-    Req.putReq(urlList.updateUserInfoByOpenId,params,function(res){
-      if(res.code == 200){
-        wx.showToast({
-          title: '提交成功',
-          icon: 'success',
-          duration: 2000
-        })
-        setTimeout(() =>{
-          wx.navigateBack({
-            delta: 1,
-          })
-        },2000)
-        that.setData({
-          oper_show: true,
-          input_disabled: true
-        })
-      }else{
-        wx.showToast({
-          title: '提交失败',
-          icon: 'none',
-          duration: 2000
-        })
-        that.setData({
-          oper_show: true,
-          input_disabled: true
-        })
-      }
-    //  console.log(res)
-    })
-  },
+  
   bindAcccountChange:function(e){
     var that = this
     that.setData({
@@ -166,80 +129,90 @@ Page({
       url: '../myAffairs/myAffairs',
     })
   },
-  signOut:function(){
-    var that = this
-    var params = ''
-    Req.putReq(urlList.meetingSignOut,params,function(res){
-      if(res.code == 200){
-        wx.showToast({
-          title: '取消报名成功',
-          icon:'success',
-          duration:2000
-        })
-        setTimeout(() =>{
-          wx.navigateBack({
-            detal:1
-          })
-        },2000)
-      }else{
-        wx.showToast({
-          title: '操作失败',
-          icon:'none',
-          duration:2000
-        })
-      }
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this
-    var data
-    Req.getReq(urlList.getUserInfoByOpenId,data,function(res){
-   //   console.log(res)
-      if(res.code == 200){
-        that.setData({
-          userInfo:res.data,
-          "userInfo":res.data,
-          regionIndex: that.data.region.indexOf(res.data.country),
-          accountIndex:that.data.account.indexOf(res.data.socialMedia)
-        })
-      }
-    })
+    // var that = this
+    // var data
+    // Req.getReq(urlList.getUserInfoByOpenId,data,function(res){
+    //   console.log(res)
+    //   if(res.code == 200){
+    //     that.setData({
+    //       userInfo:res.data,
+    //       "userInfo":res.data,
+    //       regionIndex: that.data.region.indexOf(res.data.country),
+    //       accountIndex:that.data.account.indexOf(res.data.socialMedia)
+    //     })
+    //   }
+    // })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    var that = this
-    var data
-    Req.getReq(urlList.getSignInfoByOpenId,data,function(res){
-    //  console.log(res)
-      if(res.data != null){
-        if(res.data.isSign == 0){
-          that.setData({
-            showAffairs_btn: false
-          })
-        }else{
-          that.setData({
-            showAffairs_btn: true
-          })
-        }
-      }else{
-        that.setData({
-          showAffairs_btn: false
-        })
-      }
-    })
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this
+    var openId = app.globalData.openId
+    var data = {}
+    prom.wxPromisify(wx.request)({
+      url: urlList.getUserInfoByOpenId,
+      method:'GET',
+      header:{
+        'Content-Type':'application/json',
+        'openId':openId
+      },
+      success:function(res){
+        if (res.code == 200) {
+          that.setData({
+            userInfo: res.data,
+            "userInfo": res.data,
+            regionIndex: that.data.region.indexOf(res.data.country),
+            accountIndex: that.data.account.indexOf(res.data.socialMedia)
+          })
+        }
+      }
+    }).then(function(res){
+      Req.getReq(urlList.getSignInfoByOpenId, data, function (res) {
+        //  console.log(res)
+        if (res.data != null) {
+          if (res.data.isSign == 0) {
+            that.setData({
+              showAffairs_btn: false
+            })
+          } else {
+            that.setData({
+              showAffairs_btn: true
+            })
+          }
+        } else {
+          that.setData({
+            showAffairs_btn: false
+          })
+        }
+      })
+    }).then(function(res){
+      var data = {}
+      Req.getReq(urlList.getUserInfoByOpenId, data, function (res) {
+        console.log(res)
+        if (res.code == 200) {
+          that.setData({
+            userInfo: res.data,
+            "userInfo": res.data,
+            regionIndex: that.data.region.indexOf(res.data.country),
+            accountIndex: that.data.account.indexOf(res.data.socialMedia)
+          })
+        }
+      })
+    })
   },
 
   /**

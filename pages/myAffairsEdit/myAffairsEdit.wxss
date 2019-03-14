@@ -8,3 +8,6 @@ page,
 .btn{
   padding: 40rpx
 }
+.weui-button::after{
+  border: none
+}

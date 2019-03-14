@@ -31,7 +31,8 @@
     "pages/notice/notice",
     "pages/signList/signList",
     "pages/mapRouter/mapRouter",
-    "pages/receiptNotice/receiptNotice"
+    "pages/receiptNotice/receiptNotice",
+    "pages/personEdit/personEdit"
   ],
   "permission":{
     "scope.userLocation":{
@@ -46,10 +47,6 @@
     "mapRoute":{
       "version": "1.0.6",
       "provider": "wx5bc2ac602a747594"
-    },
-    "calendar":{
-      "version":"1.1.0",
-      "provider": "wx92c68dae5a8bb046"
     }
   },
   "window":{

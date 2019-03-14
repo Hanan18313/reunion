@@ -4,6 +4,7 @@ var Req = require('../../utils/Req.js')
 var urlList = require('../../utils/base.js')
 var prom = require('../../utils/prom.js')
 var util = require('../../utils/util.js')
+var format = require('../../utils/formatDate.js')
 Page({
 
   /**
@@ -47,7 +48,9 @@ Page({
       userId: userId
     }
     Req.getReq(urlList.getSignInfoByUserId, params, function (res) {
+      console.log(res)
       if (res.code == 200) {
+        res.data.expectedArrivalTime = format.formatDate(res.data.expectedArrivalTime)
         if (res.data) {
           if (res.data.needPickUp == 0) {
             res.data.needPickUp = '否'
@@ -62,7 +65,7 @@ Page({
         }
         that.setData({
           detailReceipt: res.data,
-          family: '家属' + res.data.adultNum + '人,' + '小孩儿' + res.data.kidsNum + '人',
+          family: '成人' + res.data.adultNum + '人,' + '儿童' + res.data.kidsNum + '人',
           'payState': res.data.payState
         })
       }

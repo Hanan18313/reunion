@@ -9,5 +9,5 @@ page,
   padding: 40rpx
 }
 .receipt{
-  height: 50%;
+  height: 64%;
 }

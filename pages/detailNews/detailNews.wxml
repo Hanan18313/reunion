@@ -36,7 +36,12 @@
                 <!-- <view class="weui-article__title">章标题</view> -->
                 <view class="weui-article__section">
                     <view class="weui-article__p">
-                        <image class="weui-article__img" src='{{newsInfo.img}}' mode="aspectFit" style="height: 180px" />
+                       <view wx:if="{{imgArr.length == 0}}">
+                         <image class="weui-article__img" src='{{newsInfo.img}}' mode="scaleToFill" style="height: 180px;width:668rpx" />
+                       </view>
+                       <view wx:if="{{imgArr.length != 0}}" wx:for="{{imgArr}}">
+                        <image class="weui-article__img" src='{{item}}' mode="scaleToFill" style="height: 180px;width:668rpx;padding:10rpx" />
+                       </view>
                     </view>
                 </view>
                 <view class="weui-article__section">
