@@ -17,10 +17,19 @@ Page({
     dataArr:[],
     roomTotal:0,
     familyTotal:0,
-    pickTotal:0
+    pickTotal:0,
+    joinPartyTotal:0
   },
   onChange:function(e){
     console.log(e)
+  },
+  affairs:function(e){
+    console.log(e)
+    var that = this
+    var userId = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '../affairs/affairs?userId='+userId,
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -32,8 +41,12 @@ Page({
       page: that.data.page,
       pageSize: that.data.pageSize
     }
+    wx.showLoading({
+      title: '加载中...',
+    })
     Req.getReq(urlList.getSignInfoList, params, function (res) {
       //console.log(res)
+      wx.hideLoading()
       if (res.code == 200) {
         for(let i = 0; i < res.data.length; i++){
           Object.defineProperty(res.data[i],'familyNum',{
@@ -47,6 +60,9 @@ Page({
           if(res.data[i].needSingleRoom == 1){
             that.data.roomTotal++
           }
+          if(res.data[i].isJoinParty == 1){
+            that.data.joinPartyTotal++
+          }
           // if(res.data[i].adultNum != 0 || res.data[i].kidsNum != 0){
           //   res.data[i].adultNum = Number(res.data[i].adultNum) + Number(res.data[i].kidsNum)
           // }
@@ -58,7 +74,8 @@ Page({
           signList:res.data,
           roomTotal:that.data.roomTotal,
           pickTotal:that.data.pickTotal,
-          familyTotal:that.data.familyTotal
+          familyTotal:that.data.familyTotal,
+          joinPartyTotal:that.data.joinPartyTotal
         })
       }
     })
@@ -111,7 +128,7 @@ Page({
    */
   onShareAppMessage: function () {
     return {
-      title: '毕业30周年庆',
+      title: '毕业30年庆',
       path: '/pages/index/index',
       imageUrl: '../../images/tp.png'
     }

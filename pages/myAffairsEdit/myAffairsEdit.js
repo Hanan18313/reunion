@@ -31,6 +31,7 @@ Page({
     disabled: false,
     takeFamily: false,
     needSingleRoom: false,
+    isJoinParty:false,
     adultArray: ['0', '1', '2', '3', '4'],
     adultObj: [],
     kidObj: [],
@@ -82,6 +83,12 @@ Page({
       needSingleRoom: e.detail.value
     })
   },
+  isJoinParty:function(e){
+    var that = this
+    that.setData({
+      isJoinParty:e.detail.value
+    })
+  },
   family: function (e) {
     var that = this
     that.setData({
@@ -103,7 +110,8 @@ Page({
   _yybindchange: function (e) {
     var that = this
     console.log(e.detail.date)
-    console.log(formatDate.formatDate(e.detail.date))
+    // console.log(e.detail.date)
+    // console.log(formatDate.formatDate(e.detail.date))
     // that.setData({
     //   airTime: formatDate.formatDate(e.detail.year + '-' + e.detail.month + '-' + e.detail.day + ' ' + e.detail.time),
     //   "airTime": formatDate.formatDate(e.detail.year + '-' + e.detail.month + '-' + e.detail.day + ' ' + e.detail.time),
@@ -113,22 +121,22 @@ Page({
       that.setData({
         // expectedArrivalAirTime: formatDate.formatDate(e.detail.year + '-' + e.detail.month + '-' + e.detail.day + ' ' + e.detail.time),
         // "expectedArrivalAirTime": formatDate.formatDate(e.detail.year + '-' + e.detail.month + '-' + e.detail.day + ' ' + e.detail.time),
-        expectedArrivalAirTime:formatDate.formatDate(e.detail.date),
-        "expectedArrivalAirTime": formatDate.formatDate(e.detail.date)
+        expectedArrivalAirTime:e.detail.date,
+        "expectedArrivalAirTime": e.detail.date
       })
     } else if(that.data.inputTime == 'trainTime') {
       that.setData({
         // expectedArrivalTrainTime: formatDate.formatDate(e.detail.year + '-' + e.detail.month + '-' + e.detail.day + ' ' + e.detail.time),
         // "expectedArrivalTrainTime": formatDate.formatDate(e.detail.year + '-' + e.detail.month + '-' + e.detail.day + ' ' + e.detail.time),
-        expectedArrivalTrainTime:formatDate.formatDate(e.detail.date),
-        "expectedArrivalTrainTime": formatDate.formatDate(e.detail.date)
+        expectedArrivalTrainTime:e.detail.date,
+        "expectedArrivalTrainTime": e.detail.date
       })
     }else{
       that.setData({
         // expectedArrivalSelfTime: formatDate.formatDate(e.detail.year + '-' + e.detail.month + '-' + e.detail.day + ' ' + e.detail.time),
         // "expectedArrivalSelfTime": formatDate.formatDate(e.detail.year + '-' + e.detail.month + '-' + e.detail.day + ' ' + e.detail.time),
-        expectedArrivalSelfTime: formatDate.formatDate(e.detail.date),
-        "expectedArrivalSelfTime": formatDate.formatDate(e.detail.date)
+        expectedArrivalSelfTime: e.detail.date,
+        "expectedArrivalSelfTime": e.detail.date
       })
     }
   },
@@ -150,18 +158,21 @@ Page({
       obj.destination = e.detail.value.air_station
       obj.expectedArrivalTime = that.data.expectedArrivalAirTime
       obj.needPickUp = that.data.needPickUpAir
+      obj.isJoinParty = that.data.isJoinParty
     } else if (that.data.transport == "火车") {
       obj.transportation = that.data.transport
       obj.transportationNo = e.detail.value.train_no
       obj.destination = e.detail.value.train_station
       obj.expectedArrivalTime = that.data.expectedArrivalTrainTime,
-      obj.needPickUp = that.data.needPickUpTrain
+      obj.needPickUp = that.data.needPickUpTrain,
+      obj.isJoinParty = that.data.isJoinParty
     } else {
       obj.expectedArrivalTime = that.data.expectedArrivalSelfTime,
       obj.transportation = that.data.transport
       obj.transportationNo = ''
       obj.destination = ''
       obj.needPickUp = false
+      obj.isJoinParty = that.data.isJoinParty
     }
     if (that.data.takeFamily) {
       obj.adultNum = Number(that.data.adultIndex),
@@ -170,29 +181,36 @@ Page({
       obj.adultNum = 0,
       obj.kidsNum = 0
     }
-    obj.needSingleRoom = that.data.needSingleRoom,
-    console.log(obj)
-    Req.putReq(urlList.updateSignInfo, obj, function (res) {
-     // console.log(res)
-      if (res.code == 200) {
-        wx.showToast({
-          title: '提交成功',
-          icon: 'success',
-          duration: 2000
-        })
-        setTimeout(() =>{
-          wx.navigateBack({
-            detal:1
+    obj.needSingleRoom = that.data.needSingleRoom;
+    if(obj.expectedArrivalTime){
+      Req.putReq(urlList.updateSignInfo, obj, function (res) {
+        // console.log(res)
+        if (res.code == 200) {
+          wx.showToast({
+            title: '提交成功',
+            icon: 'success',
+            duration: 2000
           })
-        },2000)
-      } else {
-        wx.showToast({
-          title: '提交失败',
-          icon: 'none',
-          duration: 2000
-        })
-      }
-    })
+          setTimeout(() => {
+            wx.navigateBack({
+              detal: 1
+            })
+          }, 2000)
+        } else {
+          wx.showToast({
+            title: '提交失败',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      })
+    }else{
+      wx.showToast({
+        title: '请确认到达时间',
+        icon:'none',
+        duration:1500
+      })
+    }
   },
   needPickUpAir: function (e) {
     var that = this
@@ -239,7 +257,7 @@ Page({
      // console.log(res)
       if (res.code == 200) {
         res.data.expectedArrivalTime = formatDate.formatDate(formatDate.getLocalDate(res.data.expectedArrivalTime))
-       // console.log(res.data)
+        console.log(res.data)
         if (res.data.adultNum || res.data.kidsNum) {
           that.setData({
             takeFamily: true,
@@ -248,18 +266,30 @@ Page({
           })
         }
         if (res.data.transportation == '飞机') {
+          let needPickUpAir = false
+          if(res.data.needPickUp == 1){
+            needPickUpAir = true
+          }else{
+            needPickUpAir = false
+          }
           that.setData({
             air_station: res.data.destination,
             air_no: res.data.transportationNo,
             expectedArrivalAirTime: res.data.expectedArrivalTime,
-            needPickUpAir: true
+            needPickUpAir: needPickUpAir,
           })
         } else if (res.data.transportation == '火车') {
+          let needPickUpTrain = false
+          if(res.data.needPickUp == 1){
+            needPickUpTrain = true
+          }else{
+            needPickUpTrain = false
+          }
           that.setData({
             train_station: res.data.destination,
             train_no: res.data.transportationNo,
             expectedArrivalTrainTime: res.data.expectedArrivalTime,
-            needPickUpTrain: true
+            needPickUpTrain: needPickUpTrain
           })
         } else {
           that.setData({
@@ -270,6 +300,7 @@ Page({
           needSingleRoom: res.data.needSingleRoom,
           transport: res.data.transportation,
           current: res.data.transportation,
+          isJoinParty: res.data.isJoinParty
         })
       //  console.log(res.data.transportation)
       }
@@ -323,7 +354,7 @@ Page({
    */
   onShareAppMessage: function () {
     return {
-      title: '毕业30周年庆',
+      title: '毕业30年庆',
       path: '/pages/index/index',
       imageUrl: '../../images/tp.png'
     }

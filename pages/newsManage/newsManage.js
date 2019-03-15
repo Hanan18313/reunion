@@ -117,7 +117,7 @@ Page({
    */
   onShareAppMessage: function () {
     return {
-      title: '毕业30周年庆',
+      title: '毕业30年庆',
       path: '/pages/index/index',
       imageUrl: '../../images/tp.png'
     }

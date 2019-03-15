@@ -16,7 +16,8 @@
     <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell" wx:for="{{userlist}}">
                 <view class="weui-cell__bd" style='height:40rpx;width:100rpx;font-size:28rpx'>{{item.userName}}</view>
-                <view class="weui-cell__bd" style='height:40rpx;width:100rpx;font-size:28rpx' ><text wx:if="{{item.phoneCn}}">{{item.phoneCn}}</text></view>
+                <view class="weui-cell__bd" style='height:40rpx;width:100rpx;font-size:28rpx;color:#5677fc' ><text wx:if="{{item.phoneCn}}" bindtap='call'>{{item.phoneCn}}</text></view>
+                <view style='width:100rpx'></view>
                 <view class="weui-cell__bd" style='height:40rpx;width:80rpx;font-size:28rpx'><i-tag  wx:if="{{item.isSign == 1}}" color='green'>已报名</i-tag></view>
                 <view style='width:80rpx;height:40rpx;display:flex;justify-content:center;align-items:center' bindtap='detail' data-id='{{item.userId}}'><i-icon type="enter" color='blue'/></view>
             </view>
@@ -39,11 +40,11 @@
                 style='height:80rpx;display:flex;align-items:center;padding:0 0 0 40rpx;border-bottom:#dddee1 solid 1px'  data-name='{{it.name}}' bindtap='onChange'>
                 <view style='display:flex;justify-content:space-between;width:45%'>
                  <view style='width:40%'> <text>{{it.name}}</text></view>
-                  <view style='width:60%'><text wx:if="{{it.phoneCn}}" bindtap='call'>{{it.phoneCn}}</text></view>
+                  <view style='width:60%'><text wx:if="{{it.phoneCn}}" bindtap='call' style='color:#5677fc'>{{it.phoneCn}}</text></view>
                 </view>
                 <view style='display:flex;justify-content:flex-end;width:40%'>
-                <view style='width:100rpx'><i-tag wx:if="{{it.isSign == 1}}" color="green">已报名</i-tag></view>
                 <view style='width:100rpx'></view>
+                <view style='width:100rpx'><i-tag wx:if="{{it.isSign == 1}}" color="green">已报名</i-tag></view>
                 <view style='width:100rpx'><i-tag wx:if="{{it.committee}}" color='yellow'>组委会</i-tag></view>
                 </view>
                 <view style='width:60rpx;height:60rpx;display:flex;justify-content:center;align-items:center' bindtap='detail' data-id='{{it.userId}}'><i-icon type="enter" color='blue'/></view>

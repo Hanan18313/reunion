@@ -83,16 +83,22 @@
       </view>
   </view>
   <view class="weui-cell weui-cell_input">
-                <view class="weui-cell__hd">
-                    <view class="weui-label">房间号</view>
-                </view>
-                <view class="weui-cell__bd">
-                    <input class="weui-input" disabled='true' value='{{detailReceipt.hotelRoom}}'/>
-                </view>
-            </view>
- 
+      <view class="weui-cell__hd">
+          <view class="weui-label">房间号</view>
+      </view>
+      <view class="weui-cell__bd">
+          <input class="weui-input" disabled='true' value='{{detailReceipt.hotelRoom}}'/>
+      </view>
   </view>
-  
+  <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+          <view class="weui-label">九号活动</view>
+      </view>
+      <view class="weui-cell__bd">
+          <input class="weui-input" disabled='true' value='{{detailReceipt.isJoinParty}}'/>
+      </view>
+  </view>
+  </view>
   </view>
   <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>
   </view>

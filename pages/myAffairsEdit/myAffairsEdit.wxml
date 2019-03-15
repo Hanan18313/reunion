@@ -25,6 +25,12 @@
                 </view>
             </view>
             <view class="weui-cell weui-cell_switch">
+                <view class="weui-cell__bd">是否参加九号活动</view>
+                <view class="weui-cell__ft">
+                    <switch bindchange='isJoinParty' checked="{{isJoinParty}}" />
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_switch">
                 <view class="weui-cell__bd">是否携带家属</view>
                 <view class="weui-cell__ft">
                     <switch bindchange='family' checked="{{takeFamily}}" />
@@ -89,7 +95,7 @@
                   <view class='weui-select'></view>
                 </picker> -->
                     <!-- <input class="weui-input" data-name='airTime' name='air_time' value='{{expectedArrivalAirTime}}' bindtap='inputTime' adjust-position='true' placeholder="请选择时间"/> -->
-                    <button  class="weui-button"  data-name='airTime' style='background:#ffffff;font-size:32rpx;color:#616161;height:88rpx;border-top:#dddee1 solid 1px;border-radius:0rpx' bindtap='inputTime'>{{expectedArrivalAirTime}}</button>
+                    <button  class="weui-button"  data-name='airTime' style='background:#ffffff;font-size:32rpx;color:#616161;height:88rpx;border-top:#dddee1 solid 0.5px;border-radius:0rpx' bindtap='inputTime'>{{expectedArrivalAirTime}}</button>
                 </view>
             </view>
             <view class="weui-cell weui-cell_switch">
@@ -124,7 +130,7 @@
                 </view>
                 <view class="weui-cell__bd" style='height:88rpx'>
                     <!-- <input class="weui-input" data-name='trainTime' name='train_time' value='{{expectedArrivalTrainTime}}' bindtap='inputTime' placeholder="请选择时间"/> -->
-                    <button  class="weui-button"  data-name='trainTime' style='background:#ffffff;font-size:32rpx;color:#616161;height:88rpx;border-top:#dddee1 solid 1px;border-radius:0rpx' bindtap='inputTime'>{{expectedArrivalTrainTime}}</button>
+                    <button  class="weui-button"  data-name='trainTime' style='background:#ffffff;font-size:32rpx;color:#616161;height:88rpx;border-top:#dddee1 solid 0.5px;border-radius:0rpx' bindtap='inputTime'>{{expectedArrivalTrainTime}}</button>
                 </view>
             </view>
             <view class="weui-cell weui-cell_switch">
@@ -142,7 +148,7 @@
                     <view class="weui-label" style='font-size:30rpx;color:#495060'>到达时间</view>
                 </view>
                 <view class="weui-cell__bd" style='height:88rpx'>
-                  <button  class="weui-button" data-name='selfTime' style='background:#ffffff;font-size:32rpx;color:#616161;height:88rpx;border-top:#dddee1 solid 1px;border-radius:0rpx' bindtap='inputTime'>{{expectedArrivalSelfTime}}</button>
+                  <button  class="weui-button" data-name='selfTime' style='background:#ffffff;font-size:32rpx;color:#616161;height:88rpx;border-top:#dddee1 solid 0.5px;border-radius:0rpx' bindtap='inputTime'>{{expectedArrivalSelfTime}}</button>
                      <!-- <input class="weui-input" data-name='selfTime' name='self_time' value='{{expectedArrivalSelfTime}}' bindtap='inputTime' placeholder="请选择时间"/> -->
                 </view>
             </view>

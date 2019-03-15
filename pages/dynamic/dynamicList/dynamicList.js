@@ -1,4 +1,10 @@
-// pages/receiptList/receiptList.js
+// pages/dynamic/dynamicList/dynamicList.js
+const app = getApp()
+var Req = require('../../../utils/Req.js')
+var urlList = require('../../../utils/base.js')
+var prom = require('../../../utils/prom.js')
+var util = require('../../../utils/util.js')
+var format = require('../../../utils/formatDate.js');
 Page({
 
   /**
@@ -7,12 +13,17 @@ Page({
   data: {
 
   },
-
+  pinglun:function(){
+    var userId = 'userId参数'
+    wx.navigateTo({
+      url: '../dynamicPl/dynamicPl',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.hideLoading()
   },
 
   /**
@@ -61,10 +72,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    return {
-      title: '毕业30年庆',
-      path: '/pages/index/index',
-      imageUrl: '../../images/tp.png'
-    }
+
   }
 })

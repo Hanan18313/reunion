@@ -32,7 +32,10 @@
     "pages/signList/signList",
     "pages/mapRouter/mapRouter",
     "pages/receiptNotice/receiptNotice",
-    "pages/personEdit/personEdit"
+    "pages/personEdit/personEdit",
+    "pages/dynamic/dynamicList/dynamicList",
+    "pages/dynamic/dynamicPl/dynamicPl",
+    "pages/dynamic/dynamicGood/dynamicGood"
   ],
   "permission":{
     "scope.userLocation":{

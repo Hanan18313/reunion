@@ -55,13 +55,13 @@ Page({
  //   console.log()
     if (that.data.inputTime == 'startTime') {
       that.setData({
-        startTime: formatDate.formatDate(e.detail.year + '-' + e.detail.month + '-' + e.detail.day + ' ' + e.detail.time),
-        "startTime": formatDate.formatDate(e.detail.year + '-' + e.detail.month + '-' + e.detail.day + ' ' + e.detail.time),
+        startTime: e.detail.date,
+        "startTime": e.detail.date,
       })
     } else {
       that.setData({
-        endTime: formatDate.formatDate(e.detail.year + '-' + e.detail.month + '-' + e.detail.day + ' ' + e.detail.time),
-        "endTime": formatDate.formatDate(e.detail.year + '-' + e.detail.month + '-' + e.detail.day + ' ' + e.detail.time),
+        endTime: e.detail.date,
+        "endTime": e.detail.date,
       })
     }
   },
@@ -226,7 +226,7 @@ Page({
    */
   onShareAppMessage: function () {
     return {
-      title: '毕业30周年庆',
+      title: '毕业30年庆',
       path: '/pages/index/index',
       imageUrl: '../../images/tp.png'
     }

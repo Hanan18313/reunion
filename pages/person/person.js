@@ -129,6 +129,11 @@ Page({
       url: '../myAffairs/myAffairs',
     })
   },
+  extension:function(){
+    wx.navigateTo({
+      url: '../dynamic/dynamicList/dynamicList',
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -252,7 +257,7 @@ Page({
    */
   onShareAppMessage: function () {
     return {
-      title: '毕业30周年庆',
+      title: '毕业30年庆',
       path: '/pages/index/index',
       imageUrl: '../../images/tp.png'
     }

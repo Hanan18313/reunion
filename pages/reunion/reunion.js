@@ -37,9 +37,6 @@ Page({
   handleChange:function(e){
     console.log(e)
     var that = this
-    that.setData({
-      current:e.detail.key
-    })
     if(e.detail.key == 0){
       var arr = []
       let params = {
@@ -59,7 +56,7 @@ Page({
         }
       })
       Req.getReq(urlList.getUserList, params, function (res) {
-        console.log(res.data)
+     //   console.log(res.data)
         Req.getReq(urlList.getOrganizerList, obj, function (val) {
           if (res.code == 200) {
             var dataArr = that.data.dataArr
@@ -120,6 +117,9 @@ Page({
         }
       })
     }
+    that.setData({
+      current: e.detail.key
+    })
   },
   lower:function(e){
     var that = this
@@ -187,9 +187,6 @@ Page({
     })
   },
   onChange(e){
-    console.log(e)
-    var that = this
-    console.log(e)
   },
   detail(e){
    // console.log(e)
@@ -230,7 +227,7 @@ Page({
       title: '加载中...',
     })
     Req.getReq(urlList.getUserList,params,function(res){
-      console.log(res.data)
+     // console.log(res.data)
       Req.getReq(urlList.getOrganizerList,obj,function(val){
         wx.hideLoading()
         if (res.code == 200) {
@@ -340,7 +337,7 @@ Page({
    */
   onShareAppMessage: function () {
     return {
-      title: '毕业30周年庆',
+      title: '毕业30年庆',
       path: '/pages/index/index',
       imageUrl: '../../images/tp.png'
     }

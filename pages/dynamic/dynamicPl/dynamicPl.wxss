@@ -1,0 +1,7 @@
+/* pages/dynamic/dynamicPl/dynamicPl.wxss */
+@import '../../../style/weui.wxss';
+page,
+.page,
+.page__bd{
+    height: 100%;
+}

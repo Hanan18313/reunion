@@ -47,10 +47,14 @@ Page({
     var params = {
       userId: userId
     }
+    wx.showLoading({
+      title: '加载中...',
+    })
     Req.getReq(urlList.getSignInfoByUserId, params, function (res) {
-      console.log(res)
+      wx.hideLoading()
+    //  console.log(res)
       if (res.code == 200) {
-        res.data.expectedArrivalTime = format.formatDate(res.data.expectedArrivalTime)
+        res.data.expectedArrivalTime = format.formatDate(format.getLocalDate(res.data.expectedArrivalTime))
         if (res.data) {
           if (res.data.needPickUp == 0) {
             res.data.needPickUp = '否'
@@ -61,6 +65,14 @@ Page({
             res.data.needSingleRoom = '否'
           } else {
             res.data.needSingleRoom = '是'
+          }
+          if(res.data.expectedArrivalTime == '1970-1-1 08:00:00'){
+            res.data.expectedArrivalTime = ''
+          }
+          if(res.data.isJoinParty == 1){
+            res.data.isJoinParty = '参加'
+          }else{
+            res.data.isJoinParty = '不参加'
           }
         }
         that.setData({
@@ -206,7 +218,7 @@ Page({
 
   onShareAppMessage: function () {
     return {
-      title: '毕业30周年庆',
+      title: '毕业30年庆',
       path: '/pages/index/index',
       imageUrl: '../../images/tp.png'
     }

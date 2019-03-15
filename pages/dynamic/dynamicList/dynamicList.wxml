@@ -1,0 +1,28 @@
+<!--pages/person/person.wxml-->
+<!--pages/home/home.wxml-->
+<view class='page'>
+  <view class='page__bd'>
+   <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
+   <scroll-view style='height:92vh' scroll-y="true">
+    <view class='card' wx:for="{{2}}">
+      <view class='header'>
+        <view class='h_portrait'><image src='../../../images/cs.png' style='height:90rpx;width:90rpx'></image></view>
+        <view style='padding-left:20rpx'>
+          <view class='h_name'>小韩</view>
+          <view class='h_time'>2018</view>
+        </view>
+      </view>
+      <view class='sec_content'>
+        <view style='height:92rpx;background:#f4f4f4;font-size:28rpx;padding:0 80rpx;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;word-break: break-all;'><text>动态文字，动态文字，动态文字，动态文字，动态文字，动态文字，动态文字，动态文字，动态文字，动态文字，动态文字。</text></view>
+        <view class='sec_images'><view wx:for="{{7}}"><image src='../../../images/cs.png'></image></view></view>
+        <view class='footer'>
+          <view class='good' bindtap='good'><image src='../../../images/good.png'></image><text>+1</text></view>
+          <view class='pinglun' bindtap='pinglun'><image src='../../../images/pinglun.png'></image><text>+19</text></view>
+        </view>
+      </view>
+    </view>
+   </scroll-view>
+    <view class="dynamic_btn"><button type="primary" >发布动态</button></view>
+   <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>
+  </view>
+</view>
