@@ -52,7 +52,7 @@ Page({
     },
     timeGap: {
       type: Number,	// 单位时间(min)
-      value: 60
+      value: 30
     },
     show: {
       type: Boolean, 	// 显示或隐藏遮罩
@@ -141,22 +141,23 @@ Page({
     })
   },
   formSubmit: function (e) {
+    console.log(e)
     var that = this
     var obj = {}
     if (that.data.transport == "飞机") {
       obj.transportation = that.data.transport
       obj.transportationNo = e.detail.value.air_no
       obj.destination = e.detail.value.air_station
-      obj.expectedArrivalTime = e.detail.value.air_time
+      obj.expectedArrivalTime = that.data.expectedArrivalAirTime
       obj.needPickUp = that.data.needPickUpAir
     } else if (that.data.transport == "火车") {
       obj.transportation = that.data.transport
       obj.transportationNo = e.detail.value.train_no
       obj.destination = e.detail.value.train_station
-      obj.expectedArrivalTime = e.detail.value.train_time,
+      obj.expectedArrivalTime = that.data.expectedArrivalTrainTime,
       obj.needPickUp = that.data.needPickUpTrain
     } else {
-      obj.expectedArrivalTime = e.detail.value.self_time,
+      obj.expectedArrivalTime = that.data.expectedArrivalSelfTime,
       obj.transportation = that.data.transport
       obj.transportationNo = ''
       obj.destination = ''
@@ -237,7 +238,7 @@ Page({
     Req.getReq(urlList.getSignInfoByOpenId, params, function (res) {
      // console.log(res)
       if (res.code == 200) {
-        res.data.expectedArrivalTime = formatDate.formatDate(res.data.expectedArrivalTime)
+        res.data.expectedArrivalTime = formatDate.formatDate(formatDate.getLocalDate(res.data.expectedArrivalTime))
        // console.log(res.data)
         if (res.data.adultNum || res.data.kidsNum) {
           that.setData({

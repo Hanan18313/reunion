@@ -181,8 +181,12 @@ Page({
         }
       }
     }).then(function(res){
+      wx.showLoading({
+        title: '加载中...',
+      })
       Req.getReq(urlList.getSignInfoByOpenId, data, function (res) {
         //  console.log(res)
+        wx.hideLoading()
         if (res.data != null) {
           if (res.data.isSign == 0) {
             that.setData({

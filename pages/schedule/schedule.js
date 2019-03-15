@@ -81,8 +81,8 @@ Page({
     Req.getReq(urlList.getMeetingInfo, params, function (res) {
       if (res.data) {
         that.setData({
-          startDate: util.formatTime(res.data.startDate),
-          endDate: util.formatTime(res.data.endDate),
+          startDate: util.formatTime(formatDate.getLocalDate(res.data.startDate)),
+          endDate: util.formatTime(formatDate.getLocalDate(res.data.endDate)),
         })
       }
     })
@@ -114,22 +114,22 @@ Page({
               day.push(new Date(res.data[i][j].setTime).getDate())
               month.push(new Date(res.data[i][j].setTime).getMonth()+1)
               Object.defineProperty(res.data[i][j],'date',{
-                value: formatDate.formatDateEn(res.data[i][j].setTime),
+                value: formatDate.formatDateEn(formatDate.getLocalDate(res.data[i][j].setTime)),
                 enumerable:true
                // value: formatDate.formatTimeInt(res.data[i][j].setTime)
               })
               Object.defineProperty(res.data[i][j], 'STime', {
-                value: formatDate.formatTimeInt(res.data[i][j].setTime),
+                value: formatDate.formatTimeInt(formatDate.getLocalDate(res.data[i][j].setTime)),
                 enumerable:true
                 // value: formatDate.formatTimeInt(res.data[i][j].setTime)
               })
               Object.defineProperty(res.data[i][j], 'ETime', {
-                value: formatDate.formatTimeInt(res.data[i][j].endTime),
+                value: formatDate.formatTimeInt(formatDate.getLocalDate(res.data[i][j].endTime)),
                 enumerable: true
                 // value: formatDate.formatTimeInt(res.data[i][j].setTime)
               })
-              res.data[i][j].setTime = formatDate.formatDate(res.data[i][j].setTime)
-              res.data[i][j].endTime = formatDate.formatDate(res.data[i][j].endTime)
+              res.data[i][j].setTime = formatDate.formatDate(formatDate.getLocalDate(res.data[i][j].setTime))
+              res.data[i][j].endTime = formatDate.formatDate(formatDate.getLocalDate(res.data[i][j].endTime))
             //  var dateFormat = new Date(res.data[i][j].date)
             }
           }

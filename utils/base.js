@@ -40,5 +40,6 @@ var urlList = {
   getAtSelfMessage: baseUrl +'/getAtSelfMessage',//查看@我的消息
   addMsg: baseUrl +'/addMsg',//发布消息,
   getSignInfoList: baseUrl +'/getSignInfoList',//获取所有签到信息
+  replyMsg:baseUrl+'/replyMsg',//回复消息
 }
 module.exports = urlList

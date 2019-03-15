@@ -63,9 +63,19 @@ function formatTimeInt(time) {
     var newTime = hour + ':' + min;
     return newTime;
 }
+function getLocalDate(shijianchuo) {
+  var instance = new Date(shijianchuo); //创建一个Date对象
+  var localTime = instance.getTime();
+  var localOffset = instance.getTimezoneOffset() * 60000; //获得当地时间偏移的毫秒数
+  var utc = localTime + localOffset; //utc即GMT时间
+  var offset = 8; //东8区
+  var beijing = utc + (3600000 * offset);
+  return new Date(beijing);
+}
 module.exports = {
   formatDate:formatDate,
   formatDateInt:formatDateInt,
   formatTimeInt:formatTimeInt,
-  formatDateEn:formatDateEn
+  formatDateEn:formatDateEn,
+  getLocalDate: getLocalDate
 }

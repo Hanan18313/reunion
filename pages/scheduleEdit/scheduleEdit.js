@@ -19,15 +19,15 @@ Page({
     scheduleArr:[],
     beginTime: {
       type: String, 	// 开始时间
-      value: '09:00'
+      value: '06:00'
     },
     endTime: {
       type: String,	// 结束时间
-      value: '21:00'
+      value: '22:00'
     },
     timeGap: {
       type: Number,	// 单位时间(min)
-      value: 60
+      value: 30
     },
     show: {
       type: Boolean, 	// 显示或隐藏遮罩
@@ -93,8 +93,11 @@ Page({
     })
   },
   formSubmit: function (e) {
+    console.log(e)
     var that = this
-    if (e.detail.value.endTime && e.detail.value.startTime && e.detail.value.scheduleTitle && e.detail.value.scheduleContent) {
+    console.log(that.data.endTime)
+    console.log(that.data.startTime)
+    if (e.detail.value.scheduleTitle && e.detail.value.scheduleContent) {
       var obj = {
         id: that.data.scheduleId
       }
@@ -102,8 +105,8 @@ Page({
    //     console.log(res)
         if(res.code == 200){
           var params = {
-            setTime: e.detail.value.startTime,
-            endTime: e.detail.value.endTime,
+            setTime: that.data.startTime,
+            endTime: that.data.endTime,
             content: e.detail.value.scheduleContent,
             title: e.detail.value.scheduleTitle,
           }
@@ -159,8 +162,8 @@ Page({
         for(let i = 0; i < res_arr.length; i++){
           if(res_arr[i].id == scheduleId){
            
-            res_arr[i].setTime = formatDate.formatDate(res_arr[i].setTime)
-            res_arr[i].endTime = formatDate.formatDate(res_arr[i].endTime)
+            res_arr[i].setTime = formatDate.formatDate(formatDate.getLocalDate(res_arr[i].setTime))
+            res_arr[i].endTime = formatDate.formatDate(formatDate.getLocalDate(res_arr[i].endTime))
             that.data.scheduleArr = res_arr[i]
             console.log(that.data.scheduleArr)
    //         console.log(res.data[i])

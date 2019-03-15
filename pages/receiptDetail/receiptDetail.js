@@ -13,6 +13,7 @@ Page({
   data: {
     isIphoneX: app.globalData.model,
     userId:'',
+    replyId:'',
     payArray:['未缴费','确认缴费'],
     payObject:[
       {
@@ -50,7 +51,9 @@ Page({
   onLoad: function (options) {
     var that = this
     var userId = options.userId
+    var replyId = options.replyId
     that.data.userId = userId
+    that.data.replyId = replyId
     var params = {
       userId:userId
     }
@@ -81,7 +84,7 @@ Page({
         }
         that.setData({
           detailReceipt: res.data,
-          family: '家属' + res.data.adultNum + '人,' + '小孩儿' + res.data.kidsNum + '人',
+          family: '成人' + res.data.adultNum + '人,' + '儿童' + res.data.kidsNum + '人',
           'payState':res.data.payState
         })
       }
@@ -92,7 +95,8 @@ Page({
     var that = this
  //   console.log(that.data.payState)
     var params = {
-      userId:that.data.userId
+      userId:that.data.userId,
+      messageSubId:that.data.replyId
     }
     if (that.data.payState == '确认缴费') {
       Req.putReq(urlList.payEffective, params, function (res) {
@@ -164,6 +168,7 @@ Page({
  //  }).then(function(res){
       var params = {
         userId: that.data.userId,
+        messageSubId:that.data.replyId,
         hotelRoom: e.detail.value.hotelRoom,
         pickUpPhone: e.detail.value.pickUpPhone
       }

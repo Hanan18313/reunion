@@ -20,7 +20,7 @@
                 <view class="weui-media-box weui-media-box_text">
                     <view class="weui-media-box__title weui-media-box__title_in-text" wx:if="{{item.title == '系统通知'}}">系统通知：</view>
                     <view class="weui-media-box__title weui-media-box__title_in-text" wx:elif="{{item.title != '系统通知'}}">{{item.sender}}：</view>
-                    <view class="weui-media-box__desc"><text style='padding-left:56rpx;font-size:32rpx'>{{item.content}}</text><i-icon type="accessory" size='20'color='#5677fc ' bindtap='goUserAffairs' data-id='{{item.senderUserId}}' data-=''/><text wx:if="{{item.hasDeal == 0}}" style='color:#c41411'>待处理</text><text wx:if="{{item.hasDeal == 1}}" style='color:#259b24'>已处理</text><view wx:for="{{item.MessageSubs}}" wx:for-item="it"><view wx:if="{{openId == it.receiverOpenId}}">{{it.id}}</view></view></view>
+                    <view class="weui-media-box__desc"><view wx:for="{{item.MessageSubs}}" wx:for-item="it"><view wx:if="{{openId == it.receiverOpenId}}"><text style='padding-left:56rpx;font-size:32rpx'>{{item.content}}</text><i-icon type="accessory" size='20'color='#5677fc ' bindtap='goUserAffairs' data-id='{{item.senderUserId}}' data-replyId='{{it.id}}' data-msgId="{{item.id}}"/><text wx:if="{{item.hasDeal == 0}}" style='color:#c41411'>待处理</text><text wx:if="{{item.hasDeal == 1}}" style='color:#259b24'>已处理</text></view></view></view>
                     <view class="weui-media-box__info" style='color:#d99694'>
                         <!-- <view class="weui-media-box__info__meta" wx:if="{{item.title}}">{{item.title}}</view> -->
                         <view class="weui-media-box__info__meta">{{item.sendTime}}</view>

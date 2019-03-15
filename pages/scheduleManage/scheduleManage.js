@@ -112,8 +112,8 @@ Page({
     Req.getReq(urlList.getMeetingInfo,params,function(res){
       if(res.data){
         that.setData({
-          startDate: util.formatTime(res.data.startDate),
-          endDate: util.formatTime(res.data.endDate)
+          startDate: util.formatTime(formatDate.getLocalDate(res.data.startDate)),
+          endDate: util.formatTime(formatDate.getLocalDate(res.data.endDate))
         })
       }
     })
@@ -137,8 +137,8 @@ Page({
         if(res.data.length > 0){
           var res_arr = [].concat.apply([], res.data)
           for(let i = 0; i < res_arr.length; i++){
-            res_arr[i].setTime = formatDate.formatDate(res_arr[i].setTime)
-            res_arr[i].endTime = formatDate.formatDate(res_arr[i].endTime)
+            res_arr[i].setTime = formatDate.formatDate(formatDate.getLocalDate(res_arr[i].setTime))
+            res_arr[i].endTime = formatDate.formatDate(formatDate.getLocalDate(res_arr[i].endTime))
           }
           console.log(res_arr)
           that.setData({

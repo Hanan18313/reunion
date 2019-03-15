@@ -4,6 +4,7 @@ var Req = require('../../utils/Req.js')
 var urlList = require('../../utils/base.js')
 var prom = require('../../utils/prom.js')
 var util = require('../../utils/util.js')
+var format = require('../../utils/formatDate.js')
 Page({
 
   /**
@@ -189,8 +190,8 @@ Page({
           wx.hideLoading();
           that.setData({
             meetingInfo: res.data,
-            startDate:util.formatTime(res.data.startDate),
-            endDate:util.formatTime(res.data.endDate),
+            startDate: util.formatTime(format.getLocalDate(res.data.startDate)),
+            endDate: util.formatTime(format.getLocalDate(res.data.endDate)),
             "markers[0].latitude": res.data.lat,
             "markers[0].longitude": res.data.lon,
             location: res.data.location

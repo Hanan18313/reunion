@@ -255,7 +255,7 @@ Page({
     Req.getReq(urlList.getSignInfoByOpenId, params, function (res) {
      // console.log(res)
       if (res.code == 200) {
-        res.data.expectedArrivalTime = format.formatDate(res.data.expectedArrivalTime)
+        res.data.expectedArrivalTime = format.formatDate(format.getLocalDate(res.data.expectedArrivalTime))
         if (res.data.adultNum || res.data.kidsNum) {
           that.setData({
             takeFamily: true,
