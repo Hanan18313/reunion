@@ -33,7 +33,7 @@
                 </view>
                 <view class="weui-cell weui-cell_input">
                     <view class="weui-cell__hd">
-                        <view class="weui-label">结束时间: </view>
+                      <view class="weui-label">结束时间: </view>
                     </view>
                     <view class="weui-cell__bd" style='height:88rpx'>
                       <!-- <input class="weui-input" data-name='endTime' name="endTime" value='{{endTime}}' bindtap='inputEndTime' placeholder="请选择时间"/> -->

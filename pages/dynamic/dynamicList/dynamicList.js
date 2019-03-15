@@ -11,7 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    isIphoneX: app.globalData.model,
   },
   pinglun:function(){
     var userId = 'userId参数'

@@ -7,7 +7,7 @@ page,
 }
 .dynamic_btn{
     position: absolute;
-    bottom: 0rpx;
+    bottom: 30rpx;
     right: 0rpx;
     width: 100%
 }

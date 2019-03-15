@@ -19,11 +19,11 @@
               </view>
             </view>
           </view>
-          <view style='height:100rpx'></view>
+          <!-- <view style='height:100rpx'></view> -->
           <view class="weui-cells weui-cells_after-title"> 
               <view class="weui-cell">
                   <view class="weui-cell__bd">
-                      <textarea class="weui-textarea" name='content' value='{{newsInfo.content}}' style="height: 7.3em" />
+                      <textarea class="weui-textarea" name='content' maxlength='-1' value='{{newsInfo.content}}' style="height: 11.3em" />
                       <view class="weui-textarea-counter"></view>
                   </view>
               </view>

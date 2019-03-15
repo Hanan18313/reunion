@@ -36,6 +36,7 @@ App({
     var that = this;
     wx.getSystemInfo({
       success: function (res) {
+        console.log(res)
         if (res.model.search('iPhone X') != -1) {
           that.globalData.model = true
         } else {
