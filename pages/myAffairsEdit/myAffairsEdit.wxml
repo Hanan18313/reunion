@@ -148,8 +148,11 @@
                     <view class="weui-label" style='font-size:30rpx;color:#495060'>到达时间</view>
                 </view>
                 <view class="weui-cell__bd" style='height:88rpx'>
+                <!-- <picker mode="multiSelector" bindchange="bindMultiPickerChange"
+                bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+                  <view class="weui-select">{{time}}</view>
+                </picker> -->
                   <button  class="weui-button" data-name='selfTime' style='background:#ffffff;font-size:32rpx;color:#616161;height:88rpx;border-top:#dddee1 solid 0.5px;border-radius:0rpx' bindtap='inputTime'>{{expectedArrivalSelfTime}}</button>
-                     <!-- <input class="weui-input" data-name='selfTime' name='self_time' value='{{expectedArrivalSelfTime}}' bindtap='inputTime' placeholder="请选择时间"/> -->
                 </view>
             </view>
         </view>

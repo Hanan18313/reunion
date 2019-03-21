@@ -6,6 +6,7 @@ var prom = require('../../../utils/prom.js')
 var util = require('../../../utils/util.js')
 var format = require('../../../utils/formatDate.js');
 var page = undefined
+var that
 Page({
 
   /**
@@ -14,7 +15,7 @@ Page({
   data: {
     isIphoneX: app.globalData.model,
     doommData:doommList,
-    input_bottom:80
+    animationData:[]
   },
 
   bindbt: function () {
@@ -43,6 +44,13 @@ Page({
    */
   onLoad: function (options) {
     page = this
+    that = this
+    for(let i = 0; i < 50; i++){
+      doommList.push(new Doomm("你是我的小苹果,", Math.ceil(Math.random() * 100), Math.ceil(Math.random() * 10), getRandomColor()));
+    }
+    // this.setData({
+    //   doommData: doommList
+    // })
   },
 
   /**
@@ -56,7 +64,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var animation = wx.createAnimation({
+      duration:3000,
+      timingFunction:'ease'
+    })
+    that.animation = animation
+    animation.scale(2,2).rotate(45).step()
+    that.setData({
+      animationData:animation.export()
+    })
   },
 
   /**

@@ -95,7 +95,6 @@
             <input class="weui-input" disabled='{{true}}' value='{{userInfo.company}}' bindinput='bindInput_company'/>
           </view>
         </view>
-
         </view>
        </form>
       </scroll-view>

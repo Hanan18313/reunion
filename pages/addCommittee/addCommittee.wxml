@@ -18,7 +18,7 @@
                 wx:for-index="in" 
                 wx:key="{{in}}" 
                 wx:for-item="it"
-                style='height:100rpx;display:flex;align-items:center;border-bottom:#dddee1 solid 1px'>
+                style='height:56rpx;display:flex;align-items:center;border-bottom:#dddee1 solid 1px'>
                 <view style='display:flex;justify-content:space-between;width:50%'>
                   <i-checkbox-group current="{{current}}" bindchange="handleCommitteeChange" data-id='{{it.userId}}'>
                     <i-checkbox position="left" wx:key="{{it.id}}" value="{{it.name}}" disabled='{{it.dis}}' >

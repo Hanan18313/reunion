@@ -15,7 +15,7 @@ Page({
     inputShowed: false,
     inputVal: "",
     page: 1,
-    pageSize: 20,
+    pageSize: 200,
     dataArr: [],
     status: false,
     user_name: [],

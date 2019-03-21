@@ -4,13 +4,16 @@
   <view class='page__bd'>
    <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
     <view style='height:100%'>
-      <view style='height:65%;background:#f4f4f4'>
+      <!-- <view style='height:65%;background:#f4f4f4'>
         <view class='title'>
           <view><text style='font-size:32rpx;'>顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶.</text></view>
         </view>
         <view class='img'>
           <view wx:for="{{7}}"><image src='../../../images/cs.png'></image></view>
         </view>
+      </view> -->
+      <view style='height:60%'>
+        <view animation="{{animationData}}" style="background:red;height:100rpx;width:100rpx"></view>
       </view>
       <view class="doommview">
         <block wx:for="{{doommData}}" wx:key="id">
@@ -23,10 +26,10 @@
         <button bindtap="bindbt">弹一个小苹果</button>
     </view> -->
     </view>
-    <view style='position:relative;bottom:{{input_bottom}}px;height:180rpx;display:flex;justify-content:space-between'>    
+    <!-- <view style='position:relative;bottom:{{input_bottom}}px;height:180rpx;display:flex;justify-content:space-between'>    
       <view><input style='border:#dddee1 solid 1px;height:80rpx;width:616rpx' adjust-position='{{false}}' bindfocus="focus" bindblur='no_focus' placeholder='输入框在此'></input></view>
       <view><button type='primary'>发送</button></view>
-    </view>
+    </view> -->
    <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>
   </view>
 </view>
