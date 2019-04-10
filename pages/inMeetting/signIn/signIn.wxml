@@ -1,0 +1,8 @@
+<!--pages/home/home.wxml-->
+<view class='page'>
+  <view class='page__bd'>
+   <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
+    <van-dialog id="van-dialog" />
+  <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>
+  </view>
+</view>

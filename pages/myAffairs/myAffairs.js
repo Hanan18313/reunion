@@ -267,6 +267,9 @@ Page({
             kidIndex: res.data.kidsNum
           })
         }
+        if (res.data.expectedArrivalTime == '1970-1-1 08:00:00') {
+          res.data.expectedArrivalTime = ''
+        }
         // if(res.data.transportation == '飞机'){
         //   that.setData({
         //     air_station: res.data.destination,

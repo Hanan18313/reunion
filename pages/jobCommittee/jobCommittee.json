@@ -1,4 +1,6 @@
 {
-  "navigationBarTitleText": "组委会分工",
-  "usingComponents": {}
+  "navigationBarTitleText": "测试模块",
+  "usingComponents": {
+    
+  }
 }

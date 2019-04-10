@@ -1,0 +1,15 @@
+{
+  "navigationBarTitleText": "毕业30年庆",
+  "usingComponents": {
+    "i-drawer": "../../../style/dist/drawer/index",
+    "i-tab-bar": "../../../style/dist/tab-bar/index",
+    "i-tab-bar-item": "../../../style/dist/tab-bar-item/index",
+    "i-grid": "../../../style/dist/grid/index",
+    "i-grid-item": "../../../style/dist/grid-item/index",
+    "i-grid-icon": "../../../style/dist/grid-icon/index",
+    "i-grid-label": "../../../style/dist/grid-label/index",
+    "i-notice-bar": "../../../style/dist/notice-bar/index",
+    "van-dialog": "../../../style/vant/dialog/index",
+    "w-dialog":"../../../style/wuss/w-dialog/index"
+  }
+}

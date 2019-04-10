@@ -35,7 +35,17 @@
     "pages/personEdit/personEdit",
     "pages/dynamic/dynamicList/dynamicList",
     "pages/dynamic/dynamicPl/dynamicPl",
-    "pages/dynamic/dynamicGood/dynamicGood"
+    "pages/dynamic/dynamicGood/dynamicGood",
+    "pages/inMeetting/inMeettingHome/inMeettingHome",
+    "pages/inMeetting/inMeettingSignList/inMeettingSignList",
+    "pages/inMeetting/signIn/signIn",
+    "pages/inMeetting/album/album",
+    "pages/inMeetting/mineAlbum/mineAlbum",
+    "pages/inMeetting/createAlbum/createAlbum",
+    "pages/inMeetting/checkList/checkList",
+    "pages/payManage/payManage",
+    "pages/payChange/payChange",
+    "pages/inMeetting/moreAlbum/moreAlbum"
   ],
   "permission":{
     "scope.userLocation":{

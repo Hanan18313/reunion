@@ -1,8 +1,9 @@
-//var baseUrl = "http://localhost:8090/reunion"
+//var baseUrl = "http://localhost:8090/mp"
 //var baseUrl = 'http://192.168.50.230:8090/mp'
 var baseUrl = 'https://os.langjie.com/mp'
 var urlList = {
   imgUrl:'https://os.langjie.com',
+  //imgUrl:'http://localhost:8090',
   getOpenId: baseUrl +'/getOpenId', //获取openid
   checkUserByName:baseUrl+'/checkUserByName',//根据姓名判断访问者身份
   getUserInfoByOpenId:baseUrl+'/getUserInfoByOpenId',//根据openid获取用户信息
@@ -36,10 +37,25 @@ var urlList = {
   getAtSelfMessage: baseUrl +'/getAtSelfMessage',//查看@我的消息
   updateSignInfoByOrganizer: baseUrl +'/updateSignInfoByOrganizer',//组委会录入房间号和接站联系电话
   payEffective: baseUrl +'/payEffective',//汇款已提交 -> 确认收费
-  payInvalid: baseUrl +'/payInvalid',//会狂已提交 -> 未收费
+  payInvalid: baseUrl +'/payInvalid',//汇款已提交 -> 未收费
+  originzerPayEffective: baseUrl +'/originzerPayEffective',//未缴费 -> 确认缴费
   getAtSelfMessage: baseUrl +'/getAtSelfMessage',//查看@我的消息
   addMsg: baseUrl +'/addMsg',//发布消息,
   getSignInfoList: baseUrl +'/getSignInfoList',//获取所有签到信息
-  replyMsg:baseUrl+'/replyMsg',//回复消息
+  replyMsg:baseUrl+'/replyMsg',//回复消息,
+  addReplyMsg: baseUrl +'/addReplyMsg',//添加回复消息
+
+  /***********************************会议中模块*************************************** */
+  meetingCheck:baseUrl+'/meetingCheck',//会中当天签到
+  getCheckInfoByOpenId:baseUrl+'/getCheckInfoByOpenId',//根据openid获取个人签到信息
+  getCheckList:baseUrl+'/getCheckList',//获取签到列表
+  getDiscussAndLikeNotice:baseUrl+'/getDiscussAndLikeNotice',//获取评论点赞消息
+  getMineImagesInfo:baseUrl+'/getMineImagesInfo',//获取我上传的图片列表
+  getImagesDiscussInfo:baseUrl+'/getImagesDiscussInfo',//获取照片列表（附带评论和赞）
+  addImagesInfo: baseUrl +'/addImagesInfo',//添加图片信息
+  deleteImagesInfo:baseUrl+'/deleteImagesInfo',//删除图片
+  discussToImages:baseUrl+'/discussToImages',//评论（弹幕）
+  giveLikeToImages:baseUrl+'/giveLikeToImages',//点赞
+  getMostLikeImages: baseUrl +'/getMostLikeImages',//展示点赞最多的图片
 }
 module.exports = urlList

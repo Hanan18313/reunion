@@ -1,0 +1,23 @@
+<!--pages/home/home.wxml-->
+<view class='page'>
+  <view class='page__bd'>
+   <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
+   <view style='height:100%'>
+    <view class="weui-cells weui-cells_after-title">
+        <view >
+          <navigator  wx:for="{{checkList}}" url="../../affairs/affairs?userId={{item.userId}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__hd">
+                    <image wx:if="{{!item.Users[0].portrait}}" src="../../../images/td.png" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                    <image wx:elif="{{item.Users[0].portrait}}" src="{{item.Users[0].portrait}}" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
+                </view>
+                <view class="weui-cell__bd">{{item.userName}}</view>
+                <view style='width:100rpx'><i-tag wx:if="{{item.isCheck == 1}}"><view style='width:70rpx;text-align:center'>已签到</view></i-tag></view>
+                <view style='width:100rpx'><i-tag wx:if="{{item.hotelRoom}}" color="yellow" ><view style='width:70rpx;text-align:center'>{{item.hotelRoom}}</view></i-tag></view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+        </view>
+    </view>
+   </view>
+   <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>
+  </view>
+</view>

@@ -1,0 +1,23 @@
+<!--pages/person/person.wxml-->
+<!--pages/home/home.wxml-->
+<view class='page'>
+  <view class='page__bd'>
+   <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
+    <view>
+      <view class="weui-cells weui-cells_after-title">
+          <scroll-view scroll-y='true' style='height:93vh'>
+            <view wx:for="{{payInfo}}" style='border-top:#dddee1 solid 1px'>
+              <navigator url="../payChange/payChange?userId={{item.userId}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active" >
+                  <view class="weui-cell__bd">{{item.userName}}</view>
+                  <view class='weui-cell__bd'>
+                     <view style='width:120rpx'><i-tag wx:if="{{item.payState == '确认缴费'}}" color='green'>已缴费</i-tag><i-tag wx:if="{{item.payState == '汇款已递交'}}" color='red'>已递交</i-tag></view>
+                  </view>
+                  <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+              </navigator>
+            </view> 
+          </scroll-view>   
+        </view>
+    </view>
+   <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>
+  </view>
+</view>

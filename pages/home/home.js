@@ -124,7 +124,6 @@ Page({
   //  }).then(function(res){
       var data = ''
       Req.getReq(urlList.getUserInfoByOpenId, data, function (res) {
-        console.log(res)
         wx.showLoading({
           title: '加载中...',
         })

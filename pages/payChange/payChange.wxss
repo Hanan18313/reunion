@@ -1,0 +1,10 @@
+/* pages/payChange/payChange.wxss */
+@import '../../style/weui.wxss';
+page,
+.page,
+.page__bd{
+    height: 100%;
+}
+.btn{
+  padding:40rpx
+}

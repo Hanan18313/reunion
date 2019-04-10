@@ -3,7 +3,13 @@ var urlList = require('./utils/base.js')
 var req = require('./utils/Req.js')
 
 App({
+  data: {
+    deviceInfo: {}
+  },
   onLaunch: function () {
+    this.data.deviceInfo = wx.getSystemInfoSync();
+    console.log(this.data.deviceInfo);
+    
     wx.showLoading({
       title: '加载中...',
     })

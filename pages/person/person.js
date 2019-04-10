@@ -130,8 +130,11 @@ Page({
     })
   },
   extension:function(){
+    // wx.navigateTo({
+    //   url: '../dynamic/dynamicList/dynamicList',
+    // })
     wx.navigateTo({
-      url: '../dynamic/dynamicList/dynamicList',
+      url: '../inMeetting/mineAlbum/mineAlbum',
     })
   },
 

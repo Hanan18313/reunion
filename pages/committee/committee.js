@@ -11,6 +11,7 @@ Page({
    */
   data: {
     isIphoneX: app.globalData.model,
+    showCs:false
   },
 
   /**
@@ -19,6 +20,16 @@ Page({
   onLoad: function (options) {
     var that = this
     var params = ''
+    var openid = app.globalData.openId
+    if (openid = 'ofdKW5Gkk4ciHQx0InqFOSwvRVOo'){
+      that.setData({
+        showCS:true
+      })
+    }else{
+      that.setData({
+        showCS:false
+      })
+    }
     Req.getReq(urlList.getUserInfoByOpenId,params,function(res){
       if(res.code == 200){
         that.setData({

@@ -3,107 +3,79 @@
 <view class='page'>
   <view class='page__bd'>
    <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
-   <!-- <scroll-view style='height:92vh' scroll-y="true">
-    <view class='card' wx:for="{{2}}">
-      <view class='header'>
-        <view class='h_portrait'><image src='../../../images/cs.png' style='height:90rpx;width:90rpx'></image></view>
-        <view style='padding-left:20rpx'>
-          <view class='h_name'>小韩</view>
-          <view class='h_time'>2018</view>
-        </view>
-      </view>
-      <view class='sec_content'>
-        <view style='height:92rpx;background:#f4f4f4;font-size:28rpx;padding:0 80rpx;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;word-break: break-all;'><text>动态文字，动态文字，动态文字，动态文字，动态文字，动态文字，动态文字，动态文字，动态文字，动态文字，动态文字。</text></view>
-        <view class='sec_images'><view wx:for="{{7}}"><image src='../../../images/cs.png'></image></view></view>
-        <view class='footer'>
-          <view class='good' bindtap='good'><image src='../../../images/good.png'></image><text>+1</text></view>
-          <view class='pinglun' bindtap='pinglun'><image src='../../../images/pinglun.png'></image><text>+19</text></view>
-        </view>
-      </view>
-    </view>
-   </scroll-view> -->
-
-
    <!-- 仿微信朋友圈 -->
-<scroll-view class='page' style='height:92vh' scroll-y='true'>
-  <!-- 列表 -->
-  <view class='CircleList' wx:for='{{DataSource}}'>
-    <!-- 头像、昵称、内容 -->
-    <view class='body-view'>
-      <!-- 头像 -->
-      <view class='left-view'>
-        <image class='user-icon' src='{{icon}}'></image>
-      </view>
-      <view class='right-view'>
-        <!-- 昵称 -->
-        <view class='user-name-view'>
-          <label class='user-name'>小韩</label>
-        </view>
-        <!-- 内容 -->
-        <view class='user-content-view'>
-          <text class='user-content'>{{content}}</text>
-        </view>
-        <!-- 图片 -->
-        <view class='photo-view'>
-          <view class='photo' wx:for='{{resource}}' style='width:{{photoWidth}}px;height:{{photoWidth}}px'>
-            <image bindtap='LookPhoto' data-photUrl='{{item}}' src='{{item}}' style='width:{{photoWidth}}px;height:{{photoWidth}}px'></image>
+    <scroll-view class='page' style='height:92vh' scroll-y='true'>
+      <!-- 列表 -->
+      <view class='CircleList' wx:for='{{DataSource}}'>
+        <!-- 头像、昵称、内容 -->
+        <view class='body-view'>
+          <!-- 头像 -->
+          <view class='left-view'>
+            <image class='user-icon' src='{{icon}}'></image>
           </view>
-        </view>
-        <!-- 地理位置 -->
-        <view class='user-address-view'>
-          <label>杭州市下城区星城发展大厦</label>
-        </view>
+          <view class='right-view'>
+            <!-- 昵称 -->
+            <view class='user-name-view'>
+              <label class='user-name'>小韩</label>
+            </view>
+            <!-- 内容 -->
+            <view class='user-content-view'>
+              <text class='user-content'>{{content}}</text>
+            </view>
+            <!-- 图片 -->
+            <view class='photo-view'>
+              <view class='photo' wx:for='{{resource}}' style='width:{{photoWidth}}px;height:{{photoWidth}}px'>
+                <image bindtap='LookPhoto' data-photUrl='{{item}}' src='{{item}}' style='width:{{photoWidth}}px;height:{{photoWidth}}px'></image>
+              </view>
+            </view>
+            <!-- 地理位置 -->
+            <view class='user-address-view'>
+              <label>杭州市下城区星城发展大厦</label>
+            </view>
 
-        <!-- 时间、删除按钮、点赞评论按钮 -->
-        <view class='TDD-view'>
-          <label>2019-06-7 10:14:23</label>
-          <button bindtap='delete'>删除</button>
-          <!-- <view bindtap='TouchDiscuss' ><image data-isShow='{{isShow}}' src='/images/wxdiscuss.png'></image></view> -->
-        </view>
-        <view style='height:60rpx;display:flex;justify-content:space-between;margin:0 40rpx 0 10rpx;font-size:26rpx;align-items:center'>
-          <view bindtap='TouchLike'><i-icon type="like_fill" size='20' color='{{iconColor}}'/></view>
-          <view bindtap='TouchDiscuss' style='margin-top:16rpx'><image  style='width:50rpx;height:40rpx' src='/images/wxdiscuss.png'></image></view>
-        </view>
-        <!-- 点赞 -->
-        <view class='zan-view'>
-          <view class='trigon-view'>
-            <image mode='aspectFill' class='trigon' src='/images/trigon.png'></image>
-          </view>
+            <!-- 时间、删除按钮、点赞评论按钮 -->
+            <view class='TDD-view'>
+              <label>2019-06-7 10:14:23</label>
+              <button bindtap='delete' style='color:#607d8b'>删除</button>
+              <!-- <view bindtap='TouchDiscuss' ><image data-isShow='{{isShow}}' src='/images/wxdiscuss.png'></image></view> -->
+            </view>
+            <view style='height:60rpx;display:flex;justify-content:space-between;margin:0 40rpx 0 10rpx;font-size:26rpx;align-items:center'>
+              <view bindtap='TouchLike'><i-icon type="like_fill" size='20' color='{{iconColor}}'/></view>
+              <view bindtap='TouchDiscuss' style='margin-top:16rpx'><image  style='width:50rpx;height:40rpx' src='/images/wxdiscuss.png'></image></view>
+            </view>
+            <!-- 点赞 -->
+            <view class='zan-view'>
+              <view class='trigon-view'>
+                <image mode='aspectFill' class='trigon' src='/images/trigon.png'></image>
+              </view>
 
-          <!-- 点赞 -->
-          <view class='zan-bg-view'>
-            <view class='zan-user-view' wx:for='{{zanSource}}'>
-              <label bindtap='TouchZanUser' data-name='{{item}}' class='zan-user'>{{item}},</label>
+              <!-- 点赞 -->
+              <view class='zan-bg-view'>
+                <view class='zan-user-view' wx:for='{{zanSource}}'>
+                  <label bindtap='TouchZanUser' data-name='{{item}}' class='zan-user'>{{item}},</label>
+                </view>
+              </view>
+              <view class='line'></view>
+              <!-- 评论 -->
+              <!-- <view class='discuss-view'>
+                <view class='discuss' wx:for='{{contnet}}'>
+                  <label bindtap='TouchZanUser' data-name='{{item.firstname}}' class='discuss-user'>{{item.firstname}}：</label>
+                  <label class='content'>{{item.content}}</label>
+                </view>
+              </view> -->
             </view>
           </view>
-          <view class='line'></view>
-          <!-- 评论 -->
-          <view class='discuss-view'>
-            <view class='discuss' wx:for='{{contnet}}'>
-              <label bindtap='TouchZanUser' data-name='{{item.firstname}}' class='discuss-user'>{{item.firstname}}：</label>
-              <label class='content'>{{item.content}}</label>
-            </view>
-          </view>
-    <!-- <view class="doommview">
-      <block wx:for="{{doommData}}" wx:key="id">
-          <text wx:if="{{item.display}}" class="aon" style="animation: first {{item.time}}s linear forwards;top:{{item.top}}%;color:{{item.color}};">
-              {{item.text}}
-          </text>
-      </block>
-    </view> -->
         </view>
       </view>
-    </view>
-  </view>
-</scroll-view>
+    </scroll-view>
 
 <!-- 评论按钮弹出框 -->
 <!-- <view animation="{{animation}}" class='pop-up-box' style='top:{{popTop}}px;width: {{popWidth}}px;'>
 
 </view> -->
-    <view class="dynamic_btn" wx:if="{{showDiscussBtn}}" style='height:{{discussInputHight}}rpx;'>
-      <view style='width:80%'><input style='border:#dddee1 solid 1px' focus='true' bindfocus='bindFocus' bindconfirm='bindConfirm'></input></view>
-      <view style=''><button type='primary' size='mini'>发送</button></view>
+    <view class="dynamic_btn" wx:if="{{showDiscussBtn}}" style='bottom:{{discussInputHight}}rpx;background:#f8f8f9'>
+      <view style='width:75%;padding:20rpx 0 0 30rpx'><input class='dynamic_input' style='border:#dddee1 solid 1px' focus='true' bindfocus='bindFocus' bindblur='bindBlur'   ></input></view>
+      <view style='padding:20rpx 0 0 0'><button class='dynamic_btn2' type='primary' size='mini' bindtap='sendDanmu'><text style='font-size:32rpx'>发送</text></button></view>
     </view>
    <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>
   </view>

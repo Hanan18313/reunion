@@ -13,21 +13,13 @@ Page({
   data: {
     isIphoneX: app.globalData.model,
     userId:'',
-    replyId:'',
-    payArray:['未缴费','确认缴费'],
-    payObject:[
-      {
-        id:0,
-        name:'未缴费'
-      },
-      {
-        id:1,
-        name:'确认缴费'
-      }
-    ],
-    payIndex:0,
-    payState:'未缴费',
-    appendTextLength:0
+    messageId:'',
+    payState:'',
+    appendTextLength:0,
+    disReceiptBtn:true,
+    hotelRoomnNumber:'',
+    pickUpPhone:'',
+    payDisabled:false
   },
   bindPayChange:function(e){
     var that = this
@@ -49,19 +41,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     var that = this
     var userId = options.userId
-    var replyId = options.replyId
+    var messageId = options.messageId
     that.data.userId = userId
-    that.data.replyId = replyId
+    that.data.messageId = messageId
     var params = {
       userId:userId
     }
     Req.getReq(urlList.getSignInfoByUserId,params,function(res){
       if(res.code == 200){
-      //  console.log(res.data)
+      //  console.log(res.data.expectedArrivalTime)
         if(res.data){
           res.data.expectedArrivalTime = format.formatDate(res.data.expectedArrivalTime)
+          if (res.data.expectedArrivalTime == '1970-1-1 08:00:00' || res.data.expectedArrivalTime == null) {
+            res.data.expectedArrivalTime = ''
+          }
           if(res.data.needPickUp == 0){
             res.data.needPickUp = '否'
           }else{
@@ -74,18 +70,19 @@ Page({
           }
           if(res.data.payState == '确认缴费'){
             that.setData({
-              payIndex: 1
+              payDisabled:true
             })
           }else{
             that.setData({
-              payIndex: 0
+              payDisabled:false
             })
           }
         }
+        that.data.hotelRoomnNumber = res.data.hotelRoom
+        that.data.pickUpPhone = res.data.pickUpPhone
         that.setData({
           detailReceipt: res.data,
           family: '成人' + res.data.adultNum + '人,' + '儿童' + res.data.kidsNum + '人',
-          'payState':res.data.payState
         })
       }
     //  console.log(res)
@@ -146,6 +143,96 @@ Page({
       })
     }
   },
+  //确认缴费
+  payEffective:function(){
+    var that = this
+    var messageId = that.data.messageId
+    var userId = that.data.userId
+    let params = {
+      userId:userId,
+      messageSubId:messageId
+    }
+    Req.putReq(urlList.payEffective,params,function(res){
+      if(res.code ==200){
+        wx.showToast({
+          title: '操作成功',
+          icon:'success',
+          duration:1500
+        })
+        setTimeout(() => {
+          wx.navigateBack({
+            detal:1
+          })
+        },1500)
+      }else{
+        wx.showToast({
+          title: '操作失败',
+          icon:'none',
+          duration:1500
+        })
+      }
+    })
+  },
+
+  //未缴费
+  payInvalid:function(){
+    var that = this
+    var messageId = that.data.messageId
+    var userId = that.data.userId
+    let params = {
+      userId: userId,
+      messageSubId: messageId
+    }
+    console.log(params)
+    Req.putReq(urlList.payInvalid, params, function (res) {
+      console.log(res)
+      if (res.code == 200) {
+        wx.showToast({
+          title: '操作成功',
+          icon: 'success',
+          duration: 1500
+        })
+        setTimeout(() => {
+          wx.navigateBack({
+            detal: 1
+          })
+        }, 1500)
+      } else {
+        wx.showToast({
+          title: '操作失败',
+          icon: 'none',
+          duration: 1500
+        })
+      }
+    })
+  },
+
+//
+  bindInputRoomNumber:function(e){
+  //  console.log(e.detail.value)
+    var that = this
+    if(e.detail.value == that.data.hotelRoomnNumber){
+      that.setData({
+        disReceiptBtn:true
+      })
+    }else{
+      that.setData({
+        disReceiptBtn:false
+      })
+    }
+  },
+  bindInputPickUpPhone:function(e){
+    var that = this
+    if (e.detail.value == that.data.pickUpPhone) {
+      that.setData({
+        disReceiptBtn: true
+      })
+    } else {
+      that.setData({
+        disReceiptBtn: false
+      })
+    }
+  },
   formSubmit:function(e){
  //   console.log(e)
     var that = this
@@ -168,7 +255,7 @@ Page({
  //  }).then(function(res){
       var params = {
         userId: that.data.userId,
-        messageSubId:that.data.replyId,
+        messageSubId:that.data.messageId,
         hotelRoom: e.detail.value.hotelRoom,
         pickUpPhone: e.detail.value.pickUpPhone
       }
@@ -214,7 +301,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this
   },
 
   /**

@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "签到名单",
+  "navigationBarBackgroundColor": "#80848f",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "i-tag": "../../../style/dist/tag/index",
+    "i-icon": "../../../style/dist/icon/index"
+  }
+}

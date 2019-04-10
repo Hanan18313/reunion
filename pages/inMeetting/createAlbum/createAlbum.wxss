@@ -1,0 +1,13 @@
+/* pages/inMeetting/createAlbum/createAlbum.wxss */
+@import '../../../style/weui.wxss';
+page,
+.page,
+.page__bd{
+    height: 100%;
+}
+.btn{
+  padding:200rpx 40rpx 0 40rpx;
+}
+.btn1{
+  padding:100rpx 40rpx 0 40rpx;
+}

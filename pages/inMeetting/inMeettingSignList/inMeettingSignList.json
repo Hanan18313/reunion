@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "签到名单",
+  "usingComponents": {
+    "i-tag": "../../../style/dist/tag/index"
+  }
+}

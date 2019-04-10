@@ -54,7 +54,8 @@ Page({
     doommData: doommList,
     iconColor:'#80848f',
     showDiscussBtn:false,
-    discussInputHight:0
+    discussInputHight:0,
+    inputDanmu:''
   },
   pinglun:function(){
     var userId = 'userId参数'
@@ -74,7 +75,6 @@ Page({
   // 点击图片进行大图查看
   LookPhoto: function (e) {
     var that = this
-    console.log(that.data.resource)
     console.log(e)
     wx.previewImage({
       current: e.currentTarget.dataset.photurl,
@@ -103,23 +103,36 @@ Page({
   TouchDiscuss: function (e) {
     var that = this
     console.log(111)
-    that.setData({
-      showDiscussBtn:true,
+   // that.bindFocus()
+    // that.setData({
+    //   showDiscussBtn:true,
+    // })
+    wx.navigateTo({
+      url: '../dynamicPl/dynamicPl',
     })
   },
   //获取聚焦弹起键盘
   bindFocus:function(e){
     var that = this
     that.setData({
-      discussInputHight:e.detail.value
+      discussInputHight:e.detail.value+50
     })
-    console.log(e)
   },
-  //失去聚焦收起键盘
-  bindConfirm:function(e){
+  //点击完成触发
+  // bindConfirm:function(e){
+  //   console.log(e)
+  //   var that = this
+  //   that.setData({
+  //     discussInputHight:0,
+  //     showDiscussBtn:false
+  //   })
+  // },
+  //失去焦点时触发
+  bindBlur:function(e){
     var that = this
     that.setData({
-      discussInputHight:e.detail.value
+      discussInputHight: 0,
+      showDiscussBtn: false
     })
   },
   /**

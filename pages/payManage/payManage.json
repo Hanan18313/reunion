@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "缴费管理",
+  "usingComponents": {
+    "i-tag": "../../style/dist/tag/index"
+  }
+}

@@ -1,0 +1,116 @@
+@import '../../../style/weui.wxss';
+page,
+.page,
+.page__bd{
+    height: 100%;
+}
+.header{
+  /* height: 8%; */
+  display: flex;
+  align-items: center;
+  margin: 0 0 0 50rpx;
+}
+.body{
+  /* height: 70%; */
+  background: #f8f8f9;
+}
+.title{
+  font-size:36rpx;
+  /* margin: 5rpx 20rpx 5rpx 30rpx; */
+  height:  8%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  position: absolute;
+  top:1prx;
+  left: 0;
+  width: 100%;
+  background:rgba(10, 10, 10, 0.4);
+  color:rgba(255,255,255);
+
+}
+.images{
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  height: 91%;
+}
+.operation{
+  margin: 0 40rpx 0 40rpx;
+  /* display: flex;
+  justify-content: space-between;
+  height: 70rpx;
+  align-items: center; */
+  position: relative;
+  bottom: 512rpx;
+  left: -25rpx;
+  width: 20%;
+}
+.good{
+  display: flex;
+  flex-direction: row;
+}
+.footer{
+
+}
+.aon{
+position: absolute;
+white-space:nowrap;/* 防止向下换行*/
+}
+.aonImg{
+position: absolute;
+white-space:nowrap;/* 防止向下换行*/
+padding: 0 20rpx 0 0;
+}
+/* .doomview{
+  z-index: 3;
+  height: 50%;
+  width:100%;
+  position: absolute;
+  top: 200rpx;
+} */
+.doommview{
+  z-index: 3;
+  height:46%;
+  width: 100%;
+  position: relative;
+  top: -650rpx;
+}
+/**定义从右边向左边的移动的动画**/
+@keyframes first{
+  from{left: 100%; }
+  to{left: -150%;}
+}
+
+.dynamic_btn{
+  position: relative;
+  bottom: 40rpx;
+  right: 0rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.dynamic_input{
+  border-top-left-radius: 20rpx;
+  border-bottom-left-radius: 20rpx;
+  border-top-right-radius: 20rpx;
+  border-bottom-right-radius: 20rpx;
+  height:70rpx
+}
+.dynamic_btn2{
+  border-top-left-radius: 0rpx;
+  border-bottom-left-radius: 0rpx;
+  height:72rpx;
+}
+.btn{
+  position: absolute;
+  /* bottom: 2rpx; */
+  width: 100%;
+}
+.btn button{
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  border-top-right-radius: 2rpx;
+  border-top-left-radius: 2rpx;
+}

@@ -396,7 +396,11 @@ Page({
     Req.getReq(urlList.getSignInfoByOpenId, params, function (res) {
      // console.log(res)
       if (res.code == 200) {
-        res.data.expectedArrivalTime = formatDate.formatDate(formatDate.getLocalDate(res.data.expectedArrivalTime))
+        if (res.data.expectedArrivalTime == '1970-1-1 08:00:00') {
+          res.data.expectedArrivalTime = ''
+        }else{
+          res.data.expectedArrivalTime = formatDate.formatDate(formatDate.getLocalDate(res.data.expectedArrivalTime))
+        }
         console.log(res.data)
         if (res.data.adultNum || res.data.kidsNum) {
           that.setData({

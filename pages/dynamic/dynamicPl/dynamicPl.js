@@ -15,7 +15,17 @@ Page({
   data: {
     isIphoneX: app.globalData.model,
     doommData:doommList,
-    animationData:[]
+    animationData:[],
+    swiper:[
+      '../../../images/cs1.png',
+      '../../../images/signIn.png',
+      '../../../images/mine.png',
+      '../../../images/portrait.png'
+    ],
+    showDiscussBtn: true,
+    discussInputHight: 0,
+    focus:false,
+    inputDanmu:''
   },
 
   bindbt: function () {
@@ -24,19 +34,48 @@ Page({
       doommData: doommList
     })
   },
-
-
-  // 获取到焦点
-  focus: function (e) {
-    this.setData({
-      input_bottom: 430
+  bindInputDanmu: function (e) {
+    that.data.inputDanmu = e.detail.value
+  },
+  //发送弹幕
+  sendDanmu: function () {
+    doommList.push(new Doomm(that.data.inputDanmu, Math.ceil(Math.random() * 100), Math.ceil(Math.random() * 10), getRandomColor()));
+    that.setData({
+      inputDanmu: '',
+      doommData:doommList
     })
   },
 
-  // 失去焦点
-  no_focus: function (e) {
-    this.setData({
-      input_bottom: 80
+  //获取聚焦弹起键盘
+  bindFocus: function (e) {
+    var that = this
+    that.setData({
+      discussInputHight: e.detail.value + 100
+    })
+  },
+
+  //失去焦点时触发
+  bindBlur: function (e) {
+    var that = this
+    that.setData({
+      discussInputHight: 50,
+     // showDiscussBtn: false
+    })
+  },
+  //保存图片到相册
+  saveImageToPhotoAlbum:function(e){
+    console.log(e)
+    wx.getImageInfo({
+      src: '../../../images/active.png',
+      success:function(res){
+        console.log(res)
+      }
+    })
+    wx.saveImageToPhotosAlbum({
+      filePath: '',
+      success:function(res){
+        console.log(res)
+      }
     })
   },
   /**
@@ -45,9 +84,14 @@ Page({
   onLoad: function (options) {
     page = this
     that = this
-    for(let i = 0; i < 50; i++){
-      doommList.push(new Doomm("你是我的小苹果,", Math.ceil(Math.random() * 100), Math.ceil(Math.random() * 10), getRandomColor()));
-    }
+    // for(let i = 0; i < 50; i++){
+    //   doommList.push(new Doomm("你是我的小苹果,", Math.ceil(Math.random() * 100), Math.ceil(Math.random() * 10), getRandomColor()));
+    // }
+    setInterval(() => {
+      for(let i = 0; i < 3; i++){
+        doommList.push(new Doomm("你是我的小苹果,", Math.ceil(Math.random() * 100), Math.ceil(Math.random() * 10), getRandomColor()));
+      }
+    },2000)
     // this.setData({
     //   doommData: doommList
     // })
@@ -116,7 +160,7 @@ var doommList = [];
 var i = 0;//用做唯一的wx:key
 class Doomm {
   constructor(text, top, time, color) {
-    this.text = text + i;
+    this.text = text;
     this.top = top;
     this.time = time;
     this.color = color;

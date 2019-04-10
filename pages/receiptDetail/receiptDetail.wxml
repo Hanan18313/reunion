@@ -2,22 +2,31 @@
 <view class='page'>
   <view class='page__bd'>
   <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
-  <view style='display:flex;justify-content:space-between'>
-    <view style='width:76%;font-size:34rpx'>
-       <view class="weui-cell weui-cell_input">
-              <view class="weui-cell__hd">
-                  <view class="weui-label">缴费认证</view>
-              </view>
-              <view class="weui-cell__bd">
-                  <picker bindchange="bindPayChange" value="{{payIndex}}" range="{{payArray}}">
-                      <view class="weui-select">{{payArray[payIndex]}}</view>
-                  </picker>
-              </view>
-          </view>
-    </view>
-    <view style='width:24%;display:flex;justify-content:center;padding:12rpx 0 0 0'><view><button type='primary' size='mini' plain='true' bindtap='pay'>确认</button></view></view>
-  </view>
   <view>
+   <view class='weui-cells weui-cells_after-title'>
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+          <view class="weui-label">缴费状态</view>
+      </view>
+      <view class="weui-cell__bd">
+          <input class="weui-input" disabled='true' value='{{detailReceipt.payState}}'/>
+      </view>
+  </view>
+  <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+          <view class="weui-label">缴费方式</view>
+      </view>
+      <view class="weui-cell__bd">
+          <input class="weui-input" disabled='true' value='{{detailReceipt.payRem}}'/>
+      </view>
+  </view>
+   </view>
+  <view style='height:140rpx'>
+    <view style='display:flex;justify-content:space-around;'>
+         <view style='margin:30rpx 0 0 0' ><button style='width:240rpx;height:88rpx;font-size:32rpx' type='primary'  plain='true' bindtap='payEffective' disabled='{{payDisabled}}'>确认缴费</button></view>
+      <view style='margin:30rpx 0 0 0' ><button style='width:240rpx;height:88rpx;font-size:32rpx' type='default' plain='true' bindtap='payInvalid' disabled='{{payDisabled}}'>未收到缴费</button></view>
+    </view>
+  </view>
   <view class='weui-cells weui-cells_after-title' style='background:#f8f8f9'>
     <view class="weui-cell weui-cell_input">
       <view class="weui-cell__hd">
@@ -75,14 +84,6 @@
           <input class="weui-input" disabled='true' value='{{detailReceipt.needPickUp}}'/>
       </view>
   </view>
-  <view class="weui-cell weui-cell_input">
-      <view class="weui-cell__hd">
-          <view class="weui-label">缴费方式</view>
-      </view>
-      <view class="weui-cell__bd">
-          <input class="weui-input" disabled='true' value='{{detailReceipt.payRem}}'/>
-      </view>
-  </view>
   </view>
   <form bindsubmit='formSubmit'>
     <view class="weui-cells weui-cells_after-title">
@@ -91,7 +92,7 @@
                     <view class="weui-label">房间号</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input class="weui-input" auto-focus placeholder='请输入房间号' auto-focus name="hotelRoom" value='{{detailReceipt.hotelRoom}}'/>
+                    <input class="weui-input" auto-focus placeholder='请输入房间号' bindinput='bindInputRoomNumber' auto-focus name="hotelRoom" value='{{detailReceipt.hotelRoom}}'/>
                 </view>
             </view>
             <view class="weui-cell weui-cell_input">
@@ -99,7 +100,7 @@
                     <view class="weui-label">接站电话</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input class="weui-input" placeholder='请输入接站电话' name="pickUpPhone" value='{{detailReceipt.pickUpPhone}}'/>
+                    <input class="weui-input" placeholder='请输入接站电话' bindinput='bindInputPickUpPhone' name="pickUpPhone" value='{{detailReceipt.pickUpPhone}}'/>
                 </view>
             </view>
             <!-- <view class="weui-cells weui-cells_after-title">
@@ -112,7 +113,7 @@
           </view> -->
         </view>
         <!-- <view class="weui-cells__tips">附加回执可选择填写</view> -->
-      <view class='btn'><button form-type='submit' type='primary'>提交</button></view>
+      <view class='btn'><button form-type='submit' type='primary' disabled='{{disReceiptBtn}}'>处理回执</button></view>
       </form>
   </view>
   <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>

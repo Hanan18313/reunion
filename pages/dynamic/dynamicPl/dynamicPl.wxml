@@ -3,18 +3,21 @@
 <view class='page'>
   <view class='page__bd'>
    <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
-    <view style='height:100%'>
-      <!-- <view style='height:65%;background:#f4f4f4'>
-        <view class='title'>
-          <view><text style='font-size:32rpx;'>顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶.</text></view>
-        </view>
-        <view class='img'>
-          <view wx:for="{{7}}"><image src='../../../images/cs.png'></image></view>
-        </view>
-      </view> -->
-      <view style='height:60%'>
-        <view animation="{{animationData}}" style="background:red;height:100rpx;width:100rpx"></view>
+    <view style='height:90%'>
+      <view class='swiper'>
+        <swiper duration='{{duration}}' circular='{{circular}}' style='height:500rpx'>
+          <block wx:for="{{swiper}}">
+            <swiper-item>
+              <view style='display:flex;justify-content:center' bindtap='saveImageToPhotoAlbum'>
+                <image src='{{item}}' mode='aspectFit' style='width:100%'></image>
+              </view>
+            </swiper-item>
+          </block>
+        </swiper>
       </view>
+      <!-- <view style='height:60%'>
+        <view animation="{{animationData}}" style="background:red;height:100rpx;width:100rpx"></view>
+      </view> -->
       <view class="doommview">
         <block wx:for="{{doommData}}" wx:key="id">
             <text wx:if="{{item.display}}" class="aon" style="animation: first {{item.time}}s linear forwards;top:{{item.top}}%;color:{{item.color}};">
@@ -26,10 +29,10 @@
         <button bindtap="bindbt">弹一个小苹果</button>
     </view> -->
     </view>
-    <!-- <view style='position:relative;bottom:{{input_bottom}}px;height:180rpx;display:flex;justify-content:space-between'>    
-      <view><input style='border:#dddee1 solid 1px;height:80rpx;width:616rpx' adjust-position='{{false}}' bindfocus="focus" bindblur='no_focus' placeholder='输入框在此'></input></view>
-      <view><button type='primary'>发送</button></view>
-    </view> -->
+      <view class="dynamic_btn" wx:if="{{showDiscussBtn}}" style='margin-bottom:{{discussInputHight}}rpx;background:#f8f8f9'>
+        <view style='width:75%;padding:20rpx 0 0 30rpx'><input class='dynamic_input' style='border:#dddee1 solid 1px' focus='{{focus}}' bindfocus='bindFocus' bindinput='bindInputDanmu' value='{{inputDanmu}}' bindblur='bindBlur' cursor-spacing='100'></input></view>
+        <view style='padding:20rpx 0 0 0'><button class='dynamic_btn2' type='primary' size='mini' bindtap='sendDanmu'><text style='font-size:32rpx'>发送</text></button></view>
+      </view>
    <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>
   </view>
 </view>

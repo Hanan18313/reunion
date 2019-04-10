@@ -52,9 +52,9 @@ Page({
     })
     Req.getReq(urlList.getSignInfoByUserId, params, function (res) {
       wx.hideLoading()
-    //  console.log(res)
+      console.log(res)
       if (res.code == 200) {
-        res.data.expectedArrivalTime = format.formatDate(format.getLocalDate(res.data.expectedArrivalTime))
+        res.data.expectedArrivalTime = format.formatDate(res.data.expectedArrivalTime)
         if (res.data) {
           if (res.data.needPickUp == 0) {
             res.data.needPickUp = '否'

@@ -1,0 +1,15 @@
+/* pages/inMeetting/album/album.wxss */
+@import '../../../style/weui.wxss';
+page,
+.page,
+.page__bd{
+  height: 100%;
+}
+.upload_btn{
+
+}
+.upload_btn button{
+  position: absolute;
+  bottom: 0rpx;
+  width: 100%;
+}

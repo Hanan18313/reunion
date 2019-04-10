@@ -58,7 +58,7 @@
                 </view>
             </view>
             </view>
-            <view style='font-size:32rpx;border-top:#dddee1 solid 1px;padding:10rpx 0 10rpx 30rpx '>选择出行方式</view>
+            <view style='font-size:32rpx;border-top:#dddee1 solid 1px;padding:10rpx 0 10rpx 30rpx;color:#e57373 '>选择出行方式</view>
             <i-panel>
                   <view>
                     <i-radio-group current="{{current}}" bindchange="handleFruitChange">

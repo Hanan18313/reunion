@@ -3,6 +3,7 @@
 const app = getApp()
 var Req = require('../../utils/Req.js')
 var urlList = require('../../utils/base.js')
+var format = require('../../utils/formatDate.js')
 Page({
   data: {
     motto: 'Hello World',
@@ -84,13 +85,47 @@ Page({
                   title: '加载中...',
                 })
                 Req.getReq(urlList.getUserInfoByOpenId,data,function(res){
+                  // var pretime = new Date('2019-06-07 09:00:00')
+                  // wx.setStorageSync('preTime', pretime)
                   if(res.code == 200){
                     wx.hideLoading();
                     that.setData({
                       show:false
                     })
-                    wx.redirectTo({
-                      url: '../home/home',
+                    // wx.redirectTo({
+                    //   url: '../home/home',
+                    // })
+                    // wx.redirectTo({
+                    //   url: '../inMeetting/inMeettingHome/inMeettingHome',
+                    // })
+                    var preTime = wx.getStorageSync('preTime')
+                  //  console.log(format.formatDate(preTime))
+                    let params = {}
+                    Req.getReq(urlList.getMeetingInfo,params,function(res){
+                      console.log(format.formatDate(res.data.startDate))
+                      if(res.code == 200){
+                        if (preTime) {
+                          if (format.formatDate(preTime) > format.formatDate(res.data.startDate)){
+                            wx.redirectTo({
+                              url: '../inMeetting/inMeettingHome/inMeettingHome',
+                            })
+                          }else{
+                            wx.redirectTo({
+                              url: '../home/home',
+                            })
+                          }
+                        }else{
+                          if (format.formatDate(res.data.startDate) < format.formatDate(new Date())){
+                            wx.redirectTo({
+                              url: '../inMeetting/inMeettingHome/inMeettingHome',
+                            })
+                          }else{
+                            wx.redirectTo({
+                              url: '../home/home',
+                            })
+                          }
+                        }
+                      }
                     })
                   }else{
                     wx.hideLoading();

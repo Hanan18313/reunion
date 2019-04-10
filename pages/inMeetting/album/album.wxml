@@ -1,0 +1,12 @@
+<!--pages/home/home.wxml-->
+<view class='page'>
+  <view class='page__bd'>
+    <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
+      <view style='height:100%'>
+        <view class='upload_btn'>
+          <button type='default'>上传图片</button>
+        </view>
+      </view>
+    <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>
+  </view>
+</view>
