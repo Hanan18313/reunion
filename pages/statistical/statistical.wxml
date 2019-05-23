@@ -1,0 +1,70 @@
+
+<view class='page'>
+  <view class='page__bd'>
+  <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
+    <view class='tabs'>
+      <w-tabs bind:onChange='handleChange'
+        lineSize="1"
+        activeColor="#ff8800"
+        options="{{ tabsItem }}"
+        />
+    </view>
+    <view class='canvas'>
+      <!-- <view class='pay'>
+        <view><text style='font-size:32rpx;margin:0 0 0 30rpx'>缴费统计</text></view>
+        <canvas canvas-id="payCanvas" style='width:100%;height:400rpx' disable-scroll="false" class="canvas"></canvas>
+        <w-accordion-group bind:onChange="onChange" bind:disabledClick="disabledClick">
+          <w-accordion title="Wuss WeAPP 1" key="你好">
+            content 1
+          </w-accordion>
+        </w-accordion-group>
+      </view> -->
+      <view class='hotelRoom' wx:if="{{hotelRoom}}">
+        <canvas canvas-id="roomCanvas" style='width:100%; height:400rpx' disable-scroll='false' class='canvas'></canvas>
+         <scroll-view scroll-y='true' style='height:56vh'>
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell" wx:for="{{hotelRoomList}}" style='display:flex;flex-direction:row'>
+              <view class="weui-cell__bd">{{item.userName}}</view>
+              <view  wx:if="{{item.needSingleRoom == 0}}" style='padding:0 60rpx 0 0'><i-tag ><view style='text-align:center'>安排合住</view></i-tag></view>
+              <view wx:if="{{item.needSingleRoom == 1}}" style='padding:0 60rpx 0 0'><i-tag  color="blue"><view style='text-align:center'>单间</view></i-tag></view>
+              <view wx:if="{{item.needSingleRoom == 2}}" style='padding:0 60rpx 0 0'><i-tag  color="yellow"><view style='text-align:center'>自选合住人</view></i-tag><i-tag  color="yellow"><view style='width:80rpx;text-align:center'>{{item.accommodationName}}</view></i-tag></view>
+              <view wx:if="{{item.needSingleRoom == 3}}" style='padding:0 60rpx 0 0'><i-tag  color="green"><view style='text-align:center'>保留单间，也接受安排合住</view></i-tag></view>
+            </view>
+        </view>
+      </scroll-view>
+        
+      </view>
+      <view class='transport' wx:if="{{transport}}">
+        <canvas canvas-id="transportCanvas" style='width:100%; height:400rpx' disable-scroll='false' class='canvas'></canvas>
+        <scroll-view scroll-y='true' style='height:56vh'>
+          <view class="weui-cells weui-cells_after-title">
+              <view class="weui-cell" wx:for="{{hotelRoomList}}" style='display:flex;flex-direction:row'>
+                <view class="weui-cell__bd">{{item.userName}}</view>
+                <view style='display:flex;justify-content:flex-start'>
+                  <view style='width:80rpx'><i-tag color="blue" style='margin:0 0 0 10rpx'><view style='text-align:center'>{{item.transportation}}</view></i-tag></view>
+                  <view style='width:254rpx'><i-tag color="green" wx:if="{{item.expectedArrivalTime}}" style='margin:0 0 0 10rpx'><view style='text-align:center;width:220rpx'>{{item.expectedArrivalTime}}</view></i-tag></view>
+                  <view style='width:80rpx'><i-tag wx:if="{{item.needPickUp == '1'}}" color="red" style='margin:0 0 0 10rpx'><view style='text-align:center'>接站</view></i-tag></view>
+                  <view style='width:120rpx'><i-tag wx:if="{{item.destination}}" color="blue" style='margin:0 0 0 10rpx'><view style='text-align:center'>{{item.destination}}</view></i-tag></view>
+                </view>
+              </view>
+          </view>
+        </scroll-view>
+      </view>
+      <view class='T-shirt' wx:if="{{tshirt}}">
+         <canvas canvas-id="lineCanvas" style='width:100%;height:400rpx' disable-scroll="false" class="canvas"></canvas>
+        <scroll-view scroll-y='true' style='height:50vh'>
+          <view class="weui-cells weui-cells_after-title">
+              <view class="weui-cell" wx:for="{{hotelRoomList}}" style='display:flex;flex-direction:row'>
+                <view class="weui-cell__bd">{{item.userName}}</view>
+                <view style='padding:0 60rpx 0 0'><i-tag wx:if="{{item.TshirtSize != null && item.TshirtSize != '未选择'}}" color="green"><view style='width:80rpx;text-align:center'>{{item.TshirtSize}}</view></i-tag></view>
+              </view>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+  <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>
+  </view>
+</view>
+
+
+

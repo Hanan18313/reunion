@@ -115,7 +115,43 @@ Page({
     multiArray: [years, months, days, hours, minutes],
     multiIndex: [1, 5, 6, 0, 0],
     choose_year: '',
+    AccommodationArr: ['组委会安排合住','单间','自选合住人','保留单间，可接受安排合住'],
+    AccommodationIndex:0,
+    selectAccommodation:false,
+    Accommodation:0,
+    AccommodationName:'',
+    TshirtSizeArr:['未选择','WS','WM','WL','S','M','L','XL','XXL','XXXL'],
+    TshirtSizeIndex:0
   },
+  //住宿安排
+  bindAccommodationChange:function(e){
+    var that = this
+    console.log(e)
+    that.data.AccommodationIndex = e.detail.value
+    that.setData({
+      AccommodationIndex:e.detail.value
+    })
+    if(e.detail.value == '2'){
+      that.setData({
+        selectAccommodation:true
+      })
+    }else{
+      that.setData({
+        selectAccommodation:false
+      })
+    }
+  },
+// T-shirt 尺寸选择
+  bindTshirtSizeChange:function(e){
+    var that = this
+    console.log(e)
+    that.data.TshirtSizeIndex = e.detail.value
+    that.setData({
+      TshirtSizeIndex:e.detail.value
+    })
+  },
+
+
   handleFruitChange({ detail = {} }) {
     var that = this
     that.setData({
@@ -123,12 +159,12 @@ Page({
       transport: detail.value
     });
   },
-  needSingleRoom: function (e) {
-    var that = this
-    that.setData({
-      needSingleRoom: e.detail.value
-    })
-  },
+  // needSingleRoom: function (e) {
+  //   var that = this
+  //   that.setData({
+  //     needSingleRoom: e.detail.value
+  //   })
+  // },
   isJoinParty:function(e){
     var that = this
     that.setData({
@@ -155,7 +191,7 @@ Page({
   },
   _yybindchange: function (e) {
     var that = this
-    console.log(e.detail.date)
+   // console.log(e.detail.date)
     // console.log(e.detail.date)
     // console.log(formatDate.formatDate(e.detail.date))
     // that.setData({
@@ -187,7 +223,7 @@ Page({
     }
   },
   inputTime: function (e) {
-    console.log(e)
+   // console.log(e)
     var that = this
     that.setData({
       show: true,
@@ -227,7 +263,10 @@ Page({
       obj.adultNum = 0,
       obj.kidsNum = 0
     }
-    obj.needSingleRoom = that.data.needSingleRoom;
+    obj.needSingleRoom = that.data.AccommodationIndex;
+    obj.accommodationName = e.detail.value.accommodationName;
+    obj.TshirtSize = that.data.TshirtSizeArr[that.data.TshirtSizeIndex]
+    console.log(obj)
     if(obj.expectedArrivalTime){
       Req.putReq(urlList.updateSignInfo, obj, function (res) {
         // console.log(res)
@@ -260,6 +299,7 @@ Page({
   },
   needPickUpAir: function (e) {
     var that = this
+    console.log(e)
     that.setData({
       needPickUpAir: e.detail.value
     })
@@ -440,11 +480,28 @@ Page({
             expectedArrivalSelfTime: res.data.expectedArrivalTime
           })
         }
+        if(res.data.needSingleRoom == 2){
+          that.setData({
+            selectAccommodation:true
+          })
+        }else{
+          that.setData({
+            selectAccommodation:false
+          })
+        }
+        if(res.data.TshirtSize == '' || res.data.TshirtSize == null){
+          res.data.TshirtSize = '未选择'
+        }
+        that.data.AccommodationIndex = res.data.needSingleRoom
+        //console.log(that.data.AccommodationIndex)
         that.setData({
-          needSingleRoom: res.data.needSingleRoom,
+          //needSingleRoom: res.data.needSingleRoom,
+          AccommodationIndex:res.data.needSingleRoom,
+          TshirtSizeIndex: that.data.TshirtSizeArr.indexOf(res.data.TshirtSize),
           transport: res.data.transportation,
           current: res.data.transportation,
-          isJoinParty: res.data.isJoinParty
+          isJoinParty: res.data.isJoinParty,
+          accommodationName:res.data.accommodationName
         })
       //  console.log(res.data.transportation)
       }

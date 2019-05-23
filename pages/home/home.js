@@ -182,6 +182,7 @@ Page({
     }).then(function(res){
       var data =''
       Req.getReq(urlList.getMeetingInfo,data,function (res) {
+        console.log(res.data)
         wx.showLoading({
           title: '加载中...',
         })

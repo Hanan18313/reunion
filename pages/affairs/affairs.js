@@ -54,7 +54,7 @@ Page({
       wx.hideLoading()
       console.log(res)
       if (res.code == 200) {
-        res.data.expectedArrivalTime = format.formatDate(res.data.expectedArrivalTime)
+       // res.data.expectedArrivalTime = format.formatDate(res.data.expectedArrivalTime)
         if (res.data) {
           if (res.data.needPickUp == 0) {
             res.data.needPickUp = '否'
@@ -62,17 +62,29 @@ Page({
             res.data.needPickUp = '是'
           }
           if (res.data.needSingleRoom == 0) {
-            res.data.needSingleRoom = '否'
-          } else {
-            res.data.needSingleRoom = '是'
+            res.data.needSingleRoom = '组委会安排合住'
+          } else if(res.data.needSingleRoom == 1) {
+            res.data.needSingleRoom = '单间'
+          }else if(res.data.needSingleRoom == 2){
+            res.data.needSingleRoom = '自选合住人'
+          }else{
+            res.data.needSingleRoom = '保留单间，也可接受合住安排'
           }
-          if(res.data.expectedArrivalTime == '1970-1-1 08:00:00'){
+          // if(res.data.expectedArrivalTime == '1970-1-1 08:00:00'){
+          //   res.data.expectedArrivalTime = ''
+          // }
+          if (res.data.expectedArrivalTime != null && format.formatDate(res.data.expectedArrivalTime) != '1970-1-1 08:00:00' && res.data.expectedArrivalTime != ''){
+            res.data.expectedArrivalTime = format.formatDate(format.getLocalDate(res.data.expectedArrivalTime))
+          }else{
             res.data.expectedArrivalTime = ''
           }
           if(res.data.isJoinParty == 1){
             res.data.isJoinParty = '参加'
           }else{
             res.data.isJoinParty = '不参加'
+          }
+          if(res.data.TshirtSize == '' || res.data.TshirtSize == null){
+            res.data.TshirtSize = '未选择'
           }
         }
         that.setData({

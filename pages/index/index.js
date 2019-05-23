@@ -98,14 +98,24 @@ Page({
                     // wx.redirectTo({
                     //   url: '../inMeetting/inMeettingHome/inMeettingHome',
                     // })
-                    var preTime = wx.getStorageSync('preTime')
+                    //var preTime = wx.getStorageSync('preTime')
                   //  console.log(format.formatDate(preTime))
                     let params = {}
                     Req.getReq(urlList.getMeetingInfo,params,function(res){
-                      console.log(format.formatDate(res.data.startDate))
+                      console.log(res.data)
                       if(res.code == 200){
-                        if (preTime) {
-                          if (format.formatDate(preTime) > format.formatDate(res.data.startDate)){
+                        // if (preTime) {
+                        //   if (format.formatDate(preTime) > format.formatDate(res.data.startDate)){
+                        //     wx.redirectTo({
+                        //       url: '../inMeetting/inMeettingHome/inMeettingHome',
+                        //     })
+                        //   }else{
+                        //     wx.redirectTo({
+                        //       url: '../home/home',
+                        //     })
+                        //   }
+                        // }else{
+                        if (format.formatDate(format.getLocalDate(res.data.startDate)) < format.formatDate(format.formatDate(format.getLocalDate(res.data.stateDate)))){
                             wx.redirectTo({
                               url: '../inMeetting/inMeettingHome/inMeettingHome',
                             })
@@ -114,17 +124,7 @@ Page({
                               url: '../home/home',
                             })
                           }
-                        }else{
-                          if (format.formatDate(res.data.startDate) < format.formatDate(new Date())){
-                            wx.redirectTo({
-                              url: '../inMeetting/inMeettingHome/inMeettingHome',
-                            })
-                          }else{
-                            wx.redirectTo({
-                              url: '../home/home',
-                            })
-                          }
-                        }
+                       // }
                       }
                     })
                   }else{

@@ -4,6 +4,7 @@ var Req = require('../../utils/Req.js')
 var urlList = require('../../utils/base.js')
 var prom = require('../../utils/prom.js')
 var util = require('../../utils/util.js')
+var format = require('../../utils/formatDate.js')
 Page({
 
   /**
@@ -71,7 +72,8 @@ Page({
     ],
     accountIndex:0,
     userInfo:[],
-    showAffairs_btn:false
+    showAffairs_btn:false,
+    showMyAlbum:false
   },
   edit:function(){
     var that = this
@@ -142,19 +144,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // var that = this
-    // var data
-    // Req.getReq(urlList.getUserInfoByOpenId,data,function(res){
-    //   console.log(res)
-    //   if(res.code == 200){
-    //     that.setData({
-    //       userInfo:res.data,
-    //       "userInfo":res.data,
-    //       regionIndex: that.data.region.indexOf(res.data.country),
-    //       accountIndex:that.data.account.indexOf(res.data.socialMedia)
-    //     })
-    //   }
-    // })
+     var that = this
+     let params = {}
+     Req.getReq(urlList.getMeetingInfo,params,function(res){
+       if(res.code == 200){
+         if(format.formatDate(format.getLocalDate(res.data.stateDate)) >= format.formatDate(format.getLocalDate(res.data.startDate))){
+           that.setData({
+             showMyAlbum:true
+           })
+         }
+       }else{
+         that.setData({
+           showMyAlbum:false
+         })
+       }
+     })
   },
 
   /**

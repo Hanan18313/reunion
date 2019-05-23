@@ -48,16 +48,17 @@
         </view>
    </scroll-view> -->
    <scroll-view scroll-y="{{scrollY}}" style='height:94vh' scroll-top="{{scrollTop}}" scroll-into-view="">
-    <view wx:for="{{imagesList}}" style='height:650rpx;background:#f8f8f9'>
+    <view wx:for="{{imagesList}}" style='height:594rpx;background:#f8f8f9'>
        <view class='images'>
           <view class='title'>
             <view class='portrait' style='margin:5rpx 5rpx 5rpx 30rpx;display:flex;flex-direction:row'><image wx:if="{{!item.portrait}}" src='../../../images/td.png' style='height:60rpx;width:60rpx'></image><image wx:if="{{item.portrait}}" src='{{item.portrait}}' style='height:60rpx;width:60rpx' ></image>
             </view>
             <view>
-              <text style='color:#ffffff'>{{item.title}}</text>
+            <text style='color:#ffffff;padding:0 0 0 20rpx;color:#afbfff' wx:if="{{item.uploader}}">{{item.uploader}}</text>
+            <text style='color:#ffffff;padding:0 0 0 30rpx'>{{item.title}}</text>
             </view>
             </view>
-          <image wx:if="{{item.imgUrlArr.length == 0}}" src='{{item.imgUrl}}' style='width:100%'  bindtap="previewImage" id='{{item.imgUrl}}' data-imgId='{{item.id}}'></image>
+          <image wx:if="{{item.imgUrlArr.length == 0}}" src='{{item.imgUrl}}' style='width:100%;height:480rpx'  bindtap="previewImage" id='{{item.imgUrl}}' data-imgId='{{item.id}}'></image>
           <view wx:if='{{item.imgUrlArr.length != 0}}' style='display:flex;flex-wrap:wrap'><image  wx:for="{{item.imgUrlArr}}" wx:for-item="imgItem" src='{{imgItem}}'  bindtap="previewImage" id='{{imgItem}}' data-imgId='{{item.id}}' style='width:43%;margin:0 20rpx'></image></view>
           <view style='display:flex;justify-content:space-between;margin:10rpx 40rpx 10rpx 20rpx;'>
             <view class='good'>
@@ -72,12 +73,12 @@
         </view>
         <view class="doommview">
               <block wx:for="{{item.danmuList}}" wx:for-item="it" wx:key="id" style="display:flex;flex-direction:row"  wx:if="{{item.closeDanmu}}">
-                  <text wx:if="{{it.text}}" class="aon" style="animation: first {{it.time}}s linear forwards;top:{{it.top}}%;color:{{it.color}};font-size:48rpx;text-shadow:#e0f7fa 1px 0 0,#e0f7fa 0 1px 0,#e0f7fa -1px 0 0,#e0f7fa 0 -1px 0;-webkit-text-shadow:#e0f7fa 1px 0 0,#e0f7fa 0 1px 0,#e0f7fa -1px 0 0,#e0f7fa 0 -1px 0;-moz-text-shadow:#e0f7fa 1px 0 0,#e0f7fa 0 1px 0,#e0f7fa -1px 0 0,#e0f7fa 0 -1px 0;*filter: Glow(color=#e0f7fa, strength=1);">
+                  <text wx:if="{{it.text}}" class="aon" style="animation: first {{it.time}}s linear forwards;animation-delay:{{it.delay}}s;animation-fill-mode:both;top:{{it.top}}%;color:{{it.color}};font-size:56rpx;text-shadow:#e0f7fa 1px 0 0,#e0f7fa 0 1px 0,#e0f7fa -1px 0 0,#e0f7fa 0 -1px 0;-webkit-text-shadow:#e0f7fa 1px 0 0,#e0f7fa 0 1px 0,#e0f7fa -1px 0 0,#e0f7fa 0 -1px 0;-moz-text-shadow:#e0f7fa 1px 0 0,#e0f7fa 0 1px 0,#e0f7fa -1px 0 0,#e0f7fa 0 -1px 0;*filter: Glow(color=#e0f7fa, strength=1);">
                       {{it.text}}
                   </text>
               </block>
                 <block wx:if="{{item.id == imgId}}"  >
-                  <text wx:if="{{sendInputDanmu.text}}" class="aon" style="animation: first {{sendInputDanmu.time}}s linear forwards;top:{{sendInputDanmu.top}}%;color:{{sendInputDanmu.color}};font-size:48rpx;text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;-webkit-text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;-moz-text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;*filter: Glow(color=#000, strength=1);">
+                  <text wx:if="{{sendInputDanmu.text}}" class="aon" style="animation: first {{sendInputDanmu.time}}s linear forwards;top:{{sendInputDanmu.top}}%;color:{{sendInputDanmu.color}};font-size:56rpx;text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;-webkit-text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;-moz-text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;*filter: Glow(color=#000, strength=1);">
                     {{sendInputDanmu.text}}
                   </text>
               </block>

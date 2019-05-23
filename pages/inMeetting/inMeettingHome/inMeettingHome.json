@@ -10,6 +10,7 @@
     "i-grid-label": "../../../style/dist/grid-label/index",
     "i-notice-bar": "../../../style/dist/notice-bar/index",
     "van-dialog": "../../../style/vant/dialog/index",
-    "w-dialog":"../../../style/wuss/w-dialog/index"
+    "w-dialog":"../../../style/wuss/w-dialog/index",
+    "i-icon":"../../../style/dist/icon/index"
   }
 }

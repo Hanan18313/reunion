@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "生活圈",
-  "usingComponents": {
-    "i-icon":"../../../style/dist/icon/index"
-  }
-}

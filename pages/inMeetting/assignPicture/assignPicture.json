@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "图片信息", 
+  "usingComponents": {
+    "i-switch": "../../../style/dist/switch/index",
+    "i-icon": "../../../style/dist/icon/index"
+  }
+}

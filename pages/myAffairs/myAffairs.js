@@ -108,7 +108,7 @@ Page({
       obj.adultNum = 0,
       obj.kidsNum = 0
     }
-      obj.needSingleRoom = that.data.needSingleRoom,
+    //  obj.needSingleRoom = that.data.needSingleRoom,
     console.log(obj)
     Req.putReq(urlList.updateSignInfo,obj,function(res){
       console.log(res)
@@ -256,7 +256,7 @@ Page({
       title: '加载中...',
     })
     Req.getReq(urlList.getSignInfoByOpenId, params, function (res) {
-     // console.log(res)
+      console.log(res)
      wx.hideLoading()
       if (res.code == 200) {
         res.data.expectedArrivalTime = format.formatDate(format.getLocalDate(res.data.expectedArrivalTime))
@@ -314,9 +314,16 @@ Page({
             res.data.needPickUp = '是'
           }
           if (res.data.needSingleRoom == 0) {
-            res.data.needSingleRoom = '否'
-          } else {
-            res.data.needSingleRoom = '是'
+            res.data.needSingleRoom = '组委会安排合住'
+          } else if(res.data.needSingleRoom == 1) {
+            res.data.needSingleRoom = '单间'
+          }else if(res.data.needSingleRoom == 2){
+            res.data.needSingleRoom = '自选合住人'
+          }else{
+            res.data.needSingleRoom = '保留单间，也可以安排合住'
+          }
+          if(res.data.TshirtSize == '' || res.data.TshirtSize == null){
+            res.data.TshirtSize = '未选择'
           }
         }
         that.setData({

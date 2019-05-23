@@ -33,7 +33,7 @@ page,
   display: flex;
   flex-direction: column;
   /* align-items: center; */
-  height: 91%;
+  height: 99%;
 }
 .operation{
   margin: 0 40rpx 0 40rpx;
@@ -42,7 +42,7 @@ page,
   height: 70rpx;
   align-items: center; */
   position: relative;
-  bottom: 512rpx;
+  bottom: 480rpx;
   left: -25rpx;
   width: 20%;
 }
@@ -74,7 +74,7 @@ padding: 0 20rpx 0 0;
   height:46%;
   width: 100%;
   position: relative;
-  top: -650rpx;
+  top: -592rpx;
 }
 /**定义从右边向左边的移动的动画**/
 @keyframes first{

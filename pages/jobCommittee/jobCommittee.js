@@ -142,22 +142,34 @@ Page({
     data.multiIndex[e.detail.column] = e.detail.value;
     this.setData(data);
   },
-//
+//修改时间阶段信息
 submit:function(e){
   var that = this
   var time = that.data.time
   if(time){
-    wx.setStorageSync('preTime', time)
-    wx.showToast({
-      title: '提交成功',
-      icon:'success',
-      duration:2000
+    let params = {
+      stateDate:time
+    }
+    Req.postReq(urlList.setPreTime,params,function(res){
+      if(res.code == 200){
+        wx.showToast({
+          title: '提交成功',
+          icon: 'success',
+          duration: 2000
+        })
+        setTimeout(() => {
+          wx.navigateBack({
+            detal: 1
+          })
+        }, 2000)
+      }else{
+        wx.showToast({
+          title: '修改失败',
+          icon:'none',
+          duration:2000
+        })
+      }
     })
-    setTimeout(() => {
-      wx.navigateBack({
-        detal:1
-      })
-    },2000)
   }else{
     wx.showToast({
       title: '请选择时间',
@@ -166,35 +178,21 @@ submit:function(e){
     })
   }
 },
-//
-cancel:function(){
-  wx.clearStorage('preTime')
-  wx.showToast({
-    title: '取消成功',
-    icon:'success',
-    duration:2000
-  })
-},
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     var that = this
-    var params = ''
-    var preTime = wx.getStorageSync('preTime')
-    that.data.time = preTime
-    that.setData({
-      time:preTime
+    let params = {}
+    Req.getReq(urlList.getMeetingInfo, params, function (res) {
+      if (res.code == 200) {
+        res.data.stateDate = format.formatDate(format.getLocalDate(res.data.stateDate))
+        that.setData({
+          time:res.data.stateDate
+        })
+      }
     })
-    // if(preTime){
-    //   that.setData({
-    //     time: format.formatDate(preTime)
-    //   })
-    // }else{
-    //   that.setData({
-    //     time:''
-    //   })
-    // }
   },
 
   /**

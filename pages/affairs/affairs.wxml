@@ -12,10 +12,26 @@
 
     <view class="weui-cell weui-cell_input">
       <view class="weui-cell__hd">
-          <view class="weui-label">需要单间</view>
+          <view class="weui-label">住宿选择</view>
       </view>
       <view class="weui-cell__bd">
           <input class="weui-input" disabled='true' value='{{detailReceipt.needSingleRoom}}'/>
+      </view>
+  </view>
+  <view class="weui-cell weui-cell_input" wx:if="{{detailReceipt.needSingleRoom == '自选合住人'}}">
+      <view class="weui-cell__hd">
+          <view class="weui-label">合住人姓名</view>
+      </view>
+      <view class="weui-cell__bd">
+          <input class="weui-input" disabled='true' value='{{detailReceipt.accommodationName}}'/>
+      </view>
+  </view>
+  <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+          <view class="weui-label">T恤尺寸选择</view>
+      </view>
+      <view class="weui-cell__bd">
+          <input class="weui-input" disabled='true' value='{{detailReceipt.TshirtSize}}'/>
       </view>
   </view>
   <view class="weui-cell weui-cell_input">

@@ -2,11 +2,11 @@
 <view class='page'>
   <view class='page__bd'>
   <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
-    <view style='height:34%;margin:0 40rpx'>
+    <view style='height:41%;margin:0 40rpx'>
       <view class='title'>
         <view class="weui-cell">
           <view class="weui-cell__bd">
-            <textarea class="weui-textarea" placeholder="此时的想法" placeholder-style='font-size:30rpx;color:#546e7a' bindinput='bindInputText' style="height: 7.3em" />
+            <textarea class="weui-textarea" placeholder="此时的想法" placeholder-style='font-size:30rpx;color:#546e7a' bindinput='bindInputText' style="height: 6.3em" />
             <view class="weui-textarea-counter"></view>
           </view>
         </view>
@@ -22,8 +22,9 @@
                         </view>
                     </block>
                 </view>
+                <i-icon wx:if="{{files.length > 0 }}" style='position:absolute;top:354rpx;left:162rpx' type="trash_fill" color='red' size='20' bindtap='trashImages' />
                 <view class="weui-uploader__input-box" wx:if='{{files.length <= 0}}'>
-                    <view  class="weui-uploader__input" bindtap="chooseImage"></view>
+                  <view  class="weui-uploader__input" bindtap="chooseImage"></view>
                 </view>
             </view>
         </view>
@@ -33,7 +34,7 @@
         <canvas canvas-id='canvas' style='height:{{cHeight}}px;width:{{cWidth}}px'></canvas>
       </view>
     </view>
-    <view style='background:#f8f8f9;height:60%'>
+    <view style='background:#f8f8f9;height:56%'>
       <view class='btn'><button type='primary' plain='true' bindtap='createAlbum'>提交</button></view>
       <view class='btn1'><button type='default' plain='true' bindtap='goback'>返回</button></view>
     </view>

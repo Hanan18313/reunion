@@ -1,0 +1,46 @@
+<view class='page'>
+  <view class='page__bd' wx:if="{{!showAssignPicture}}">
+    <!-- <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view> -->
+      <view class='assignPicture'>
+        <view class='title'>
+          <view class='portrait' ><image wx:if="{{!assignPicture.portrait}}" src='../../../images/td.png' style='height:80rpx;width:80rpx'></image><image wx:if="{{assignPicture.portrait}}" src='{{assignPicture.portrait}}' style='height:80rpx;width:80rpx' ></image>
+            <!-- <image src='{{assignPicture.portrait}}' mode='scaleToFill'></image> -->
+            <view class='name'><text>{{assignPicture.uploader}}</text></view>
+          </view>
+        </view>
+        <view class='images'>
+          <image src='{{assignPicture.imgUrl}}'></image>
+          <view class="doommview">
+              <block wx:for="{{assignPicture.danmuList}}" wx:for-item="it" wx:key="id" style="display:flex;flex-direction:row" wx:if="{{assignPicture.closeDanmu}}">
+                  <text wx:if="{{it.text}}"  class="aon" style="animation: first {{it.time}}s linear forwards;animation-delay: {{it.delay}}s;animation-fill-mode:both;top:{{it.top}}%;color:{{it.color}};font-size:56rpx;text-shadow:#e0f7fa 1px 0 0,#e0f7fa 0 1px 0,#e0f7fa -1px 0 0,#e0f7fa 0 -1px 0;-webkit-text-shadow:#e0f7fa 1px 0 0,#e0f7fa 0 1px 0,#e0f7fa -1px 0 0,#e0f7fa 0 -1px 0;-moz-text-shadow:#e0f7fa 1px 0 0,#e0f7fa 0 1px 0,#e0f7fa -1px 0 0,#e0f7fa 0 -1px 0;*filter: Glow(color=#e0f7fa, strength=1);">{{it.text}}</text>
+              </block>
+                <block wx:if="{{assignPicture.id == imgId}}">
+                  <text wx:if="{{sendInputDanmu.text}}" class="aon" style="animation: first {{sendInputDanmu.time}}s linear forwards;top:{{sendInputDanmu.top}}%;color:{{sendInputDanmu.color}};font-size:56rpx;text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;-webkit-text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;-moz-text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;*filter: Glow(color=#000, strength=1);">
+                    {{sendInputDanmu.text}}
+                  </text>
+              </block>
+          </view>
+        <view class='operation'>
+          <i-switch value="{{assignPicture.closeDanmu}}" data-id='{{assignPicture.id}}' bind:change="onChange" slot="footer" size="large">
+            <view slot="open">弹幕</view>
+            <view slot="close">关闭</view>
+          </i-switch>
+        </view>
+          <view style='position:absolute;left:100rpx;top:750rpx;color:#616161;font-size:32rpx'><text>{{assignPicture.title}}</text></view>
+        </view>
+        <view class='zone'>
+          <view class='like'>
+            <image src='../../../images/good.png' bindtap='giveLike'></image>
+            <image wx:for="{{assignPicture.Discusses}}" wx:for-item="ite" wx:if="{{ite.isLike == 1}}" src='{{ite.portrait}}' style='height:50rpx;width:50rpx;padding:0 0 0 20rpx'></image>
+          </view><text wx:if="{{isLikeTotal > 5}}" style='position:relative;top:-8rpx;left:-68rpx;font-size:35rpx;margin:6rpx 0 0 0'>+{{isLikeTotal - 5}} 赞</text>
+          <view class='discuss'>
+            <image src='../../../images/wxdiscuss.png' bindtap='discuss'></image>
+          </view>
+        </view>
+      </view>
+      <view class="dynamic_btn" wx:if="{{showDiscussBtn}}" style='position:absolute;bottom:{{btnBottom}}rpx;background:#f8f8f9'>
+        <view style='width:92%;padding:20rpx 0 0 30rpx;'><input class='dynamic_input' style='border:#dddee1 solid 1px' focus='{{focus}}' bindfocus='bindFocus' bindinput='bindInputDanmu' value='{{inputDanmu}}' bindblur='bindBlur' cursor-spacing='100' adjust-position="false"  confirm-type='send' bindconfirm='sendDanmu'></input></view>
+      </view>
+    <!-- <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view> -->
+  </view>
+</view>

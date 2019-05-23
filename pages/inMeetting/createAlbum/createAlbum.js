@@ -39,6 +39,16 @@ Page({
       }
     })
   },
+
+  //删除上传图片
+  trashImages:function(){
+    that.data.files = []
+    that.data.imgName = []
+    that.setData({
+      files:that.data.files,
+    })
+  },
+
   chooseWxImages: function (type) {
     //  var that = this
     wx.chooseImage({
@@ -133,6 +143,9 @@ Page({
           icon:'success',
           duration:2000
         })
+        console.log(res)
+        let imgId = res.data.id
+        let uploader = res.data.uploader
         setTimeout(() =>{
           // wx.navigateBack({
           //   detal:1

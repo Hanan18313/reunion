@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "T恤统计管理",
+  "usingComponents": {
+    "i-tag": "../../style/dist/tag/index"
+  }
+}

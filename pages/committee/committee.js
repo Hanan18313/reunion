@@ -11,7 +11,8 @@ Page({
    */
   data: {
     isIphoneX: app.globalData.model,
-    showCs:false
+    showCs:false,
+    openid_list: ['ofdKW5PAGwcwesG6uLgCskknYIP4', 'ofdKW5Gkk4ciHQx0InqFOSwvRVOo', 'ofdKW5CqvPoob9F2HUPcgQ2tHGGQ','ofdKW5NI2OhWFWZAHJjyeFNRF3rk']
   },
 
   /**
@@ -21,13 +22,21 @@ Page({
     var that = this
     var params = ''
     var openid = app.globalData.openId
-    if (openid = 'ofdKW5Gkk4ciHQx0InqFOSwvRVOo'){
+    var openidList = that.data.openid_list
+    var even = openidList.find(function(elment){
+      if(elment == openid){
+        return true
+      }else{
+        return false
+      }
+    })
+    if (even == undefined){
       that.setData({
-        showCS:true
+        showCS:false
       })
     }else{
       that.setData({
-        showCS:false
+        showCS:true
       })
     }
     Req.getReq(urlList.getUserInfoByOpenId,params,function(res){

@@ -151,7 +151,7 @@ Page({
       organizerArr:arr
     }
     Req.postReq(urlList.addOrganizer,params,function(res){
-    //  console.log(res)
+      console.log(res)
       if(res.code == 200){
         wx.showToast({
           title: '新增成功',

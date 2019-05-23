@@ -16,7 +16,6 @@
         </view>
     </view>
       <view class='btn'><button type='primary' bindtap='submit'>提交</button></view>
-      <view class='btn'><button type='default' bindtap='cancel'>取消预设时间</button></view>
    <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>
   </view>
 </view>

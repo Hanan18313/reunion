@@ -18,10 +18,38 @@
                 </view>
             </view> -->
             <view class="weui-cells weui-cells_after-title">
-            <view class="weui-cell weui-cell_switch">
+            <!-- <view class="weui-cell weui-cell_switch">
                 <view class="weui-cell__bd">是否需要单间</view>
                 <view class="weui-cell__ft">
                     <switch bindchange='needSingleRoom' checked="{{needSingleRoom}}" />
+                </view>
+            </view> -->
+            <view class="weui-cell weui-cell_select">
+                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="weui-label">住宿选择</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker bindchange="bindAccommodationChange" value="{{AccommodationIndex}}" range="{{AccommodationArr}}">
+                        <view class="weui-select weui-select_in-select-after">{{AccommodationArr[AccommodationIndex]}}</view>
+                    </picker>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input" wx:if="{{selectAccommodation}}">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">合住人姓名</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" value='{{accommodationName}}' name='accommodationName' placeholder="请输入合住人姓名"/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_select">
+                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="weui-label">T恤尺寸选择</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker bindchange="bindTshirtSizeChange" value="{{TshirtSizeIndex}}" range="{{TshirtSizeArr}}">
+                        <view class="weui-select weui-select_in-select-after">{{TshirtSizeArr[TshirtSizeIndex]}}</view>
+                    </picker>
                 </view>
             </view>
             <view class="weui-cell weui-cell_switch">
@@ -157,7 +185,6 @@
             </view>
         </view>
             </view>
-
 
         </view>
         <!-- <view class="weui-cells__tips">接机/站联系电话：123456789</view> -->

@@ -77,7 +77,7 @@ Page({
       senderOpenId:that.data.imgSenderOpenId
     }
     Req.postReq(urlList.discussToImages,params,function(res){
-      console.log(res)
+     // console.log(res)
       if(res.code == 200){
         wx.showToast({
           title: '评论成功',
@@ -85,15 +85,15 @@ Page({
           duration:1000
         })
         setTimeout(() =>{
-          sendInputDanmu.push(new Doomm(that.data.inputDanmu, Math.ceil(Math.random() * 100), Math.ceil(Math.random() * 20), getRandomColor()))
-          console.log(sendInputDanmu[0])
+          sendInputDanmu.push(new Doomm(that.data.inputDanmu, Math.ceil(Math.random() * 100), Math.ceil(Math.random() * 20), 0, getRandomColor()))
+         // console.log(sendInputDanmu[0])
           that.setData({
             showDiscussBtn:false,
             sendInputDanmu: sendInputDanmu[0],
             imgId: that.data.imgId,
             inputDanmu: ''
           })
-        },1500)
+        },3000)
       }else if(res.code == -12001){
         wx.showToast({
           title: '请输入内容',
@@ -113,18 +113,24 @@ Page({
     var imgId = e.target.dataset.id 
     var dataSource = that.data.DataSource
     for(let i = 0; i < dataSource.length; i++){
+      wx.setStorageSync(String(dataSource[i].id), dataSource[i].closeDanmu)
       if(dataSource[i].id == imgId){
         if(dataSource[i].closeDanmu == false){
           dataSource[i].closeDanmu = true
+          wx.setStorageSync(String(dataSource[i].id), true)
         }else{
+          wx.setStorageSync(String(dataSource[i].id), false)
           dataSource[i].closeDanmu = false
         }
       }
     }
     that.setData({
-      imagesList: that.data.DataSource
+      imagesList: that.data.DataSource,
+      scrollY:1000000
     })
   },
+
+  //打开关闭弹幕
 
 
 //图片预加载
@@ -164,7 +170,7 @@ imagesPreLoad:function(){
         res.data[i].imgSendTime = format.formatDate(res.data[i].imgSendTime)
         for (let j = 0; j < res.data[i].Discusses.length; j++) {
           // doommList.push(new Doomm(res.data[i].Discusses[j].content, Math.ceil(Math.random() * 100), Math.ceil(Math.random() * 10), getRandomColor()));
-          res.data[i].danmuList.push(new Doomm(res.data[i].Discusses[j].content, Math.ceil(Math.random() * 100), Math.ceil(Math.random() * 20), getRandomColor()))
+          res.data[i].danmuList.push(new Doomm(res.data[i].Discusses[j].content, Math.ceil(Math.random() * 100), Math.ceil(Math.random() * 20), Math.ceil(Math.random()*10), getRandomColor()))
           if(res.data[i].Discusses[j].isLike == 1){
             res.data[i].isLikeTotal++
           }
@@ -179,11 +185,33 @@ imagesPreLoad:function(){
       imgArr.push(res.data)
       imgArr = [].concat.apply([],imgArr)
       that.data.DataSource = imgArr
-      console.log(that.data.DataSource)
-      that.setData({
-        imagesList: that.data.DataSource,
-        scrollTop:1000000,
-      })
+      //console.log(that.data.DataSource)
+      // console.log(that.data.DataSource)
+        new Promise((resolve,reject) => {
+          wx.getStorageInfo({
+            success: function (res) {
+              for (let i = 0; i < that.data.DataSource.length; i++) {
+                for (let j = 0; j < res.keys.length; j++) {
+                  if (String(that.data.DataSource[i].id) == res.keys[j]) {
+                    that.data.DataSource[i].closeDanmu = wx.getStorageSync(res.keys[j])
+                  }
+                }
+              }
+              resolve()
+            },
+            fail:function(){
+              reject()
+            }
+          })
+        }).then(() => {
+          that.setData({
+            imagesList: that.data.DataSource,
+            scrollTop: 1000000,
+          })
+        })
+        setTimeout(() => {
+          
+        },200)
       if(res.data.length > 0){
         that.imagesPreLoad()
       }
@@ -202,7 +230,7 @@ giveLike:function(e){
     senderOpenId:senderOpenId
   }
   Req.postReq(urlList.giveLikeToImages,params,function(res){
-    console.log(res)
+   // console.log(res)
     if(res.code == 200){
       const dataSource = that.data.DataSource
       for (let i = 0; i < dataSource.length; i++) {
@@ -253,7 +281,7 @@ uploadImages:function(){
       if(e.currentTarget.dataset.imgid == that.data.DataSource[i].id){
         if(that.data.DataSource[i].imgUrlArr.length == 0){
           imgArr.push(that.data.DataSource[i].imgUrl)
-          console.log(imgArr)
+          //console.log(imgArr)
           wx.previewImage({
             urls:imgArr
           })
@@ -282,7 +310,7 @@ uploadImages:function(){
       pageSize: that.data.pageSize
     }
     Req.getReq(urlList.getImagesDiscussInfo, params, function (res) {
-      console.log(res)
+      //console.log(res)
       if (res.code == 200) {
         for (let i = 0; i < res.data.length; i++) {
           Object.defineProperty(res.data[i], 'danmuList', {
@@ -312,7 +340,7 @@ uploadImages:function(){
           res.data[i].imgSendTime = format.formatDate(res.data[i].imgSendTime)
           for (let j = 0; j < res.data[i].Discusses.length; j++) {
             // doommList.push(new Doomm(res.data[i].Discusses[j].content, Math.ceil(Math.random() * 100), Math.ceil(Math.random() * 10), getRandomColor()));
-            res.data[i].danmuList.push(new Doomm(res.data[i].Discusses[j].content, Math.ceil(Math.random() * 100), Math.ceil(Math.random() * 20), getRandomColor()))
+            res.data[i].danmuList.push(new Doomm(res.data[i].Discusses[j].content, Math.ceil(Math.random() * 100), Math.ceil((Math.random()+0.5) * 10), Math.ceil(Math.random()*10), getRandomColor()))
             if (res.data[i].Discusses[j].isLike == 1) {
               res.data[i].isLikeTotal++
             }
@@ -327,30 +355,28 @@ uploadImages:function(){
         if (res.data.length > 0) {
           that.imagesPreLoad()
         }
-        that.setData({
-          imagesList: res.data,
-          scrollTop:1000000
-        })
+        // that.setData({
+        //   imagesList: res.data,
+        //   scrollTop:1000000
+        // })
       }
     })
+
+    
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  //  that.imagesPreLoad()
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log(that.data.isOnshow)
-    if(that.data.isOnshow){
     
-    }
   },
 
   /**
@@ -396,10 +422,11 @@ uploadImages:function(){
 var doommList = [];
 var i = 0;//用做唯一的wx:key
 class Doomm {
-  constructor(text, top, time, color) {
+  constructor(text, top, time,delay, color) {
     this.text = text;
     this.top = top;
     this.time = time;
+    this.delay = delay;
     this.color = color;
     this.display = true;
     let that = this;
@@ -424,10 +451,10 @@ class Doomm {
 // }
 function getRandomColor(){
   var colorArr = []
-  var color = ['#0091ea','#a1887f','#0d47a1','#9fa8da']
+  var color = ['#0091ea','#ffff8d','#0d47a1','#9fa8da']
   var RandomColor = ''
   var randomCode = Math.floor(Math.random()*10)
-  console.log(randomCode)
+  //console.log(randomCode)
   if (0 <= randomCode && randomCode <= 2){
     randomCode = 0
     RandomColor = color[randomCode]
@@ -442,3 +469,4 @@ function getRandomColor(){
   }
   return RandomColor
 }
+

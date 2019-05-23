@@ -11,7 +11,8 @@ Page({
    */
   data: {
     isIphoneX: app.globalData.model,
-    openId:app.globalData.openId
+    openId:app.globalData.openId,
+    newsList:[]
   },
   addNews:function(){
     wx.navigateTo({
@@ -30,12 +31,20 @@ Page({
     var params = {
       id:newsId
     }
+    for (let i = 0; i < that.data.newsList.length; i++) {
+      if (that.data.newsList[i].id == newsId) {
+        that.data.newsList.splice(i, 1)
+      }
+    }
     Req.deleteReq(urlList.delMeetingNews,params,function(res){
       if(res.code == 200){
         wx.showToast({
           title: '删除成功',
           icon:'success',
           duration:2000
+        })
+        that.setData({
+          newsList:that.data.newsList
         })
       }else{
         wx.showToast({
@@ -77,6 +86,7 @@ Page({
           //   res.data[i].isTop = '已置顶'
           // }
         }
+        that.data.newsList = res.data
         that.setData({
           newsList: res.data
         })

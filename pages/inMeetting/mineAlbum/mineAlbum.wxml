@@ -11,15 +11,15 @@
               <view class='content-title'><text>{{item.title}}</text></view>
             </view>
             <view class='delete' style='height:40rpx' bindtap='deleteImg' data-id='{{item.id}}'><text style='font-size:28rpx;position:absolute;right:200rpx;color:#5677fc;padding-bottom:10rpx;'>删除</text></view>
-              <scroll-view scroll-y="true" style='height:16vh;background: #f8f8f9;margin-left:0rpx;margin-top: 40rpx;'>
+              <!-- <scroll-view scroll-y="true" style='height:5vh;background: #f8f8f9;margin-left:0rpx;margin-top: 40rpx;'> -->
             <view class='discuss'>
                 <view class='like'><image src='../../../images/good.png' style='height:40rpx;width:40rpx'></image></view>
               <view style='display:flex;flex-wrap:no-wrap;width:45%;overflow:hidden'>
                 <view class='portrait' wx:for="{{item.Discusses}}" wx:for-item='it' wx:if="{{it.isLike == 1}}"><image src='{{it.portrait}}' style='height:50rpx;width:50rpx'></image></view>
               </view>
-              <view wx:if="{{item.isLikeTotal >= 6}}" style='display:flex;align-items:center'><text style='font-size:32rpx;margin:0rpx 0 0 4rpx'>+{{item.isLikeTotal - 6}}赞</text></view>
+              <view wx:if="{{item.isLikeTotal >= 7}}" style='display:flex;align-items:center'><text style='font-size:32rpx;margin:0rpx 0 0 4rpx'>+{{item.isLikeTotal - 7}}赞</text></view>
             </view>
-            </scroll-view>
+            <!-- </scroll-view> -->
         </view>
       </view>
     </scroll-view>

@@ -5,6 +5,7 @@ var urlList = require('../../../utils/base.js')
 var prom = require('../../../utils/prom.js')
 var util = require('../../../utils/util.js')
 var format = require('../../../utils/formatDate.js')
+const socket = require('../../../utils/socket.js')
 Page({
 
   /**
@@ -30,15 +31,20 @@ Page({
       '../../../images/portrait.png'
     ],
     autoPlay:true,
+    imgAutoPlay:false,
     interval:3000,
     duration:500,
     circular:true,
     noticeInterval:4000,
     noticeDuration:400,
-    noticeCircular:true,
+    noticeCircular:false,
     vertical:true,
     checkBtn:false,
-    checkMsg:false
+    checkMsg:false,
+    scrollY:true,
+    scrollTop:0,
+    intervalState:false,
+    scanNotice:undefined
   },
   person: function (e) {
     wx.navigateTo({
@@ -69,6 +75,14 @@ Page({
     })
   },
 
+  //跳转指定图片
+  assignPicture:function(e){
+    var imgId = e.currentTarget.dataset.imgid
+    var senderOpenId = e.currentTarget.dataset.senderopenid
+    wx.navigateTo({
+      url: '../assignPicture/assignPicture?imgId='+imgId+'&senderOpenId='+senderOpenId,
+    })
+  },
   //签到
   signIn:function(){
     var that = this
@@ -93,6 +107,9 @@ Page({
       scanType:'qrCode',
       success:function(res){
         console.log(res)
+        wx.showLoading({
+          title: '加载中...',
+        })
         wx.request({
           url: res.result,
           method:'PUT',
@@ -101,6 +118,7 @@ Page({
             'openid':openId
           },
           success:function(res){
+            wx.hideLoading()
             console.log(res)
             if(res.data.code == 200){
               wx.showToast({
@@ -113,7 +131,7 @@ Page({
                   checkBtn:false,
                   checkMsg:true
                 })
-              },1000)
+              },2000)
             }else if(res.data.code == -12018){
               wx.showToast({
                 title: '您已签到，请勿再次签到',
@@ -138,6 +156,24 @@ Page({
     wx.navigateTo({
       url: '../checkList/checkList',
     })
+  },
+
+
+  Fun_ScanNotice:function(){
+    var that = this
+    that.data.intervalState = true
+    that.data.scanNotice = setInterval(param => {
+      let params = {}
+      Req.getReq(urlList.getDiscussAndLikeNotice, params, function (res) {
+        for(let i = 0; i < res.data.length; i++){
+          res.data[i].sendTime = format.formatDate(format.getLocalDate(res.data[i].sendTime))
+        }
+        that.setData({
+          noticeList:res.data,
+          scrollTop:1000000
+        })
+      })
+    },10000)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -170,11 +206,11 @@ Page({
       }
     }).then(function(res){
       var data = ''
+      wx.showLoading({
+        title: '加载中...',
+      })
       Req.getReq(urlList.getUserInfoByOpenId, data, function (res) {
       // console.log(res)
-        wx.showLoading({
-          title: '加载中...',
-        })
         if (res.code == 200) {
           wx.hideLoading();
           that.setData({
@@ -182,7 +218,25 @@ Page({
           })
         }
       })
+      let params = {}
+      Req.getReq(urlList.getDiscussAndLikeNotice, params, function (res) {
+        console.log(res.data)
+        for (let i = 0; i < res.data.length; i++) {
+          res.data[i].sendTime = format.formatDate(format.getLocalDate(res.data[i].sendTime))
+        }
+        that.setData({
+          noticeList: res.data,
+          scrollTop: 1000000
+        })
+      })
     })
+    console.log(that.data.intervalState)
+    if(that.data.intervalState){
+      clearInterval(that.data.scanNotice)
+      that.data.intervalState = false
+    }else{
+      that.Fun_ScanNotice()
+    }
   },
 
   /**
@@ -192,11 +246,7 @@ Page({
     var that = this
     var data = ''
     Req.getReq(urlList.getMeetingInfo, data, function (res) {
-      wx.showLoading({
-        title: '加载中...',
-      })
       if (res.code == 200) {
-        wx.hideLoading();
         that.setData({
           meetingInfo: res.data,
           startDate: util.formatTime(format.getLocalDate(res.data.startDate)),
@@ -223,7 +273,6 @@ Page({
         'openId': openid
       },
       complete: function (res) {
-        wx.hideLoading();
         if (res.data.code == -12005) {
           that.setData({
             show_org: false
@@ -270,20 +319,21 @@ Page({
       // })
     }).then(function (res) {
       let params = {}
-      wx.showLoading({
-        title: '加载中...',
-      })
       Req.getReq(urlList.getCheckInfoByOpenId,params,function(res){
-      //  console.log(res)
-        wx.hideLoading()
         if(res.code == 200){
-          if(res.data.isCheck == 1){
-            that.setData({
-              checkMsg:true
-            })
+          if(res.data){
+            if (res.data.isCheck == 1) {
+              that.setData({
+                checkMsg: true
+              })
+            } else {
+              that.setData({
+                checkBtn: true,
+              })
+            }
           }else{
             that.setData({
-              checkBtn:true,
+              checkBtn: true,
             })
           }
         }
@@ -301,20 +351,23 @@ Page({
         }
       })
     })
+    wx.onSocketMessage(function(res){
+      console.log(res)
+    })
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+  //  this.Fun_ScanNotice('stop')
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+   // this.Fun_ScanNotice('stop')
   },
 
   /**

@@ -1,7 +1,7 @@
 //app.js
 var urlList = require('./utils/base.js')
 var req = require('./utils/Req.js')
-
+var socket = require('./utils/socket.js')
 App({
   data: {
     deviceInfo: {}

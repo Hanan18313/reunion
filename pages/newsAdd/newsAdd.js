@@ -12,78 +12,78 @@ Page({
   data: {
     isIphoneX: app.globalData.model,
     openId: app.globalData.openId,
-    imgName:'',
+    imgName:[],
     files:[],
     disabled:false,
     loading:false
   },
-  chooseImage: function (e) {
-    var that = this
-    // that.showActionSheet()
-    wx.showActionSheet({
-      itemList: ['拍照', '从手机选择'],
-      success: function (res) {
-        if (res.tapIndex == 1) {
-          wx.chooseImage({
-            count: 1,
-            sizeType: ['original', 'compressed'],
-            sourceType: ['album', 'camera'],
-            success: function (res) {
-              that.setData({
-                files:that.data.files.concat(res.tempFilePaths)
-              })
-              var openId = app.globalData.openId
-              var tempFilePath = res.tempFilePaths
-          //    console.log(tempFilePath)
-              wx.showLoading({
-                title: '上传图片...',
-              })
-              wx.uploadFile({
-                url: urlList.uploadImgForMeetingNews,
-                filePath: tempFilePath[0],
-                name: 'file',
-                header: {
-                  'Content-Type': 'application/x-www-form-urlencoded',
-                  'openId': openId
-                },
-                success: function (res) {
-                  var val = JSON.parse(res.data)
-            //      console.log(JSON.parse(res.data))
-                  wx.hideLoading()
-                  if (JSON.parse(res.data).msg == '上传成功') {
-              //      console.log(JSON.parse(res.data).data)
-                    that.data.imgName = JSON.parse(res.data).data[0]
-                    wx.showToast({
-                      title: '上传成功',
-                      icon: 'success',
-                      duration: 1500
-                    })
-                  } else {
-                    wx.showToast({
-                      title: '上传失败',
-                      icon: 'none',
-                      duration: 1500
-                    })
-                  }
-                }
-              })
-            },
-          })
-        } else {
+  // chooseImage: function (e) {
+  //   var that = this
+  //   // that.showActionSheet()
+  //   wx.showActionSheet({
+  //     itemList: ['拍照', '从手机选择'],
+  //     success: function (res) {
+  //       if (res.tapIndex == 1) {
+  //         wx.chooseImage({
+  //           count: 3,
+  //           sizeType: ['original', 'compressed'],
+  //           sourceType: ['album', 'camera'],
+  //           success: function (res) {
+  //             that.setData({
+  //               files:that.data.files.concat(res.tempFilePaths)
+  //             })
+  //             var openId = app.globalData.openId
+  //             var tempFilePath = res.tempFilePaths
+  //         //    console.log(tempFilePath)
+  //             wx.showLoading({
+  //               title: '上传图片...',
+  //             })
+  //             wx.uploadFile({
+  //               url: urlList.uploadImgForMeetingNews,
+  //               filePath: tempFilePath[0],
+  //               name: 'file',
+  //               header: {
+  //                 'Content-Type': 'application/x-www-form-urlencoded',
+  //                 'openId': openId
+  //               },
+  //               success: function (res) {
+  //                 var val = JSON.parse(res.data)
+  //           //      console.log(JSON.parse(res.data))
+  //                 wx.hideLoading()
+  //                 if (JSON.parse(res.data).msg == '上传成功') {
+  //             //      console.log(JSON.parse(res.data).data)
+  //                   that.data.imgName = JSON.parse(res.data).data[0]
+  //                   wx.showToast({
+  //                     title: '上传成功',
+  //                     icon: 'success',
+  //                     duration: 1500
+  //                   })
+  //                 } else {
+  //                   wx.showToast({
+  //                     title: '上传失败',
+  //                     icon: 'none',
+  //                     duration: 1500
+  //                   })
+  //                 }
+  //               }
+  //             })
+  //           },
+  //         })
+  //       } else {
 
 
-        }
-      },
-      // fail: function (res) {
-      //   wx.hideLoading()
-      //   wx.showToast({
-      //     title: '上传失败，请检查网络',
-      //     icon: 'none',
-      //     duration: 2000
-      //   })
-      // }
-    })
-  },
+  //       }
+  //     },
+  //     // fail: function (res) {
+  //     //   wx.hideLoading()
+  //     //   wx.showToast({
+  //     //     title: '上传失败，请检查网络',
+  //     //     icon: 'none',
+  //     //     duration: 2000
+  //     //   })
+  //     // }
+  //   })
+  // },
   chooseImage: function (e) {
     var that = this
     wx.showActionSheet({
@@ -105,6 +105,7 @@ Page({
   chooseWxImages: function (type) {
     var that = this
     wx.chooseImage({
+      count:3,
       sizeType: ['original', 'compressed'],
       sourceType: [type],
       success: function (res) {
@@ -116,39 +117,56 @@ Page({
         })
         // console.log('res:' + res.tempFilePaths)
         var openId = app.globalData.openId
-        var tempFilePath = res.tempFilePaths
-    //    console.log(tempFilePath)
-        wx.showLoading({
-          title: '上传图片...',
-        })
-        wx.uploadFile({
-          url: urlList.uploadImgForMeetingNews,
-          filePath: tempFilePath[0],
-          name: 'file',
-          header: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'openId': openId
-          },
-          success: function (res) {
-            var val = JSON.parse(res.data)
-            console.log(JSON.parse(res.data))
-            wx.hideLoading()
-            if (JSON.parse(res.data).msg == '上传成功') {
-       //       console.log(JSON.parse(res.data).data)
-              that.data.imgName = JSON.parse(res.data).data[0]
-              wx.showToast({
-                title: '上传成功',
-                icon: 'success',
-                duration: 1500
-              })
-            } else {
-              wx.showToast({
-                title: '上传失败',
-                icon: 'none',
-                duration: 1500
-              })
-            }
-          }
+        var tempFilePath = res.tempFilePaths;
+        const _p = []
+        console.log(tempFilePath)
+        tempFilePath.forEach((items, index) => {
+          _p[index] = new Promise((resolve, reject) => {
+            wx.showLoading({
+              title: '上传图片...',
+            })
+            wx.uploadFile({
+              url: urlList.uploadImgForMeetingNews,
+              filePath: tempFilePath[index],
+              name: 'file',
+              header: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'openId': openId
+              },
+              success: function (res) {
+                var val = JSON.parse(res.data)
+                console.log(JSON.parse(res.data))
+                wx.hideLoading()
+                if (JSON.parse(res.data).msg == '上传成功') {
+                  //  that.data.imgName = JSON.parse(res.data).data[0]
+                  that.data.imgName.push(JSON.parse(res.data).data[0])
+                  wx.showToast({
+                    title: '上传成功',
+                    icon: 'success',
+                    duration: 1500
+                  })
+                  resolve()
+                } else {
+                  wx.hideLoading()
+                  wx.showToast({
+                    title: '上传失败',
+                    icon: 'none',
+                    duration: 1500
+                  })
+                  reject()
+                }
+              },
+              fail: function () {
+                wx.hideLoading()
+                wx.showToast({
+                  title: '上传失败',
+                  icon: 'none',
+                  duration: 2000
+                })
+                resolve()
+              },
+            })
+          })
         })
       },
     })
@@ -173,12 +191,13 @@ Page({
         let params = {
           title:e.detail.value.title,
           content:e.detail.value.content,
-          img:that.data.imgName
+          img:that.data.imgName.toString()
         }
         that.setData({
           loading:true,
           disabled:true
         })
+        console.log(params)
         Req.postReq(urlList.addMeetingNews,params,function(res){
       //    console.log(res)
           that.setData({

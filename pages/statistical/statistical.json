@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "会务统计",
+  "usingComponents": {
+    "w-accordion":"../../style/wuss/w-accordion/index",
+    "w-accordion-group":"../../style/wuss/w-accordion-group/index",
+    "w-tabs":"../../style/wuss/w-tabs/index",
+    "i-tag": "../../style/dist/tag/index"
+  }
+}
