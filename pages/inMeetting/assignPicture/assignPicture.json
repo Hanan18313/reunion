@@ -1,5 +1,8 @@
 {
   "navigationBarTitleText": "图片信息", 
+    "navigationBarBackgroundColor": "#80848f",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": true,
   "usingComponents": {
     "i-switch": "../../../style/dist/switch/index",
     "i-icon": "../../../style/dist/icon/index"

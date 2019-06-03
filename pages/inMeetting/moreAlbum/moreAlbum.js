@@ -70,7 +70,27 @@ Page({
   },
   //
   sendDanmu:function(){
-    const sendInputDanmu = []
+    this.animation.translate(-1000).step()
+    this.animation.left(1000).step()
+    this.animation.duration = 5000
+    this.animation.width = 200
+    this.setData({
+      animation: this.animation.export(),
+      showInputDanmu: that.data.inputDanmu,
+      color: getRandomColor(),
+      showDiscussBtn: false,
+      imgId: that.data.imgId,
+    })
+    setTimeout(() => {
+      this.animation.rotate(0, 0)
+        .scale(1)
+        .translate(0, 0)
+        .skew(0, 0)
+        .step({ duration: 0 })
+      this.setData({ animation: this.animation.export() })
+    }, 6000)
+
+   // const sendInputDanmu = []
     let params = {
       album_id:that.data.imgId,
       content:that.data.inputDanmu,
@@ -78,22 +98,20 @@ Page({
     }
     Req.postReq(urlList.discussToImages,params,function(res){
      // console.log(res)
+      that.setData({
+        inputDanmu: ''
+      })
       if(res.code == 200){
-        wx.showToast({
-          title: '评论成功',
-          icon:'success',
-          duration:1000
-        })
-        setTimeout(() =>{
-          sendInputDanmu.push(new Doomm(that.data.inputDanmu, Math.ceil(Math.random() * 100), Math.ceil(Math.random() * 20), 0, getRandomColor()))
-         // console.log(sendInputDanmu[0])
-          that.setData({
-            showDiscussBtn:false,
-            sendInputDanmu: sendInputDanmu[0],
-            imgId: that.data.imgId,
-            inputDanmu: ''
-          })
-        },3000)
+        // setTimeout(() =>{
+        //   sendInputDanmu.push(new Doomm(that.data.inputDanmu, Math.ceil(Math.random() * 100), Math.ceil(Math.random() * 20), 0, getRandomColor()))
+        //  // console.log(sendInputDanmu[0])
+        //   that.setData({
+        //     showDiscussBtn:false,
+        //     sendInputDanmu: sendInputDanmu[0],
+        //     imgId: that.data.imgId,
+        //     inputDanmu: ''
+        //   })
+        // },0)
       }else if(res.code == -12001){
         wx.showToast({
           title: '请输入内容',
@@ -109,6 +127,8 @@ Page({
       }
     })
   },
+
+
   onChange:function(e){
     var imgId = e.target.dataset.id 
     var dataSource = that.data.DataSource
@@ -309,8 +329,12 @@ uploadImages:function(){
       page: that.data.page,
       pageSize: that.data.pageSize
     }
+    wx.showLoading({
+      title: '加载中...',
+    })
     Req.getReq(urlList.getImagesDiscussInfo, params, function (res) {
       //console.log(res)
+      wx.hideLoading()
       if (res.code == 200) {
         for (let i = 0; i < res.data.length; i++) {
           Object.defineProperty(res.data[i], 'danmuList', {
@@ -369,7 +393,10 @@ uploadImages:function(){
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    that.animation = wx.createAnimation({
+      duration: 8000,
+      timingFunction: 'linear',
+    })
   },
 
   /**

@@ -10,15 +10,18 @@
         </view>
         <view class='images'>
           <image src='{{assignPicture.imgUrl}}'></image>
-          <view class="doommview">
-              <block wx:for="{{assignPicture.danmuList}}" wx:for-item="it" wx:key="id" style="display:flex;flex-direction:row" wx:if="{{assignPicture.closeDanmu}}">
-                  <text wx:if="{{it.text}}"  class="aon" style="animation: first {{it.time}}s linear forwards;animation-delay: {{it.delay}}s;animation-fill-mode:both;top:{{it.top}}%;color:{{it.color}};font-size:56rpx;text-shadow:#e0f7fa 1px 0 0,#e0f7fa 0 1px 0,#e0f7fa -1px 0 0,#e0f7fa 0 -1px 0;-webkit-text-shadow:#e0f7fa 1px 0 0,#e0f7fa 0 1px 0,#e0f7fa -1px 0 0,#e0f7fa 0 -1px 0;-moz-text-shadow:#e0f7fa 1px 0 0,#e0f7fa 0 1px 0,#e0f7fa -1px 0 0,#e0f7fa 0 -1px 0;*filter: Glow(color=#e0f7fa, strength=1);">{{it.text}}</text>
+          <view class="doommview" >
+              <block wx:if="{{assignPicture.closeDanmu}}" wx:for="{{assignPicture.danmuList}}" wx:for-item="it" wx:key="id" style="display:flex;flex-direction:row" >
+                  <text wx:if="{{it.text}}" class="aon" style="animation: first {{it.time}}s linear forwards;animation-delay: {{it.delay}}s;animation-fill-mode:both;top:{{it.top}}%;color:{{it.color}};font-size:56rpx;text-shadow:#e0f7fa 1px 0 0,#e0f7fa 0 1px 0,#e0f7fa -1px 0 0,#e0f7fa 0 -1px 0;-webkit-text-shadow:#e0f7fa 1px 0 0,#e0f7fa 0 1px 0,#e0f7fa -1px 0 0,#e0f7fa 0 -1px 0;-moz-text-shadow:#e0f7fa 1px 0 0,#e0f7fa 0 1px 0,#e0f7fa -1px 0 0,#e0f7fa 0 -1px 0;*filter: Glow(color=#e0f7fa, strength=1);">{{it.text}}</text>
               </block>
-                <block wx:if="{{assignPicture.id == imgId}}">
-                  <text wx:if="{{sendInputDanmu.text}}" class="aon" style="animation: first {{sendInputDanmu.time}}s linear forwards;top:{{sendInputDanmu.top}}%;color:{{sendInputDanmu.color}};font-size:56rpx;text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;-webkit-text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;-moz-text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;*filter: Glow(color=#000, strength=1);">
-                    {{sendInputDanmu.text}}
+                <!-- <block wx:if="{{assignPicture.id == imgId}}">
+                  <text  class="aon" style="animation: first 10s linear forwards;top:40%;color:{{sendInputDanmu.color}};font-size:56rpx;text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;-webkit-text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;-moz-text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;*filter: Glow(color=#000, strength=1);" animation = "{{animation}}">
+                    {{inputDanmu}}
                   </text>
-              </block>
+              </block> -->
+              <view class="animation-element-wrapper">
+                <view class="animation-element" style="color:{{color}};font-size:56rpx;text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;-webkit-text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;-moz-text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;*filter: Glow(color=#000, strength=1);" animation="{{animation}}"><text>{{showInputDanmu}}</text></view>
+              </view>
           </view>
         <view class='operation'>
           <i-switch value="{{assignPicture.closeDanmu}}" data-id='{{assignPicture.id}}' bind:change="onChange" slot="footer" size="large">
@@ -39,7 +42,7 @@
         </view>
       </view>
       <view class="dynamic_btn" wx:if="{{showDiscussBtn}}" style='position:absolute;bottom:{{btnBottom}}rpx;background:#f8f8f9'>
-        <view style='width:92%;padding:20rpx 0 0 30rpx;'><input class='dynamic_input' style='border:#dddee1 solid 1px' focus='{{focus}}' bindfocus='bindFocus' bindinput='bindInputDanmu' value='{{inputDanmu}}' bindblur='bindBlur' cursor-spacing='100' adjust-position="false"  confirm-type='send' bindconfirm='sendDanmu'></input></view>
+        <view style='width:92%;padding:20rpx 0 0 30rpx;'><input class='dynamic_input' style='border:#dddee1 solid 1px' focus='{{focus}}' bindfocus='bindFocus' bindinput='bindInputDanmu' value='{{inputDanmu}}' bindblur='bindBlur' cursor-spacing='100' adjust-position="false"  confirm-type='send' bindconfirm='sendDanmu' maxlength='10'></input></view>
       </view>
     <!-- <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view> -->
   </view>

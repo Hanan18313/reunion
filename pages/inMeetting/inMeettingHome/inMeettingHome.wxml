@@ -68,7 +68,7 @@
        <view class='swiper' style='background:#e8eaf6'>
         <scroll-view style='height:26vh' scroll-y='{{scrollY}}' scroll-top='{{scrollTop}}'>
           <view class='notice' wx:for='{{noticeList}}' style='margin:10rpx 0 10rpx 20rpx;font-size:28rpx;display:flex;flex-direction:row'>
-            <view>{{item.content}}</view>
+            <view style='width:65%'>【{{item.sender}}】: {{item.content}}</view>
             <view wx:if="{{item.imgId}}" style='padding:0 0 0 20rpx'>{{item.sendTime}}
               <!-- <i-icon style='padding: 0 0 20rpx 20rpx' type="accessory" size='20' color='blue' bindtap='assignPicture' data-imgId='{{item.imgId}}' data-senderOpenId='{{item.senderOpenId}}'/> -->
               <text style='font-size:28rpx;color:#5677fc' bindtap='assignPicture' data-imgId='{{item.imgId}}' data-senderOpenId='{{item.senderOpenId}}'>查看</text>

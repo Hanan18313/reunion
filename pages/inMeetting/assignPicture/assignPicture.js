@@ -22,7 +22,9 @@ Page({
     discussInputHight: 0,
     focus: false,
     inputDanmu: '',
-    showAssignPicture:false
+    showAssignPicture:false,
+    resData:[],
+    sendInputDanmu:[]
   },
 
 //点赞
@@ -33,7 +35,7 @@ giveLike:function(){
     senderOpenId:that.data.senderOpenId
   }
   Req.postReq(urlList.giveLikeToImages,params,function(res){
-    console.log(res)
+   // console.log(res)
     if(res.code == 200){
       that.data.dataSource.Discusses.push(res.data);
       that.data.isLikeTotal++;
@@ -107,30 +109,88 @@ giveLike:function(){
 
 //发送弹幕
 
+// sendDanmu:function(){
+//  // var sendInputDanmu = that.data.sendInputDanmu
+//  const danmuArr = []
+//   danmuArr.push(new Doomm(that.data.inputDanmu, Math.ceil(Math.random() * 100), Math.ceil((Math.random() + 0.5) * 10), 0, getRandomColor()))
+//   console.log(danmuArr)
+//   setTimeout(() => {
+//     that.setData({
+//       showDiscussBtn: false,
+//       sendInputDanmu: danmuArr[0],
+//       imgId: that.data.imgId,
+//       //inputDanmu: '',
+//       assignPicture: that.data.resData
+//     })
+//   },1000)
+
+//   console.log(that.data)
+//   let params = {
+//     album_id:that.data.imgId,
+//     content:that.data.inputDanmu,
+//     senderOpenId:that.data.senderOpenId
+//   }
+//   Req.postReq(urlList.discussToImages,params,function(res){
+//     if (res.code == 200) {
+//         // that.setData({
+//         //   showDiscussBtn: false,
+//         //   sendInputDanmu: sendInputDanmu[0],
+//         //   imgId: that.data.imgId,
+//         //   //inputDanmu: '',
+//         //   assignPicture:that.data.resData
+//         // })
+//       that.data.inputDanmu = ''
+//     } else if (res.code == -12001) {
+//       wx.showToast({
+//         title: '请输入内容',
+//         icon: 'none',
+//         duration: 2000
+//       })
+//     } else {
+//       wx.showToast({
+//         title: '发送失败，请检查网络',
+//         icon: 'none',
+//         duration: 2000
+//       })
+//     }
+//   })
+// },
 sendDanmu:function(){
-  const sendInputDanmu = []
+  this.animation.translate(-1000).step()
+  this.animation.left(1000).step()
+  this.animation.duration = 5000
+  this.animation.width = 200
+  this.setData({ 
+    animation: this.animation.export(),
+    showInputDanmu:that.data.inputDanmu,
+    color: getRandomColor(),
+  })
+  setTimeout(() => {
+    this.animation.rotate(0, 0)
+      .scale(1)
+      .translate(0, 0)
+      .skew(0, 0)
+      .step({ duration: 0 })
+    this.setData({ animation: this.animation.export() })
+  },6000)
   let params = {
-    album_id:that.data.imgId,
-    content:that.data.inputDanmu,
-    senderOpenId:that.data.senderOpenId
+    album_id: that.data.imgId,
+    content: that.data.inputDanmu,
+    senderOpenId: that.data.senderOpenId
   }
-  Req.postReq(urlList.discussToImages,params,function(res){
+  Req.postReq(urlList.discussToImages, params, function (res) {
     if (res.code == 200) {
-      wx.showToast({
-        title: '评论成功',
-        icon: 'success',
-        duration: 1000
+      // that.setData({
+      //   showDiscussBtn: false,
+      //   sendInputDanmu: sendInputDanmu[0],
+      //   imgId: that.data.imgId,
+      //   //inputDanmu: '',
+      //   assignPicture:that.data.resData
+      // })
+      that.setData({
+        inputDanmu: ''
       })
-      setTimeout(() => {
-        sendInputDanmu.push(new Doomm(that.data.inputDanmu, Math.ceil(Math.random() * 100), Math.ceil(Math.random() * 20), 0, getRandomColor()))
-        // console.log(sendInputDanmu[0])
-        that.setData({
-          showDiscussBtn: false,
-          sendInputDanmu: sendInputDanmu[0],
-          imgId: that.data.imgId,
-          inputDanmu: ''
-        })
-      }, 3000)
+      that.data.inputDanmu = ''
     } else if (res.code == -12001) {
       wx.showToast({
         title: '请输入内容',
@@ -146,7 +206,6 @@ sendDanmu:function(){
     }
   })
 },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -154,16 +213,14 @@ sendDanmu:function(){
     that = this
     page = this
     var imgId = options.imgId;
-    var senderOpenId = options.senderOpenId;
     that.data.imgId = imgId;
-    that.data.senderOpenId = senderOpenId
     let params = {
       imgId:imgId
     }
     Req.postReq(urlList.getAssignPicture,params,function(res){
-      console.log(res)
       if(res.code == 200){
         if(res.data){
+          that.data.senderOpenId = res.data.imgSender
           that.data.dataSource = res.data
           res.data.imgUrl = urlList.imgUrl + res.data.imgUrl
           res.data.closeDanmu = wx.getStorageSync(String(that.data.imgId))
@@ -178,6 +235,8 @@ sendDanmu:function(){
             }
             res.data.danmuList.push(new Doomm(res.data.Discusses[i].content, Math.ceil(Math.random() * 100), Math.ceil((Math.random() + 0.5) * 10), Math.ceil(Math.random() * 10), getRandomColor()))
           }
+          that.data.resData = res.data
+          console.log(res)
           that.setData({
             assignPicture: res.data,
             isLikeTotal: that.data.isLikeTotal
@@ -194,14 +253,16 @@ sendDanmu:function(){
         }
       }
     })
-    console.log(imgId)
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    that.animation = wx.createAnimation({
+      duration:8000,
+      timingFunction:'linear',
+    })
   },
 
   /**
@@ -243,7 +304,11 @@ sendDanmu:function(){
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: '毕业30年庆',
+      path: 'pages/index/index',
+      imageUrl: '../../../images/tp.png'
+    }
   }
 })
 
@@ -251,6 +316,7 @@ var doommList = [];
 var i = 0;//用做唯一的wx:key
 class Doomm {
   constructor(text, top, time, delay, color) {
+  //  console.log(this)
     this.text = text;
     this.top = top;
     this.time = time;
@@ -259,12 +325,12 @@ class Doomm {
     this.display = true;
     let that = this;
     this.id = i++;
-    setTimeout(function () {
-      doommList.splice(doommList.indexOf(that), 1);//动画完成，从列表中移除这项
-      page.setData({
-        doommData: doommList
-      })
-    }, this.time * 2000)//定时器动画完成后执行。
+    // setTimeout(function () {
+    //   doommList.splice(doommList.indexOf(that), 1);//动画完成，从列表中移除这项
+    //   // page.setData({
+    //   //   doommData: doommList
+    //   // })
+    // }, this.time * 2000)//定时器动画完成后执行。
   }
 }
 // function getRandomColor() {

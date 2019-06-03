@@ -102,7 +102,7 @@ Page({
                   //  console.log(format.formatDate(preTime))
                     let params = {}
                     Req.getReq(urlList.getMeetingInfo,params,function(res){
-                      console.log(res.data)
+                      console.log(res)
                       if(res.code == 200){
                         // if (preTime) {
                         //   if (format.formatDate(preTime) > format.formatDate(res.data.startDate)){
@@ -115,7 +115,7 @@ Page({
                         //     })
                         //   }
                         // }else{
-                        if (format.formatDate(format.getLocalDate(res.data.startDate)) < format.formatDate(format.formatDate(format.getLocalDate(res.data.stateDate)))){
+                        if (format.formatDate(format.getLocalDate(res.data.startDate)) < format.formatDate(format.getLocalDate(res.data.stateDate))){
                             wx.redirectTo({
                               url: '../inMeetting/inMeettingHome/inMeettingHome',
                             })

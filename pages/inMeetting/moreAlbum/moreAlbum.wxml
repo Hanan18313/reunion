@@ -2,51 +2,6 @@
 <view class='page'>
   <view class='page__bd'>
    <view class="{{isIphoneX ?'fix-iphonex-navbar-ipx':'fix-iphonex-navbar'}}"></view>
-   <!-- <scroll-view scroll-y="true" style='height:93vh'>
-        <view wx:for="{{imagesList}}" style='height:650rpx;'>
-       <view class='images'>
-          <view wx:if="{{item.imgUrlArr.length == 0}}" style='position:absolute;z-index:-1;width:100%;background:#f8f8f9'>
-            <view style='font-size:36rpx;height:90rpx;display:flex;align-items:center;flex-direction:row;position:absolute;top:0;left:0;width:100%;background:rgba(10, 10, 10, 0.4);color:rgba(255,255,255);'>
-              <view class='portrait' style='margin:5rpx 5rpx 5rpx 30rpx;display:flex;flex-direction:row'><image wx:if="{{!item.portrait}}" src='../../../images/td.png' style='height:60rpx;width:60rpx'></image><image wx:if="{{item.portrait}}" src='{{item.portrait}}' style='height:60rpx;width:60rpx' ></image>
-              </view>
-              <view>
-                <text style='color:#ffffff'>{{item.title}}</text>
-              </view>
-            </view>
-            <image src='{{item.imgUrl}}' style='width:100%;position:absolute;z-index:-1'></image>
-          </view>
-          <view wx:if='{{item.imgUrlArr.length != 0}}' style='display:flex;flex-wrap:wrap;position:relative;z-index:-1;background:#f8f8f9'><image  wx:for="{{item.imgUrlArr}}" wx:for-item="imgItem" src='{{imgItem}}' style='width:43%;height:200rpx;margin:20rpx'></image></view>
-        </view>
-        <view style='height:40%;width:100%;z-index:3;position:relative;top:-563rpx'>
-              <block wx:for="{{item.danmuList}}" wx:for-item="it" wx:key="id" style="display:flex;flex-direction:row"  wx:if="{{item.closeDanmu}}">
-                  <text wx:if="{{it.text}}" class="aon" style="animation: first {{it.time}}s linear forwards;top:{{it.top}}%;color:{{it.color}};font-size:48rpx;text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;-webkit-text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;-moz-text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;*filter: Glow(color=#000, strength=1);">
-                      {{it.text}}
-                  </text>
-              </block>
-               <block wx:if="{{item.id == imgId}}"  >
-                  <text wx:if="{{sendInputDanmu.text}}" class="aon" style="animation: first {{sendInputDanmu.time}}s linear forwards;top:{{sendInputDanmu.top}}%;color:{{sendInputDanmu.color}};font-size:48rpx;text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;-webkit-text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;-moz-text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;*filter: Glow(color=#000, strength=1);">
-                    {{sendInputDanmu.text}}
-                  </text>
-              </block>
-          </view>
-        <view style='margin:0 40rpx;position:relative;bottom:444rpx;left:-25rpx'>
-          <i-switch value="{{item.closeDanmu}}" data-id='{{item.id}}' bind:change="onChange" slot="footer" size="large">
-            <view slot="open">弹幕</view>
-            <view slot="close">关闭</view>
-          </i-switch>
-        </view>
-        <view style='display:flex;justify-content:space-between;margin:10rpx 40rpx 10rpx 20rpx;position:relative;bottom:425rpx;'>
-            <view class='good'>
-              <view style='display:flex;flex-direction:row;margin:10rpx;width:300rpx;overflow:hidden'>
-                <view style='width:60rpx;height:50rpx' bindtap='giveLike' data-imgId='{{item.id}}' data-senderOpenId='{{item.imgSender}}'><image src='../../../images/good.png' style='height:40rpx;width:40rpx;padding:10rpx'></image></view>
-                <view style='display:flex;flex-wrap:no-wrap'><view wx:for="{{item.Discusses}}" wx:for-item="its"><image wx:if="{{its.isLike == 1}}" src='{{its.portrait}}' style='height:40rpx;width:40rpx;padding:10rpx'></image></view></view>
-              </view>
-              <view style='margin:15rpx 0;font-size:32rpx'><text wx:if="{{item.isLikeTotal && item.isLikeTotal > 4}}">+{{item.isLikeTotal}}赞</text></view>
-            </view>
-            <view style='display:flex;align-items:center;height:92rpx' bindtap='discuss' data-id='{{item.id}}' data-sendId='{{item.imgSender}}'><image src='../../../images/wxdiscuss.png' style='height:56rpx;width:56rpx'></image></view>
-          </view>
-        </view>
-   </scroll-view> -->
    <scroll-view scroll-y="{{scrollY}}" style='height:94vh' scroll-top="{{scrollTop}}" scroll-into-view="">
     <view wx:for="{{imagesList}}" style='height:594rpx;background:#f8f8f9'>
        <view class='images'>
@@ -77,11 +32,14 @@
                       {{it.text}}
                   </text>
               </block>
-                <block wx:if="{{item.id == imgId}}"  >
+                <!-- <block wx:if="{{item.id == imgId}}"  >
                   <text wx:if="{{sendInputDanmu.text}}" class="aon" style="animation: first {{sendInputDanmu.time}}s linear forwards;top:{{sendInputDanmu.top}}%;color:{{sendInputDanmu.color}};font-size:56rpx;text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;-webkit-text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;-moz-text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;*filter: Glow(color=#000, strength=1);">
                     {{sendInputDanmu.text}}
                   </text>
-              </block>
+              </block> -->
+               <view class="animation-element-wrapper" >
+                <view class="animation-element" style="color:{{color}};font-size:56rpx;text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;-webkit-text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;-moz-text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;*filter: Glow(color=#000, strength=1);" animation="{{animation}}"><text wx:if="{{item.id == imgId}}">{{showInputDanmu}}</text></view>
+              </view>
           </view>
         <view class='operation'>
         <i-switch value="{{item.closeDanmu}}" data-id='{{item.id}}' bind:change="onChange" slot="footer" size="large">
@@ -92,7 +50,7 @@
     </view>
    </scroll-view>
     <view class="dynamic_btn" wx:if="{{showDiscussBtn}}" style='margin-bottom:{{discussInputHight}}rpx;background:#f8f8f9'>
-        <view style='width:92%;padding:20rpx 0 0 30rpx'><input class='dynamic_input' style='border:#dddee1 solid 1px' focus='{{focus}}' bindfocus='bindFocus' bindinput='bindInputDanmu' value='{{inputDanmu}}' bindblur='bindBlur' cursor-spacing='100' adjust-position="false"  confirm-type='send' bindconfirm='sendDanmu'></input></view>
+        <view style='width:92%;padding:20rpx 0 0 30rpx'><input class='dynamic_input' style='border:#dddee1 solid 1px' focus='{{focus}}' bindfocus='bindFocus' bindinput='bindInputDanmu' value='{{inputDanmu}}' bindblur='bindBlur' cursor-spacing='100' adjust-position="false"  confirm-type='send' bindconfirm='sendDanmu' maxlength='10'></input></view>
       </view>
       <view class='btn' style='position:absolute;bottom:{{btnBottom}}rpx'><button style='border-bottom:none;border-right:none;border-left:none;border-top:none' type='default' plain='true' bindtap='uploadImages'><view style='height:82rpx;width:100%'><i-icon type="camera" size='32'/></view></button></view>
   <view class="{{isIphoneX ? 'feed-bottom-view feed-bottom-view-IPX' : 'feed-bottom-view'}}"></view>

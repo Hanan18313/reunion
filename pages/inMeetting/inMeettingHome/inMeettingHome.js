@@ -77,6 +77,7 @@ Page({
 
   //跳转指定图片
   assignPicture:function(e){
+    console.log(e)
     var imgId = e.currentTarget.dataset.imgid
     var senderOpenId = e.currentTarget.dataset.senderopenid
     wx.navigateTo({
@@ -169,7 +170,7 @@ Page({
           res.data[i].sendTime = format.formatDate(format.getLocalDate(res.data[i].sendTime))
         }
         that.setData({
-          noticeList:res.data,
+          noticeList:res.data.reverse(),
           scrollTop:1000000
         })
       })
@@ -225,7 +226,7 @@ Page({
           res.data[i].sendTime = format.formatDate(format.getLocalDate(res.data[i].sendTime))
         }
         that.setData({
-          noticeList: res.data,
+          noticeList: res.data.reverse(),
           scrollTop: 1000000
         })
       })
@@ -284,22 +285,17 @@ Page({
         }
       }
     }).then(function (res) {
-      var params = {}
-      Req.getReq(urlList.getDiscussAndLikeNotice, params, function (res) {
-        if (res.code == 200) {
-          if (res.data.length > 5) {
-            that.setData({
-              notice: res.data,
-              displayItem: 5
-            })
-          } else {
-            that.setData({
-              notice: res.data,
-              displayItem: 1
-            })
-          }
-        }
-      })
+      // var params = {}
+      // Req.getReq(urlList.getDiscussAndLikeNotice, params, function (res) {
+      //   if (res.code == 200) {
+      //     for(let i = 0; i < res.data.length; i++){
+      //       res.data[i].sendTime = format.formatDate(format.getLocalDate(res.data[i].sendTime))
+      //     }
+      //     that.setData({
+      //       noticeList:res.data.reverse()
+      //     })
+      //   }
+      // })
       // var data = ''
       // Req.getReq(urlList.getMeetingInfo, data, function (res) {
       //   wx.showLoading({
@@ -320,6 +316,7 @@ Page({
     }).then(function (res) {
       let params = {}
       Req.getReq(urlList.getCheckInfoByOpenId,params,function(res){
+        console.log(res.data)
         if(res.code == 200){
           if(res.data){
             if (res.data.isCheck == 1) {
@@ -350,9 +347,6 @@ Page({
           })
         }
       })
-    })
-    wx.onSocketMessage(function(res){
-      console.log(res)
     })
   },
 

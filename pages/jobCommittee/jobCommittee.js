@@ -187,7 +187,11 @@ submit:function(e){
     let params = {}
     Req.getReq(urlList.getMeetingInfo, params, function (res) {
       if (res.code == 200) {
-        res.data.stateDate = format.formatDate(format.getLocalDate(res.data.stateDate))
+        if(res.data.stateDate){
+          res.data.stateDate = format.formatDate(format.getLocalDate(res.data.stateDate))
+        }else{
+          res.data.stateDate = ''
+        }
         that.setData({
           time:res.data.stateDate
         })
