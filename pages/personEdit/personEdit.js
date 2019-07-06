@@ -73,14 +73,6 @@ Page({
     userInfo: [],
     showAffairs_btn: false
   },
-  edit: function () {
-    var that = this
-    that.setData({
-      input_disabled: false,
-      oper_show: false,
-      auto_focus: true
-    })
-  },
   right: function (e) {
     var that = this
     // console.log(that.data.userInfo)
@@ -92,6 +84,7 @@ Page({
       socialMedia: that.data.userInfo.socialMedia,
       company: that.data.userInfo.company
     }
+  //  console.log(params)
     Req.putReq(urlList.updateUserInfoByOpenId, params, function (res) {
       if (res.code == 200) {
         wx.showToast({
@@ -172,9 +165,15 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    var data
-    Req.getReq(urlList.getUserInfoByOpenId, data, function (res) {
-      //   console.log(res)
+    var data = {
+      userId:options.userId
+    }
+    wx.showLoading({
+      title: '加载中...',
+    })
+    Req.getReq(urlList.getUserInfoByUserId, data, function (res) {
+        // console.log(res)
+        wx.hideLoading()
       if (res.code == 200) {
         that.setData({
           userInfo: res.data,
@@ -197,26 +196,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this
-    var data
-    Req.getReq(urlList.getSignInfoByOpenId, data, function (res) {
-      //  console.log(res)
-      if (res.data != null) {
-        if (res.data.isSign == 0) {
-          that.setData({
-            showAffairs_btn: false
-          })
-        } else {
-          that.setData({
-            showAffairs_btn: true
-          })
-        }
-      } else {
-        that.setData({
-          showAffairs_btn: false
-        })
-      }
-    })
+
   },
 
   /**

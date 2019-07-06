@@ -63,5 +63,12 @@ var urlList = {
   giveLikeToImages:baseUrl+'/giveLikeToImages',//点赞
   getMostLikeImages: baseUrl +'/getMostLikeImages',//展示点赞最多的图片
   getAssignPicture:baseUrl+'/getAssignPicture',//获取指定图片
+
+  /***********************************会后模块****************************************** */
+  addressBook:baseUrl+'/addressBook', //通讯录
+  getMyCollection:baseUrl+'/getMyCollection',//获取我收藏的联系人列表
+  addMyCollection:baseUrl+'/addMyCollection',//添加联系人到我的收藏夹
+  removeMyCollection:baseUrl+'/removeMyCollection',//移除文件夹中联系人
+  getCollection:baseUrl+'/getCollection',//获取收藏夹指定联系人
 }
 module.exports = urlList

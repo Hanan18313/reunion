@@ -1,6 +1,6 @@
 {
-  "navigationBarTitleText": "扫码签到",
+  "navigationBarTitleText": "个人信息",
   "usingComponents": {
-   
+    "i-icon": "../../style/dist/icon/index"
   }
 }

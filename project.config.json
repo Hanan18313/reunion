@@ -42,7 +42,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 2,
 			"list": [
 				{
 					"id": -1,
@@ -54,6 +54,13 @@
 					"id": -1,
 					"name": "album",
 					"pathName": "pages/inMeetting/moreAlbum/moreAlbum",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "通讯录",
+					"pathName": "pages/inMeetting/album/album",
 					"scene": null
 				}
 			]

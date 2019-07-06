@@ -119,13 +119,13 @@ Page({
             'openid':openId
           },
           success:function(res){
-            wx.hideLoading()
+            //wx.hideLoading()
             console.log(res)
             if(res.data.code == 200){
               wx.showToast({
                 title: '签到成功',
                 icon:'sucess',
-                duration:2000
+                duration:4000
               })
               setTimeout(() => {
                 that.setData({
@@ -171,7 +171,7 @@ Page({
         }
         that.setData({
           noticeList:res.data.reverse(),
-          scrollTop:1000000
+        //  scrollTop:1000000
         })
       })
     },10000)
@@ -218,17 +218,6 @@ Page({
             userInfo: res.data
           })
         }
-      })
-      let params = {}
-      Req.getReq(urlList.getDiscussAndLikeNotice, params, function (res) {
-        console.log(res.data)
-        for (let i = 0; i < res.data.length; i++) {
-          res.data[i].sendTime = format.formatDate(format.getLocalDate(res.data[i].sendTime))
-        }
-        that.setData({
-          noticeList: res.data.reverse(),
-          scrollTop: 1000000
-        })
       })
     })
     console.log(that.data.intervalState)
@@ -346,6 +335,18 @@ Page({
             displayImages:res.data
           })
         }
+      })
+    })
+//通知中心
+    let params = {}
+    Req.getReq(urlList.getDiscussAndLikeNotice, params, function (res) {
+      console.log(res.data)
+      for (let i = 0; i < res.data.length; i++) {
+        res.data[i].sendTime = format.formatDate(format.getLocalDate(res.data[i].sendTime))
+      }
+      that.setData({
+        noticeList: res.data.reverse(),
+        scrollTop: 1000000
       })
     })
   },

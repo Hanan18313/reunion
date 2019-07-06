@@ -8,7 +8,7 @@ App({
   },
   onLaunch: function () {
     this.data.deviceInfo = wx.getSystemInfoSync();
-    console.log(this.data.deviceInfo);
+   // console.log(this.data.deviceInfo);
     
     wx.showLoading({
       title: '加载中...',
@@ -42,7 +42,7 @@ App({
     var that = this;
     wx.getSystemInfo({
       success: function (res) {
-        console.log(res)
+     //   console.log(res)
         if (res.model.search('iPhone X') != -1) {
           that.globalData.model = true
         } else {

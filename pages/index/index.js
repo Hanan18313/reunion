@@ -102,7 +102,7 @@ Page({
                   //  console.log(format.formatDate(preTime))
                     let params = {}
                     Req.getReq(urlList.getMeetingInfo,params,function(res){
-                      console.log(res)
+                    //  console.log(res)
                       if(res.code == 200){
                         // if (preTime) {
                         //   if (format.formatDate(preTime) > format.formatDate(res.data.startDate)){
@@ -117,7 +117,7 @@ Page({
                         // }else{
                         if (format.formatDate(format.getLocalDate(res.data.startDate)) < format.formatDate(format.getLocalDate(res.data.stateDate))){
                             wx.redirectTo({
-                              url: '../inMeetting/inMeettingHome/inMeettingHome',
+                              url: '../inMeetting/album/album',
                             })
                           }else{
                             wx.redirectTo({
@@ -199,6 +199,7 @@ Page({
     if(e.detail.userInfo){
       if(params.userName){
         Req.postReq(url, params, function (res) {
+          console.log(res)
           if (res.code == 200) {
             wx.showToast({
               title: '验证成功',
@@ -207,7 +208,7 @@ Page({
             })
             setTimeout(() => {
               wx.redirectTo({
-                url: '../home/home',
+                url: '../inMeeting/album/album',
               })
             }, 2000)
           } else if (res.code == -12003) {

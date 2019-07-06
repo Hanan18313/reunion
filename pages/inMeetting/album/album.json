@@ -1,4 +1,14 @@
 {
-  "navigationBarTitleText": "相册",
-  "usingComponents": {}
+  "navigationBarTitleText": "通讯录",
+  "usingComponents": {
+    "i-index":"../../../style/dist/index/index",
+    "i-index-item":"../../../style/dist/index-item/index",
+    "i-sticky":"../../../style/dist/sticky/index",
+    "i-sticky-item":"../../../style/dist/sticky-item/index",
+    "i-icon":"../../../style/dist/icon/index",
+    "w-drop-menu":"../../../style/wuss/w-drop-menu/index",
+    "w-cell":"../../../style/wuss/w-cell/index",
+    "w-cell-group":"../../../style/wuss/w-cell-group/index",
+    "w-tabs":"../../../style/wuss/w-tabs/index"
+  }
 }
